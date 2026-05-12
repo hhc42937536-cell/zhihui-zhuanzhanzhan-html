@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>解決方案詳情 - 智慧轉運站</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div id="navbar"></div>
+  <div id="pageContent"></div>
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const solutions = [
+      {
+        id: 1,
+        title: 'AI 客服自動回覆系統',
+        description: '利用 ChatGPT API 建立 24 小時自動客服，處理常見問題、訂單查詢與售後服務，大幅降低人工客服成本。',
+        fullDescription: '這套解決方案結合 ChatGPT API 與你現有的客服系統，建立一個能自動理解客戶意圖、給出精準回覆的 AI 客服助理。無論是常見問題解答、訂單狀態查詢，還是退換貨申請，都能 24 小時自動處理，讓你的團隊專注於處理複雜案例。',
+        category: 'automation',
+        difficulty: 'medium',
+        timeToImplement: '1-2 週',
+        costEstimate: '月費約 NT$500-2000',
+        rating: 4.8,
+        reviewCount: 234,
+        icon: 'ri-customer-service-2-line',
+        color: 'teal',
+        tags: ['ChatGPT', 'API', '自動化', '客服'],
+        steps: [
+          { title: '準備 OpenAI API 金鑰', desc: '前往 OpenAI 官網申請 API 金鑰，建議先使用免費額度測試效果。' },
+          { title: '建立常見問題資料庫', desc: '整理你的客服 FAQ，包含產品資訊、退換貨政策、配送說明等，這是 AI 回覆的知識來源。' },
+          { title: '設定 Prompt 模板', desc: '撰寫系統提示詞，定義 AI 客服的角色、語氣、回覆格式，以及何時需要轉接人工客服。' },
+          { title: '串接通訊渠道', desc: '使用 Zapier 或 Make 將 AI 系統串接到 LINE、Facebook Messenger 或你的網站聊天視窗。' },
+          { title: '測試與優化', desc: '模擬各種客服情境進行測試，根據實際對話不斷優化 Prompt 和知識庫內容。' }
+        ],
+        tools: [
+          { name: 'ChatGPT API', desc: 'OpenAI 提供的語言模型 API，是整套方案的核心引擎。', link: '#', free: false },
+          { name: 'Zapier', desc: '無程式碼自動化工具，用於串接 ChatGPT 與各種通訊平台。', link: '#', free: true },
+          { name: 'Notion', desc: '用於建立和管理客服知識庫，方便隨時更新內容。', link: '#', free: true }
+        ],
+        caseStudy: {
+          business: '台中連鎖手搖飲料店',
+          challenge: '每天接到 200+ 則詢問訂單、門市資訊的訊息，3 名客服人員疲於奔命。',
+          solution: '導入 AI 客服系統後，80% 的常見問題由 AI 自動回覆，人工只需處理複雜申訴。',
+          result: '客服人力從 3 人降至 1 人，回覆時間從平均 30 分鐘縮短至 3 秒，客戶滿意度反而提升 20%。'
+        },
+        relatedIds: [2, 3, 4]
+      },
+      {
+        id: 2,
+        title: 'AI 社群行銷內容工廠',
+        description: '用 AI 工具自動生成 IG、FB、LINE 貼文，結合排程發布，讓一個人也能維持高頻率的社群更新。',
+        fullDescription: '這套方案讓你用 AI 批量生成高品質的社群貼文、圖片說明和 hashtag，再搭配排程工具，讓你每週只需花 2 小時就能維持 7 天的社群更新節奏。',
+        category: 'marketing',
+        difficulty: 'easy',
+        timeToImplement: '3-5 天',
+        costEstimate: '月費約 NT$300-800',
+        rating: 4.6,
+        reviewCount: 189,
+        icon: 'ri-megaphone-line',
+        color: 'orange',
+        tags: ['ChatGPT', 'Canva', '社群行銷', 'IG'],
+        steps: [
+          { title: '定義品牌語氣與風格', desc: '用 ChatGPT 建立你的品牌語氣指南，包含用詞偏好、貼文結構、emoji 使用規範。' },
+          { title: '建立內容日曆', desc: '規劃每週貼文主題，包含產品介紹、客戶故事、教學內容、促銷活動等類型比例。' },
+          { title: '批量生成貼文文案', desc: '用 ChatGPT 一次生成一週的貼文草稿，再逐一審閱調整，效率比一則一則寫快 10 倍。' },
+          { title: '用 Canva AI 製作圖片', desc: '用 Canva 的 AI 功能生成配圖，保持視覺風格一致性，不需要設計背景也能做出專業圖片。' },
+          { title: '排程自動發布', desc: '使用 Buffer 或 Later 設定排程，讓貼文在最佳時段自動發布，不需要守在手機前。' }
+        ],
+        tools: [
+          { name: 'ChatGPT', desc: '生成貼文文案、hashtag 和互動問句的主要工具。', link: '#', free: true },
+          { name: 'Canva AI', desc: 'AI 輔助設計工具，快速製作符合品牌風格的貼文圖片。', link: '#', free: true },
+          { name: 'Buffer', desc: '社群媒體排程工具，支援 IG、FB、Twitter 等平台。', link: '#', free: true }
+        ],
+        caseStudy: {
+          business: '新竹手工烘焙工作室',
+          challenge: '老闆一人身兼生產、銷售、客服，根本沒時間經營社群，IG 粉絲長期停在 200 人。',
+          solution: '每週日花 2 小時用 AI 批量生成一週貼文，Canva 製圖，Buffer 排程發布。',
+          result: '3 個月後 IG 粉絲成長至 5000 人，每週訂單從 10 個增加到 40 個，老闆還有時間休息了。'
+        },
+        relatedIds: [1, 3, 5]
+      },
+      {
+        id: 3,
+        title: '智慧庫存與訂單管理',
+        description: '結合 Google Sheets + AI 公式，建立自動計算庫存、預測備貨量、發送低庫存警報的管理系統。',
+        fullDescription: '這套方案不需要昂貴的 ERP 系統，只需 Google Sheets 搭配 AI 輔助設定，就能建立適合中小型店家的智慧庫存管理系統，自動追蹤進出貨、計算剩餘庫存、預測下次補貨時機。',
+        category: 'productivity',
+        difficulty: 'medium',
+        timeToImplement: '1 週',
+        costEstimate: '完全免費',
+        rating: 4.5,
+        reviewCount: 156,
+        icon: 'ri-store-2-line',
+        color: 'emerald',
+        tags: ['Google Sheets', 'AI公式', '庫存管理', '零成本'],
+        steps: [
+          { title: '建立庫存主表', desc: '在 Google Sheets 建立商品清單，記錄 SKU、商品名稱、安全庫存量、供應商資訊。' },
+          { title: '設計進出貨記錄表', desc: '建立每日進貨和出貨記錄表，用 SUMIF 公式自動彙算每個商品的即時庫存數量。' },
+          { title: '用 AI 設定預測公式', desc: '讓 ChatGPT 幫你寫預測補貨量的公式，根據過去 30 天銷售均值和安全天數自動計算。' },
+          { title: '設定低庫存自動警報', desc: '使用 Google Apps Script 設定當庫存低於安全量時，自動發送 Email 或 LINE 通知。' },
+          { title: '建立儀表板', desc: '用 Google Sheets 的圖表功能建立視覺化儀表板，一眼掌握庫存健康狀況。' }
+        ],
+        tools: [
+          { name: 'Google Sheets', desc: '免費的雲端試算表，整套方案的核心平台。', link: '#', free: true },
+          { name: 'Google Apps Script', desc: '用於設定自動警報和排程任務，完全免費。', link: '#', free: true },
+          { name: 'ChatGPT', desc: '協助撰寫複雜公式和 Apps Script 程式碼。', link: '#', free: true }
+        ],
+        caseStudy: {
+          business: '台南文創選物店',
+          challenge: '管理 300+ 種商品，經常發生熱賣品斷貨、滯銷品積壓的問題，損失難以估計。',
+          solution: '建立 Google Sheets 智慧庫存系統，自動預警低庫存，根據銷售數據調整備貨策略。',
+          result: '斷貨事件減少 85%，庫存周轉率提升 40%，每月省下約 20 小時的手動盤點時間。'
+        },
+        relatedIds: [1, 4, 6]
+      },
+      {
+        id: 4,
+        title: 'AI 快速製作提案簡報',
+        description: '用 AI 工具在 30 分鐘內產出專業提案簡報，包含市場分析、競品比較、財務預測等完整內容。',
+        fullDescription: '這套方案結合 ChatGPT 的文字生成能力與 Gamma 或 Beautiful.ai 的自動排版功能，讓你只需提供關鍵資訊，AI 就能在 30 分鐘內生成完整的專業簡報，不需要設計技能。',
+        category: 'productivity',
+        difficulty: 'easy',
+        timeToImplement: '1-2 天學習',
+        costEstimate: '月費約 NT$0-500',
+        rating: 4.7,
+        reviewCount: 212,
+        icon: 'ri-presentation-line',
+        color: 'purple',
+        tags: ['ChatGPT', 'Gamma', '簡報', '提案'],
+        steps: [
+          { title: '用 ChatGPT 生成大綱', desc: '描述你的提案目的和目標受眾，讓 AI 生成完整的簡報大綱和每頁重點內容。' },
+          { title: '補充具體數據', desc: '在 AI 生成的框架中填入你的真實數據：市場規模、競品分析、財務預測等。' },
+          { title: '用 Gamma 自動排版', desc: '將內容貼入 Gamma，它會自動生成設計精美的簡報，並提供多種主題風格選擇。' },
+          { title: '調整視覺細節', desc: '修改品牌色彩、加入產品圖片、調整字體大小，讓簡報符合你的品牌形象。' },
+          { title: '匯出與分享', desc: '匯出 PDF 或直接用連結分享，Gamma 的線上版本還支援互動式展示效果。' }
+        ],
+        tools: [
+          { name: 'ChatGPT', desc: '生成簡報大綱、撰寫各頁面文案內容。', link: '#', free: true },
+          { name: 'Gamma', desc: 'AI 驅動的簡報工具，自動將文字轉換為精美投影片。', link: '#', free: true },
+          { name: 'Unsplash', desc: '免費高品質圖庫，用於豐富簡報視覺效果。', link: '#', free: true }
+        ],
+        caseStudy: {
+          business: '台北新創公司創辦人',
+          challenge: '每次向投資人提案都要花 3-5 天製作簡報，光是設計就佔去大半時間，嚴重影響本業。',
+          solution: '用 ChatGPT 生成簡報文案框架，Gamma 自動排版，整個流程壓縮到 2 小時以內。',
+          result: '提案頻率從每季 1 次增加到每月 2-3 次，成功獲得天使輪投資，投資人對簡報品質印象深刻。'
+        },
+        relatedIds: [2, 3, 5]
+      },
+      {
+        id: 5,
+        title: 'LINE 官方帳號 AI 行銷機器人',
+        description: '為你的 LINE 官方帳號建立 AI 行銷助理，自動推播個人化優惠、回覆詢問、收集用戶偏好。',
+        fullDescription: '這套方案讓你的 LINE 官方帳號從單向廣播升級為雙向 AI 對話，根據用戶的行為和偏好推播個人化內容，自動回覆常見問題，並收集用戶數據以優化行銷策略。',
+        category: 'marketing',
+        difficulty: 'hard',
+        timeToImplement: '2-3 週',
+        costEstimate: '月費約 NT$800-3000',
+        rating: 4.4,
+        reviewCount: 98,
+        icon: 'ri-chat-smile-3-line',
+        color: 'green',
+        tags: ['LINE API', 'ChatGPT', '行銷自動化', '個人化'],
+        steps: [
+          { title: '申請 LINE Messaging API', desc: '在 LINE Developers 建立 Provider 和 Channel，取得 Channel Access Token 和 Channel Secret。' },
+          { title: '設定 Webhook 伺服器', desc: '使用 Render 或 Railway 部署一個免費的 Node.js 伺服器，接收 LINE 傳來的用戶訊息。' },
+          { title: '串接 ChatGPT API', desc: '在伺服器中整合 OpenAI API，讓用戶的訊息透過 ChatGPT 處理後再回覆。' },
+          { title: '建立用戶標籤系統', desc: '根據用戶的互動行為（詢問的商品類型、購買記錄）自動給予標籤，用於精準推播。' },
+          { title: '設計個人化推播模板', desc: '建立不同用戶群組的推播模板，用 ChatGPT 動態生成個人化的優惠訊息內容。' }
+        ],
+        tools: [
+          { name: 'LINE Messaging API', desc: 'LINE 官方 API，是整套方案的基礎架構。', link: '#', free: false },
+          { name: 'OpenAI API', desc: '驅動智慧回覆和個人化內容生成的 AI 引擎。', link: '#', free: false },
+          { name: 'Railway', desc: '免費的雲端部署平台，用於托管 Webhook 伺服器。', link: '#', free: true }
+        ],
+        caseStudy: {
+          business: '高雄連鎖美容沙龍',
+          challenge: 'LINE 官方帳號有 8000 名好友，但群發效果越來越差，封鎖率高達 30%。',
+          solution: '導入 AI 行銷機器人，根據顧客的服務類型和消費頻率推送個人化優惠，並加入 AI 預約對話功能。',
+          result: '封鎖率從 30% 降至 8%，優惠券使用率從 5% 提升至 22%，每月新增預約量增加 45%。'
+        },
+        relatedIds: [1, 2, 6]
+      },
+      {
+        id: 6,
+        title: 'AI 輔助財務報表分析',
+        description: '用 AI 自動解讀財務報表、找出異常趨勢、生成中文摘要報告，讓老闆 5 分鐘掌握公司財務健康狀況。',
+        fullDescription: '這套方案讓不懂財務的老闆也能快速理解公司的財務狀況。只需上傳月報或季報，AI 就會自動找出重要趨勢、標記異常數字，並用白話文生成摘要報告和具體建議。',
+        category: 'finance',
+        difficulty: 'medium',
+        timeToImplement: '3-5 天',
+        costEstimate: '月費約 NT$200-500',
+        rating: 4.6,
+        reviewCount: 143,
+        icon: 'ri-line-chart-line',
+        color: 'blue',
+        tags: ['ChatGPT', 'Excel', '財務分析', '報表'],
+        steps: [
+          { title: '整理財務數據格式', desc: '將你的損益表、資產負債表、現金流量表整理成 Excel 格式，確保數據乾淨完整。' },
+          { title: '建立 AI 分析 Prompt', desc: '設計一套標準化的 Prompt，讓 ChatGPT 每次都用相同角度分析報表：成長趨勢、利潤率變化、現金流健康度。' },
+          { title: '設定自動比較基準', desc: '輸入上期數據和行業平均值，讓 AI 自動進行橫向和縱向比較，標記出偏離基準的指標。' },
+          { title: '生成白話文報告', desc: '讓 AI 將分析結果轉化為老闆可以直接閱讀的中文報告，附上 3-5 條具體行動建議。' },
+          { title: '建立定期分析流程', desc: '設定每月固定時間執行分析流程，將報告自動寄送給相關決策者。' }
+        ],
+        tools: [
+          { name: 'ChatGPT', desc: '核心分析引擎，負責解讀數字、生成洞察報告。', link: '#', free: true },
+          { name: 'Excel / Google Sheets', desc: '財務數據的整理和初步計算平台。', link: '#', free: true },
+          { name: 'Zapier', desc: '自動化工具，用於串接試算表和 ChatGPT，建立定期分析流程。', link: '#', free: true }
+        ],
+        caseStudy: {
+          business: '台中中型製造商（50 人）',
+          challenge: '每月財務結算後，老闆需要花半天時間看報表，還常常看不出問題所在，等到發現異常時已經晚了。',
+          solution: '建立 AI 財務分析系統，月結後自動生成 1 頁白話文摘要，標記 3 個最需要注意的指標。',
+          result: '老闆看報表時間從 4 小時縮短至 15 分鐘，提前 2 個月發現應收帳款異常，避免了一筆 200 萬的呆帳風險。'
+        },
+        relatedIds: [3, 4, 5]
+      }
+    ];
+
+    const difficultyMap = { easy: { label: '容易上手', color: 'green' }, medium: { label: '需要學習', color: 'amber' }, hard: { label: '需要技術', color: 'red' } };
+    const colorMap = {
+      teal: { bg: 'bg-teal-500', light: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-600', badge: 'bg-teal-100 text-teal-700' },
+      orange: { bg: 'bg-orange-500', light: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-600', badge: 'bg-orange-100 text-orange-700' },
+      emerald: { bg: 'bg-emerald-500', light: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-600', badge: 'bg-emerald-100 text-emerald-700' },
+      purple: { bg: 'bg-purple-500', light: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-600', badge: 'bg-purple-100 text-purple-700' },
+      green: { bg: 'bg-green-500', light: 'bg-green-50', border: 'border-green-200', text: 'text-green-600', badge: 'bg-green-100 text-green-700' },
+      blue: { bg: 'bg-blue-500', light: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-600', badge: 'bg-blue-100 text-blue-700' }
+    };
+
+    function renderPage() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id')) || 1;
+      const sol = solutions.find(s => s.id === id);
+
+      if (!sol) {
+        document.getElementById('pageContent').innerHTML = `
+          <div class="min-h-screen flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-6xl mb-4">🔍</div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">找不到此方案</h2>
+              <a href="solution-gallery.html" class="text-teal-600 hover:underline">回到方案展覽</a>
+            </div>
+          </div>`;
+        return;
+      }
+
+      const c = colorMap[sol.color] || colorMap.teal;
+      const diff = difficultyMap[sol.difficulty];
+      const related = solutions.filter(s => sol.relatedIds.includes(s.id));
+      const stars = Array.from({length:5}, (_, i) => i < Math.round(sol.rating) ? '★' : '☆').join('');
+
+      document.title = `${sol.title} - 智慧轉運站`;
+
+      document.getElementById('pageContent').innerHTML = `
+        <!-- Hero -->
+        <div class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+          <div class="max-w-5xl mx-auto px-6 py-16">
+            <a href="solution-gallery.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 text-sm">
+              <i class="ri-arrow-left-line"></i> 回到方案展覽
+            </a>
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+              <div class="w-20 h-20 ${c.bg} rounded-2xl flex items-center justify-center shadow-xl shrink-0">
+                <i class="${sol.icon} text-white text-4xl"></i>
+              </div>
+              <div class="flex-1">
+                <div class="flex flex-wrap gap-2 mb-4">
+                  ${sol.tags.map(t => `<span class="bg-white/10 text-gray-300 px-3 py-1 rounded-full text-xs font-semibold">${t}</span>`).join('')}
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-snug">${sol.title}</h1>
+                <p class="text-gray-300 text-lg leading-relaxed mb-6">${sol.fullDescription}</p>
+                <div class="flex flex-wrap gap-6">
+                  <div class="flex items-center gap-2">
+                    <span class="text-yellow-400 text-lg">${stars}</span>
+                    <span class="font-bold text-lg">${sol.rating}</span>
+                    <span class="text-gray-400 text-sm">(${sol.reviewCount} 人評分)</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-gray-300">
+                    <i class="ri-time-line"></i>
+                    <span class="text-sm">實施時間：${sol.timeToImplement}</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-gray-300">
+                    <i class="ri-money-dollar-circle-line"></i>
+                    <span class="text-sm">${sol.costEstimate}</span>
+                  </div>
+                  <span class="bg-${diff.color}-500/20 text-${diff.color}-300 px-3 py-1 rounded-full text-sm font-semibold">
+                    ${diff.label}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+
+          <!-- 實施步驟 -->
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div class="w-10 h-10 ${c.bg} rounded-xl flex items-center justify-center">
+                <i class="ri-list-check-2 text-white text-lg"></i>
+              </div>
+              實施步驟
+            </h2>
+            <div class="space-y-4">
+              ${sol.steps.map((step, i) => `
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex gap-5">
+                  <div class="w-10 h-10 ${c.bg} rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">${i+1}</div>
+                  <div>
+                    <h3 class="font-bold text-gray-900 mb-1">${step.title}</h3>
+                    <p class="text-gray-600 leading-relaxed">${step.desc}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- 推薦工具 -->
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div class="w-10 h-10 ${c.bg} rounded-xl flex items-center justify-center">
+                <i class="ri-tools-line text-white text-lg"></i>
+              </div>
+              推薦工具
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              ${sol.tools.map(tool => `
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                  <div class="flex items-start justify-between mb-3">
+                    <h3 class="font-bold text-gray-900">${tool.name}</h3>
+                    <span class="${tool.free ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'} text-xs font-semibold px-2 py-0.5 rounded-full">
+                      ${tool.free ? '免費' : '付費'}
+                    </span>
+                  </div>
+                  <p class="text-gray-600 text-sm leading-relaxed">${tool.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- 案例研究 -->
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div class="w-10 h-10 ${c.bg} rounded-xl flex items-center justify-center">
+                <i class="ri-trophy-line text-white text-lg"></i>
+              </div>
+              成功案例
+            </h2>
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+              <div class="${c.light} ${c.border} border-b px-6 py-4">
+                <span class="font-bold ${c.text} flex items-center gap-2">
+                  <i class="ri-building-line"></i> ${sol.caseStudy.business}
+                </span>
+              </div>
+              <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <div class="text-xs font-bold text-red-500 uppercase tracking-wide mb-2 flex items-center gap-1">
+                    <i class="ri-error-warning-line"></i> 面臨挑戰
+                  </div>
+                  <p class="text-gray-700 text-sm leading-relaxed">${sol.caseStudy.challenge}</p>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-blue-500 uppercase tracking-wide mb-2 flex items-center gap-1">
+                    <i class="ri-lightbulb-line"></i> 解決方案
+                  </div>
+                  <p class="text-gray-700 text-sm leading-relaxed">${sol.caseStudy.solution}</p>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-green-500 uppercase tracking-wide mb-2 flex items-center gap-1">
+                    <i class="ri-check-double-line"></i> 成果
+                  </div>
+                  <p class="text-gray-700 text-sm leading-relaxed">${sol.caseStudy.result}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 相關方案 -->
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div class="w-10 h-10 ${c.bg} rounded-xl flex items-center justify-center">
+                <i class="ri-layout-grid-line text-white text-lg"></i>
+              </div>
+              相關方案
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              ${related.map(r => {
+                const rc = colorMap[r.color] || colorMap.teal;
+                return `
+                  <a href="solution-detail.html?id=${r.id}" class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all group block">
+                    <div class="w-10 h-10 ${rc.bg} rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                      <i class="${r.icon} text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2 text-sm leading-snug">${r.title}</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed line-clamp-2">${r.description}</p>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+        </div>
+      `;
+    }
+
+    renderPage();
+  </script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的帳戶 - 智慧轉運站</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div id="navbar"></div>
+
+  <!-- Not logged in state -->
+  <div id="notLoggedIn" class="hidden min-h-screen flex items-center justify-center px-6">
+    <div class="text-center max-w-md">
+      <div class="w-24 h-24 bg-gradient-to-br from-orange-100 to-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i class="ri-user-3-line text-orange-400 text-4xl"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-3">請先登入</h2>
+      <p class="text-gray-500 mb-8 leading-relaxed">登入後即可查看你的智慧幣餘額、成就徽章與活動記錄。</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="login.html" class="px-8 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:shadow-lg transition-all">
+          <i class="ri-login-box-line mr-2"></i>立即登入
+        </a>
+        <a href="register.html" class="px-8 py-3 bg-white text-gray-700 font-bold rounded-xl border-2 border-gray-200 hover:border-orange-300 hover:bg-orange-50 transition-all">
+          <i class="ri-user-add-line mr-2"></i>註冊帳號
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logged in state -->
+  <div id="loggedIn" class="hidden">
+    <!-- Profile Hero -->
+    <div class="bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-400 text-white">
+      <div class="max-w-5xl mx-auto px-6 py-12">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl border-4 border-white/30">
+            <i class="ri-user-3-line text-white text-4xl"></i>
+          </div>
+          <div class="text-center sm:text-left">
+            <h1 class="text-3xl font-bold mb-1" id="displayName">轉運站用戶</h1>
+            <p class="text-orange-100 mb-3" id="displayEmail">user@example.com</p>
+            <div class="flex flex-wrap justify-center sm:justify-start gap-3">
+              <span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                <i class="ri-calendar-line mr-1"></i>加入於 2026 年 1 月
+              </span>
+              <span id="badgeChip" class="bg-yellow-400/30 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                <i class="ri-medal-line mr-1"></i>銅牌會員
+              </span>
+            </div>
+          </div>
+          <div class="sm:ml-auto text-center">
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl px-8 py-4">
+              <div class="text-4xl font-bold mb-1" id="painBalance">320</div>
+              <div class="text-orange-100 text-sm flex items-center justify-center gap-1">
+                <i class="ri-copper-coin-line"></i> 痛幣餘額
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 py-10 space-y-8">
+
+      <!-- 智慧幣概覽 -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center">
+          <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <i class="ri-copper-coin-line text-orange-500 text-2xl"></i>
+          </div>
+          <div class="text-2xl font-bold text-gray-900 mb-1" id="painTotal">320</div>
+          <div class="text-gray-500 text-sm">痛幣（Pain Coin）</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center">
+          <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <i class="ri-medal-line text-amber-500 text-2xl"></i>
+          </div>
+          <div class="text-2xl font-bold text-gray-900 mb-1" id="wisdomTotal">15</div>
+          <div class="text-gray-500 text-sm">智慧幣（Wisdom Coin）</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center">
+          <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <i class="ri-exchange-line text-green-500 text-2xl"></i>
+          </div>
+          <div class="text-2xl font-bold text-gray-900 mb-1">10:1</div>
+          <div class="text-gray-500 text-sm">兌換比例</div>
+        </div>
+      </div>
+
+      <!-- 兌換區 + 到期警告 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <i class="ri-exchange-funds-line text-orange-500"></i> 智慧幣兌換
+          </h2>
+          <button onclick="openConvertModal()" class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:shadow-lg transition-all text-sm">
+            <i class="ri-coins-line mr-1"></i>立即兌換
+          </button>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">每 <strong>10 個痛幣</strong> 可兌換 <strong>1 個智慧幣</strong>。智慧幣可用於兌換平台工具與專屬服務。</p>
+        <!-- 到期警告 -->
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+          <i class="ri-time-line text-amber-500 text-lg mt-0.5 shrink-0"></i>
+          <div>
+            <p class="font-semibold text-amber-900 text-sm">代幣即將到期提醒</p>
+            <p class="text-amber-700 text-sm mt-0.5">你有 <strong>50 個痛幣</strong> 將於 <strong>2026 年 3 月 31 日</strong> 到期，請盡快使用或兌換。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 成就徽章 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
+          <i class="ri-award-line text-orange-500"></i> 成就徽章
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- 銅牌 -->
+          <div class="border-2 border-orange-300 bg-orange-50 rounded-xl p-4">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center">
+                <i class="ri-medal-line text-orange-600 text-xl"></i>
+              </div>
+              <div>
+                <div class="font-bold text-orange-900">銅牌會員</div>
+                <div class="text-xs text-orange-600">已達成 ✓</div>
+              </div>
+            </div>
+            <p class="text-xs text-gray-600">累積 100 痛幣即可達成</p>
+            <div class="mt-2 bg-orange-200 rounded-full h-2">
+              <div class="bg-orange-500 h-2 rounded-full w-full"></div>
+            </div>
+          </div>
+          <!-- 銀牌 -->
+          <div class="border-2 border-gray-200 bg-gray-50 rounded-xl p-4">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                <i class="ri-medal-line text-gray-500 text-xl"></i>
+              </div>
+              <div>
+                <div class="font-bold text-gray-700">銀牌會員</div>
+                <div class="text-xs text-gray-500">320 / 500 痛幣</div>
+              </div>
+            </div>
+            <p class="text-xs text-gray-600">累積 500 痛幣即可達成</p>
+            <div class="mt-2 bg-gray-200 rounded-full h-2">
+              <div class="bg-gray-400 h-2 rounded-full" style="width:64%"></div>
+            </div>
+          </div>
+          <!-- 金牌 -->
+          <div class="border-2 border-gray-200 bg-gray-50 rounded-xl p-4">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                <i class="ri-medal-line text-gray-400 text-xl"></i>
+              </div>
+              <div>
+                <div class="font-bold text-gray-600">金牌會員</div>
+                <div class="text-xs text-gray-400">320 / 1000 痛幣</div>
+              </div>
+            </div>
+            <p class="text-xs text-gray-600">累積 1000 痛幣即可達成</p>
+            <div class="mt-2 bg-gray-200 rounded-full h-2">
+              <div class="bg-gray-300 h-2 rounded-full" style="width:32%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 本週貢獻 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
+          <i class="ri-bar-chart-line text-orange-500"></i> 本週貢獻
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="text-center p-4 bg-orange-50 rounded-xl">
+            <div class="text-2xl font-bold text-orange-600 mb-1">3</div>
+            <div class="text-xs text-gray-500">發布痛點</div>
+          </div>
+          <div class="text-center p-4 bg-amber-50 rounded-xl">
+            <div class="text-2xl font-bold text-amber-600 mb-1">7</div>
+            <div class="text-xs text-gray-500">回覆留言</div>
+          </div>
+          <div class="text-center p-4 bg-green-50 rounded-xl">
+            <div class="text-2xl font-bold text-green-600 mb-1">2</div>
+            <div class="text-xs text-gray-500">分享方案</div>
+          </div>
+          <div class="text-center p-4 bg-blue-50 rounded-xl">
+            <div class="text-2xl font-bold text-blue-600 mb-1">+45</div>
+            <div class="text-xs text-gray-500">本週獲得痛幣</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 近期活動 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
+          <i class="ri-history-line text-orange-500"></i> 近期活動
+        </h2>
+        <div class="space-y-3">
+          <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+            <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center shrink-0">
+              <i class="ri-add-circle-line text-orange-500"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-semibold text-gray-800">發布了新痛點「傳統產業轉型 AI 的困境」</p>
+              <p class="text-xs text-gray-400">2 天前</p>
+            </div>
+            <span class="text-green-600 text-sm font-bold">+10</span>
+          </div>
+          <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center shrink-0">
+              <i class="ri-chat-3-line text-amber-500"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-semibold text-gray-800">回覆了「如何用 AI 做社群行銷」</p>
+              <p class="text-xs text-gray-400">3 天前</p>
+            </div>
+            <span class="text-green-600 text-sm font-bold">+5</span>
+          </div>
+          <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0">
+              <i class="ri-lightbulb-line text-green-500"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-semibold text-gray-800">分享了解決方案「ChatGPT 報價自動化」</p>
+              <p class="text-xs text-gray-400">5 天前</p>
+            </div>
+            <span class="text-green-600 text-sm font-bold">+15</span>
+          </div>
+          <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <i class="ri-download-line text-blue-500"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-semibold text-gray-800">兌換了工具「Notion AI 模板包」</p>
+              <p class="text-xs text-gray-400">1 週前</p>
+            </div>
+            <span class="text-red-500 text-sm font-bold">-50</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Convert Modal -->
+  <div id="convertModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+      <div class="flex items-center justify-between mb-5">
+        <h3 class="text-xl font-bold text-gray-900">兌換智慧幣</h3>
+        <button onclick="closeConvertModal()" class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center">
+          <i class="ri-close-line text-gray-600"></i>
+        </button>
+      </div>
+      <div class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-4 mb-5">
+        <div class="flex justify-between items-center">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-orange-600" id="convertPainInput">10</div>
+            <div class="text-xs text-gray-500 mt-1">痛幣</div>
+          </div>
+          <i class="ri-arrow-right-line text-gray-400 text-xl"></i>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-amber-600" id="convertWisdomOutput">1</div>
+            <div class="text-xs text-gray-500 mt-1">智慧幣</div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-5">
+        <label class="block text-sm font-semibold text-gray-700 mb-2">兌換數量（智慧幣）</label>
+        <div class="flex items-center gap-3">
+          <button onclick="adjustConvert(-1)" class="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-xl font-bold text-xl flex items-center justify-center">-</button>
+          <input id="convertQty" type="number" value="1" min="1" max="32" oninput="updateConvert()"
+            class="flex-1 text-center py-2.5 border border-gray-200 rounded-xl text-lg font-bold focus:outline-none focus:border-orange-400" />
+          <button onclick="adjustConvert(1)" class="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-xl font-bold text-xl flex items-center justify-center">+</button>
+        </div>
+        <p class="text-xs text-gray-400 mt-2 text-center">最多可兌換 32 個智慧幣（需 320 痛幣）</p>
+      </div>
+      <button onclick="confirmConvert()" class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:shadow-lg transition-all">
+        確認兌換
+      </button>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    // Mock: check auth from supabase session or show demo logged-in state
+    // For static demo, show logged-in state directly
+    document.addEventListener('DOMContentLoaded', () => {
+      // Try to get session from supabase; fall back to demo logged-in view
+      const showLoggedIn = () => {
+        document.getElementById('notLoggedIn').classList.remove('hidden');
+        // Change to logged-in for demo purposes - uncomment below & comment above
+        // document.getElementById('loggedIn').classList.remove('hidden');
+      };
+      if (window._supabase) {
+        window._supabase.auth.getSession().then(({ data }) => {
+          if (data.session) {
+            document.getElementById('notLoggedIn').classList.add('hidden');
+            document.getElementById('loggedIn').classList.remove('hidden');
+            const user = data.session.user;
+            document.getElementById('displayEmail').textContent = user.email || '';
+            const name = user.user_metadata?.full_name || user.email?.split('@')[0] || '轉運站用戶';
+            document.getElementById('displayName').textContent = name;
+          } else {
+            document.getElementById('notLoggedIn').classList.remove('hidden');
+          }
+        });
+      } else {
+        document.getElementById('notLoggedIn').classList.remove('hidden');
+      }
+    });
+
+    function openConvertModal() {
+      document.getElementById('convertModal').classList.remove('hidden');
+    }
+    function closeConvertModal() {
+      document.getElementById('convertModal').classList.add('hidden');
+    }
+    function adjustConvert(delta) {
+      const input = document.getElementById('convertQty');
+      const val = Math.min(32, Math.max(1, parseInt(input.value || 1) + delta));
+      input.value = val;
+      updateConvert();
+    }
+    function updateConvert() {
+      const qty = parseInt(document.getElementById('convertQty').value) || 1;
+      const clamped = Math.min(32, Math.max(1, qty));
+      document.getElementById('convertPainInput').textContent = clamped * 10;
+      document.getElementById('convertWisdomOutput').textContent = clamped;
+    }
+    function confirmConvert() {
+      const qty = parseInt(document.getElementById('convertQty').value) || 1;
+      closeConvertModal();
+      alert(`成功兌換 ${qty} 個智慧幣！`);
+    }
+
+    document.getElementById('convertModal').addEventListener('click', function(e) {
+      if (e.target === this) closeConvertModal();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>老闆故事 - 智慧轉運站</title>
+  <meta name="description" content="聽聽他們如何用 AI 工具解決痛點、逆轉困境，找到屬於自己的出路。" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .carousel-track { transition: transform 0.5s ease-in-out; }
+  </style>
+</head>
+<body class="bg-white">
+  <div id="navbar"></div>
+
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-br from-orange-600 via-amber-500 to-yellow-400 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-40 h-40 bg-white rounded-full"></div>
+      <div class="absolute bottom-10 right-20 w-60 h-60 bg-white rounded-full"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-6">
+        <i class="ri-trophy-line"></i> 真實轉運故事
+      </div>
+      <h1 class="text-5xl font-bold mb-6">老闆故事</h1>
+      <p class="text-xl text-orange-100 max-w-2xl mx-auto leading-relaxed">
+        聽聽他們如何用 AI 工具解決痛點、逆轉困境，找到屬於自己的出路
+      </p>
+      <div class="flex justify-center gap-8 mt-10">
+        <div class="text-center">
+          <div class="text-3xl font-bold">6+</div>
+          <div class="text-orange-200 text-sm mt-1">成功故事</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold">1047+</div>
+          <div class="text-orange-200 text-sm mt-1">獲得啟發</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold">300%</div>
+          <div class="text-orange-200 text-sm mt-1">最高效率提升</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Carousel -->
+  <section class="bg-gray-900 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+        <i class="ri-fire-line text-orange-400"></i> 精選故事
+      </h2>
+      <div class="relative overflow-hidden rounded-2xl" id="carousel">
+        <div class="flex carousel-track" id="carouselTrack">
+          <!-- Slides injected by JS -->
+        </div>
+        <!-- Arrows -->
+        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-all z-10">
+          <i class="ri-arrow-left-s-line text-xl"></i>
+        </button>
+        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-all z-10">
+          <i class="ri-arrow-right-s-line text-xl"></i>
+        </button>
+        <!-- Dots -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" id="carouselDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    <!-- Sort + Submit -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <div class="flex items-center gap-3">
+        <span class="text-gray-700 font-semibold">排序：</span>
+        <div class="flex bg-gray-100 rounded-xl p-1">
+          <button id="sortHot" onclick="setSort('hot')" class="px-4 py-2 rounded-lg text-sm font-semibold bg-orange-500 text-white transition-all">
+            <i class="ri-fire-line mr-1"></i>熱門
+          </button>
+          <button id="sortLatest" onclick="setSort('latest')" class="px-4 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:text-gray-900 transition-all">
+            <i class="ri-time-line mr-1"></i>最新
+          </button>
+        </div>
+      </div>
+      <button onclick="openShareModal()" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:shadow-lg transition-all flex items-center gap-2">
+        <i class="ri-add-line"></i> 分享我的故事
+      </button>
+    </div>
+
+    <!-- Story Grid -->
+    <div id="storyGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- Founder Card -->
+  <section class="bg-gradient-to-r from-orange-50 to-amber-50 py-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col md:flex-row items-center gap-8">
+        <div class="w-24 h-24 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center shrink-0 shadow-lg">
+          <i class="ri-user-star-line text-white text-4xl"></i>
+        </div>
+        <div class="text-center md:text-left">
+          <div class="text-sm text-orange-500 font-semibold mb-1">創辦人的話</div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">每一個痛點，都是轉機的起點</h3>
+          <p class="text-gray-600 leading-relaxed">
+            我們建立這個平台，是因為相信台灣有無數像你一樣的人，面對困境卻找不到出路。
+            這些故事不是奇蹟，是真實的人用真實的方法，在 AI 時代找到了屬於自己的節奏。
+            你的故事，也可以成為下一個人的轉機。
+          </p>
+          <div class="mt-4 text-sm text-gray-500">— 智慧轉運站 創辦人</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Share Modal -->
+  <div id="shareModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-xl font-bold text-gray-900">分享我的故事</h3>
+        <button onclick="closeShareModal()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+          <i class="ri-close-line text-gray-600"></i>
+        </button>
+      </div>
+      <form onsubmit="submitStory(event)" class="p-6 space-y-5">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">故事標題 *</label>
+          <input type="text" placeholder="例：用 AI 讓我的生意成長 3 倍" required
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">你是誰？*</label>
+          <input type="text" placeholder="例：台中手工餅乾老闆" required
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">你的故事 *</label>
+          <textarea rows="5" placeholder="分享你遇到的痛點、如何發現解法，以及改變後的成果..." required
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 resize-none"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">聯絡 Email（選填）</label>
+          <input type="email" placeholder="your@email.com"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
+        </div>
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:shadow-lg transition-all">
+          <i class="ri-send-plane-line mr-2"></i>送出故事
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Story Detail Modal -->
+  <div id="detailModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div id="detailContent" class="p-0"></div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const stories = [
+      { id:1, title:'從手動報價到 AI 自動化，接單效率提升 300%', excerpt:'我是做客製化家具的，以前每個客戶詢價都要花 1-2 小時計算材料、工時、報價。用了 AI 工具後，現在 5 分鐘就能給出專業報價單...', content:'我是做客製化家具的小老闆，台中工作室。以前每個客戶詢價都要花 1-2 小時：量尺寸、算材料、估工時、做報價單，一天最多處理 3-4 個詢價。\n\n後來在痛點樞紐發文求救，有人推薦我用 ChatGPT + Google Sheets 自動化。我把常用材料價格、工時標準都建成資料庫，客戶傳需求過來，我複製貼上到 AI，它就自動生成專業報價單，還會建議最佳材料組合。\n\n現在一天可以處理 10+ 個詢價，接單率也從 30% 提升到 65%，因為回覆速度快、報價專業。真的感謝這個平台，讓我找到對的工具。', author:'阿傑（台中家具老闆）', likes:234, image:'https://readdy.ai/api/search-image?query=modern%20furniture%20workshop%20with%20digital%20tablet%20showing%20automated%20quotation%20system%20professional%20carpentry%20tools%20warm%20lighting&width=600&height=400&seq=story-001&orientation=landscape', date:'2026-01-15', featured:true },
+      { id:2, title:'學生也能用 AI 接案！我的第一筆收入來自這個平台', excerpt:'大三學生，會一點 Python。在這裡看到有人需要「自動整理 Excel 報表」，我用 AI 幫忙寫腳本，2 小時搞定，賺到第一筆 3000 元...', content:'我是政大資管大三學生，會一點 Python 但不算高手。某天在痛點樞紐看到一個貿易公司老闆發文：「每週要手動整理 50 份 Excel 報表，超痛苦」。\n\n我私訊他說可以試試看，用 ChatGPT 幫我寫 Python 腳本，我再調整細節。結果 2 小時就搞定了，老闆超滿意，直接轉帳 3000 元給我。\n\n這是我第一次用技能賺錢，雖然不多，但超有成就感。現在我常在這裡找痛點，用 AI 輔助解決，已經接了 5 個案子了。對學生來說，這個平台真的是寶藏。', author:'小陳（政大學生）', likes:189, image:'https://readdy.ai/api/search-image?query=young%20student%20working%20on%20laptop%20with%20Python%20code%20and%20Excel%20spreadsheets%20modern%20study%20desk%20successful%20freelance%20work%20atmosphere&width=600&height=400&seq=story-002&orientation=landscape', date:'2026-01-12', featured:true },
+      { id:3, title:'AI 讓我的烘焙小店起死回生', excerpt:'疫情後生意慘淡，不會行銷也不懂社群。用了 AI 工具自動生成貼文、設計圖片，IG 粉絲從 200 漲到 5000，訂單翻倍...', content:'我在新竹開手工烘焙小店，疫情後生意一直很慘。我不會行銷，IG 只有 200 粉絲，都是親友。\n\n在這個平台看到有人分享「用 AI 做社群行銷」的工具，我試著用 Canva AI 設計圖片、用 ChatGPT 寫貼文文案。每天花 30 分鐘，就能產出 3-5 則專業貼文。\n\n3 個月後，IG 粉絲漲到 5000，每週訂單從 10 個變成 40 個。我還學會用 AI 分析哪種產品最受歡迎，現在主打「AI 推薦款」，客人都說很準。\n\n真的很感謝這個平台，讓不懂技術的我也能用上 AI。', author:'小美（新竹烘焙店）', likes:156, image:'https://readdy.ai/api/search-image?query=cozy%20bakery%20shop%20with%20fresh%20pastries%20and%20smartphone%20showing%20Instagram%20growth%20analytics%20warm%20inviting%20atmosphere%20successful%20small%20business&width=600&height=400&seq=story-003&orientation=landscape', date:'2026-01-10', featured:false },
+      { id:4, title:'從不懂 AI 到幫 20 家公司導入自動化', excerpt:'我是傳統產業出身，完全不懂程式。在這裡學了 3 個月，現在成為 AI 顧問，幫中小企業導入自動化工具...', content:'我 45 歲，做了 20 年傳統製造業。去年被資遣後很迷茫，不知道能做什麼。\n\n偶然發現這個平台，開始每天看痛點、看解法、試工具。我發現很多中小企業老闆跟我一樣，不懂 AI 但很需要。\n\n我花 3 個月自學，把平台上分享的工具都試過一遍，整理成「中小企業 AI 工具包」。現在我是自由 AI 顧問，已經幫 20 家公司導入自動化，月收入比以前上班還高。\n\n年紀不是問題，只要願意學。這個平台給了我第二次機會。', author:'老王（AI 顧問）', likes:142, image:'https://readdy.ai/api/search-image?query=mature%20professional%20man%20presenting%20AI%20automation%20solutions%20to%20small%20business%20owners%20modern%20office%20meeting%20successful%20career%20transformation&width=600&height=400&seq=story-004&orientation=landscape', date:'2026-01-08', featured:false },
+      { id:5, title:'用 AI 翻譯工具，我的代購生意拓展到日韓', excerpt:'做代購只會中文很吃虧。用了 AI 即時翻譯工具後，現在可以直接跟日韓賣家溝通，利潤提升 50%...', content:'我做代購 3 年，主要做歐美品牌，因為只會中文和英文。日韓商品利潤更高，但語言是障礙。\n\n在這裡看到有人分享「DeepL + ChatGPT 組合翻譯法」，我試了一下，發現翻譯品質超好，連敬語、商業用語都很到位。\n\n現在我直接用 AI 跟日韓賣家溝通，還能看懂產品說明、處理客訴。日韓商品佔我營業額 40%，利潤比歐美高 50%。\n\n語言不再是障礙，AI 讓我的生意版圖擴大了。', author:'Tina（代購業者）', likes:128, image:'https://readdy.ai/api/search-image?query=online%20shopping%20business%20with%20Japanese%20and%20Korean%20products%20laptop%20showing%20translation%20tools%20international%20commerce%20success&width=600&height=400&seq=story-005&orientation=landscape', date:'2026-01-05', featured:false },
+      { id:6, title:'我用 AI 做了一個記帳 App，現在有 1000 個用戶', excerpt:'不會寫程式的設計師，用 AI 輔助開發了記帳 App。從這個平台找到第一批用戶，現在每月都有新功能上線...', content:'我是 UI 設計師，不會寫程式。一直想做一個「超簡單記帳 App」，但找不到工程師合作。\n\n後來發現可以用 AI 輔助開發，我用 ChatGPT + Claude 寫程式碼，用 Cursor 編輯器輔助，花了 2 個月做出第一版。\n\n我在這個平台分享我的 App，第一週就有 200 人下載試用，大家給了很多建議。現在用戶破 1000 人，每月都有新功能上線。\n\n不會寫程式也能做產品，AI 真的降低了創業門檻。感謝這個平台給我第一批用戶。', author:'Kevin（獨立開發者）', likes:198, image:'https://readdy.ai/api/search-image?query=UI%20designer%20working%20on%20budgeting%20app%20interface%20with%20AI%20coding%20assistant%20modern%20workspace%20successful%20app%20development&width=600&height=400&seq=story-006&orientation=landscape', date:'2026-01-03', featured:false }
+    ];
+
+    let sortMode = 'hot';
+    const likedIds = new Set();
+    const likeCounts = {};
+    stories.forEach(s => likeCounts[s.id] = s.likes);
+
+    // Carousel
+    const featuredStories = stories.filter(s => s.featured);
+    let currentSlide = 0;
+    let autoPlayTimer;
+
+    function buildCarousel() {
+      const track = document.getElementById('carouselTrack');
+      const dots = document.getElementById('carouselDots');
+      track.innerHTML = featuredStories.map(s => `
+        <div class="min-w-full relative cursor-pointer" onclick="openDetail(${s.id})">
+          <img src="${s.image}" alt="${s.title}" class="w-full h-80 object-cover object-top" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-8">
+            <div class="text-orange-400 text-sm font-semibold mb-2"><i class="ri-star-fill mr-1"></i>精選故事</div>
+            <h3 class="text-white text-2xl font-bold mb-2 leading-snug">${s.title}</h3>
+            <p class="text-gray-300 text-sm line-clamp-2">${s.excerpt}</p>
+            <div class="flex items-center gap-4 mt-3">
+              <span class="text-orange-300 text-sm"><i class="ri-user-line mr-1"></i>${s.author}</span>
+              <span class="text-gray-400 text-sm"><i class="ri-heart-line mr-1"></i>${s.likes}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      dots.innerHTML = featuredStories.map((_, i) => `
+        <button onclick="goSlide(${i})" class="w-2.5 h-2.5 rounded-full transition-all ${i===0?'bg-orange-400 w-6':'bg-white/50'}"></button>
+      `).join('');
+    }
+
+    function updateCarousel() {
+      document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+      const dotBtns = document.querySelectorAll('#carouselDots button');
+      dotBtns.forEach((d, i) => {
+        d.className = `rounded-full transition-all ${i===currentSlide?'bg-orange-400 w-6 h-2.5':'bg-white/50 w-2.5 h-2.5'}`;
+      });
+    }
+
+    function nextSlide() { currentSlide = (currentSlide + 1) % featuredStories.length; updateCarousel(); resetAutoPlay(); }
+    function prevSlide() { currentSlide = (currentSlide - 1 + featuredStories.length) % featuredStories.length; updateCarousel(); resetAutoPlay(); }
+    function goSlide(i) { currentSlide = i; updateCarousel(); resetAutoPlay(); }
+    function resetAutoPlay() { clearInterval(autoPlayTimer); autoPlayTimer = setInterval(nextSlide, 5000); }
+
+    // Story Grid
+    function setSort(mode) {
+      sortMode = mode;
+      document.getElementById('sortHot').className = `px-4 py-2 rounded-lg text-sm font-semibold transition-all ${mode==='hot'?'bg-orange-500 text-white':'text-gray-600 hover:text-gray-900'}`;
+      document.getElementById('sortLatest').className = `px-4 py-2 rounded-lg text-sm font-semibold transition-all ${mode==='latest'?'bg-orange-500 text-white':'text-gray-600 hover:text-gray-900'}`;
+      renderGrid();
+    }
+
+    function renderGrid() {
+      const sorted = [...stories].sort((a, b) => sortMode === 'hot' ? b.likes - a.likes : new Date(b.date) - new Date(a.date));
+      document.getElementById('storyGrid').innerHTML = sorted.map(s => {
+        const liked = likedIds.has(s.id);
+        return `
+          <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-all group cursor-pointer" onclick="openDetail(${s.id})">
+            <div class="relative overflow-hidden">
+              <img src="${s.image}" alt="${s.title}" class="w-full h-48 object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+              ${s.featured ? '<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full"><i class="ri-star-fill mr-1"></i>精選</div>' : ''}
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-gray-900 text-lg leading-snug mb-2 line-clamp-2">${s.title}</h3>
+              <p class="text-gray-500 text-sm leading-relaxed line-clamp-3 mb-4">${s.excerpt}</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center">
+                    <i class="ri-user-line text-white text-xs"></i>
+                  </div>
+                  <span class="text-sm text-gray-600">${s.author}</span>
+                </div>
+                <button onclick="toggleLike(event, ${s.id})" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all ${liked?'bg-red-50 border-red-200 text-red-500':'border-gray-200 text-gray-500 hover:border-red-200 hover:text-red-500'}">
+                  <i class="${liked?'ri-heart-fill':'ri-heart-line'}"></i>
+                  <span class="text-sm font-semibold like-count-${s.id}">${likeCounts[s.id]}</span>
+                </button>
+              </div>
+              <div class="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-400">
+                <i class="ri-calendar-line mr-1"></i>${s.date}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleLike(e, id) {
+      e.stopPropagation();
+      if (likedIds.has(id)) { likedIds.delete(id); likeCounts[id]--; }
+      else { likedIds.add(id); likeCounts[id]++; }
+      renderGrid();
+    }
+
+    function openDetail(id) {
+      const s = stories.find(x => x.id === id);
+      if (!s) return;
+      const liked = likedIds.has(s.id);
+      document.getElementById('detailContent').innerHTML = `
+        <img src="${s.image}" alt="${s.title}" class="w-full h-64 object-cover object-top rounded-t-2xl" />
+        <div class="p-8">
+          <div class="flex items-start justify-between mb-4">
+            <h2 class="text-2xl font-bold text-gray-900 leading-snug flex-1 mr-4">${s.title}</h2>
+            <button onclick="closeDetail()" class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center shrink-0">
+              <i class="ri-close-line text-gray-600"></i>
+            </button>
+          </div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="flex items-center gap-2">
+              <div class="w-9 h-9 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center">
+                <i class="ri-user-line text-white text-sm"></i>
+              </div>
+              <span class="text-gray-700 font-semibold">${s.author}</span>
+            </div>
+            <span class="text-gray-400 text-sm"><i class="ri-calendar-line mr-1"></i>${s.date}</span>
+          </div>
+          <div class="text-gray-700 leading-relaxed whitespace-pre-line mb-6">${s.content}</div>
+          <button onclick="toggleLike(event, ${s.id})" class="flex items-center gap-2 px-5 py-2.5 rounded-full border transition-all ${liked?'bg-red-50 border-red-300 text-red-500':'border-gray-200 text-gray-500 hover:border-red-300 hover:text-red-500'}">
+            <i class="${liked?'ri-heart-fill':'ri-heart-line'}"></i>
+            <span class="font-semibold">${likeCounts[s.id]} 人受到啟發</span>
+          </button>
+        </div>
+      `;
+      document.getElementById('detailModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetail() {
+      document.getElementById('detailModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function openShareModal() {
+      document.getElementById('shareModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeShareModal() {
+      document.getElementById('shareModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    function submitStory(e) {
+      e.preventDefault();
+      closeShareModal();
+      alert('感謝分享！我們會在審核後發布你的故事。');
+    }
+
+    document.getElementById('shareModal').addEventListener('click', function(e) {
+      if (e.target === this) closeShareModal();
+    });
+    document.getElementById('detailModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDetail();
+    });
+
+    buildCarousel();
+    renderGrid();
+    autoPlayTimer = setInterval(nextSlide, 5000);
+  </script>
+</body>
+</html>
