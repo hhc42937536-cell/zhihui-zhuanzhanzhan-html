@@ -39,8 +39,11 @@ function renderNav() {
           </a>
           <div class="hidden lg:flex items-center space-x-1">${linksHTML}</div>
           <div class="flex items-center space-x-3">
-            <a href="pain-point-hub.html" class="hidden md:inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm font-medium rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all">
-              <i class="ri-add-line mr-1"></i>分享痛點
+            <a href="login.html" class="hidden md:inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors whitespace-nowrap">
+              登入 / 註冊
+            </a>
+            <a href="pain-point-hub.html" class="hidden md:inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm font-medium rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all whitespace-nowrap">
+              開始分享
             </a>
             <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-600 hover:text-orange-600">
               <i class="ri-menu-line text-xl"></i>
@@ -50,7 +53,8 @@ function renderNav() {
       </div>
       <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-1">
         ${mobileLinksHTML}
-        <a href="pain-point-hub.html" class="block px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium text-center mt-2">分享痛點</a>
+        <a href="login.html" class="block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-sm font-medium text-center border border-gray-200 mt-2">登入 / 註冊</a>
+        <a href="pain-point-hub.html" class="block px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium text-center mt-2">開始分享</a>
       </div>
     </nav>`;
 
