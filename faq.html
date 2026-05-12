@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>常見問題 FAQ - 智慧轉運站 | 新手轉運指南</title>
+  <meta name="description" content="關於智慧轉運站的所有疑問，這裡都有解答。了解痛痛幣、智慧幣、如何投稿、匿名分享、AI工具箱等功能說明。" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+    .animate-ping { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,.6,1) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+    .faq-answer { display: none; }
+    .faq-answer.open { display: block; }
+    .faq-chevron { transition: transform 0.2s; }
+    .faq-chevron.open { transform: rotate(180deg); }
+  </style>
+</head>
+<body class="bg-white">
+  <div id="navbar"></div>
+
+  <div class="min-h-screen bg-gradient-to-b from-orange-50 via-white to-amber-50">
+
+    <!-- Hero -->
+    <div class="bg-gradient-to-b from-orange-50 to-white pt-28 pb-16">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-full font-bold text-sm mb-6">
+          <i class="ri-question-answer-line"></i> 常見問題
+        </div>
+        <h1 class="text-5xl font-bold text-gray-900 mb-6">常見問題解答 – 新手轉運指南！</h1>
+        <p class="text-xl text-gray-600 leading-relaxed">關於智慧轉運站的所有疑問，這裡都有解答</p>
+      </div>
+    </div>
+
+    <!-- 分類篩選 -->
+    <div class="max-w-4xl mx-auto px-6 mb-10">
+      <div class="flex flex-wrap gap-3 justify-center" id="category-filters">
+        <button onclick="filterFAQ('全部')" class="faq-cat-btn active px-6 py-2.5 rounded-full font-bold transition-all bg-orange-500 text-white shadow-lg" data-cat="全部">全部</button>
+        <button onclick="filterFAQ('幣系統')" class="faq-cat-btn px-6 py-2.5 rounded-full font-bold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300" data-cat="幣系統">幣系統</button>
+        <button onclick="filterFAQ('使用指南')" class="faq-cat-btn px-6 py-2.5 rounded-full font-bold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300" data-cat="使用指南">使用指南</button>
+        <button onclick="filterFAQ('法律聲明')" class="faq-cat-btn px-6 py-2.5 rounded-full font-bold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300" data-cat="法律聲明">法律聲明</button>
+        <button onclick="filterFAQ('社群互動')" class="faq-cat-btn px-6 py-2.5 rounded-full font-bold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300" data-cat="社群互動">社群互動</button>
+        <button onclick="filterFAQ('平台介紹')" class="faq-cat-btn px-6 py-2.5 rounded-full font-bold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300" data-cat="平台介紹">平台介紹</button>
+        <button onclick="filterFAQ('功能說明')" class="faq-cat-btn px-6 py-2.5 rounded-full font-bold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300" data-cat="功能說明">功能說明</button>
+        <button onclick="filterFAQ('隱私安全')" class="faq-cat-btn px-6 py-2.5 rounded-full font-bold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300" data-cat="隱私安全">隱私安全</button>
+        <button onclick="filterFAQ('費用相關')" class="faq-cat-btn px-6 py-2.5 rounded-full font-bold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300" data-cat="費用相關">費用相關</button>
+      </div>
+    </div>
+
+    <!-- FAQ 列表 -->
+    <div class="max-w-4xl mx-auto px-6 pb-20" id="faq-list">
+
+      <div class="faq-item space-y-0" data-cat="使用指南">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">使用指南</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">怎麼參與？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed whitespace-pre-line">參與非常簡單，完全免費！
+
+【三步驟開始轉運】
+1. 註冊免費帳號
+2. 分享你的痛點/解法/故事，立即得痛痛幣/智慧幣
+3. 探索 AI 解法、工具庫、機會交換區，找到你的轉運機會！
+
+從 Threads 看到的痛點，也歡迎直接來網站投稿！在網站投稿得幣更直接，還有全站曝光機會。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="幣系統">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">幣系統</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">什麼是痛痛幣/智慧幣？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron open">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer open px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed whitespace-pre-line">痛痛幣和智慧幣是平台的貢獻獎勵系統！
+
+【獲得方式】
+• 分享痛點/留言 → +10痛痛幣
+• 提供高品質AI解法/創業故事 → +50~200智慧幣
+
+【兌換用途】
+• 解法優先查看權限
+• 專屬模板下載
+• 轉贈學生使用
+• 額外曝光機會
+
+【特別加成】
+學生/18歲以下自動加成30%幣值！我們強調「價值轉運與教育公益」。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="使用指南">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">使用指南</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">如何投稿/匿名分享？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed whitespace-pre-line">投稿非常簡單！
+
+【分享痛點流程】
+1. 點擊「分享你的痛點」按鈕
+2. 填寫痛點標題、情境描述
+3. 如果有解法也可以一併分享
+4. 選擇是否匿名分享（勾選匿名選項即可保護隱私）
+5. 提交後立即獲得 +10 痛痛幣
+
+【匿名分享】
+我們提供完整的匿名選項，保護你的隱私。即使匿名分享，你仍然可以獲得痛痛幣獎勵！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="法律聲明">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">法律聲明</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">免責聲明</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed whitespace-pre-line">【重要聲明】
+本平台以教育分享與AI應用為主，僅提供參考，不構成專業建議。
+
+• 涉及法律、醫療、財務、個資等專業領域，請務必諮詢專業人士
+• 所有內容由使用者分享，平台不負法律責任
+• 違規內容一經檢舉立即下架
+• 使用者需對自己分享的內容負責
+• 使用平台內容所產生的任何後果，使用者需自行承擔
+
+我們致力於提供安全、有價值的分享環境，但請務必謹慎判斷並為自己的決策負責。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="社群互動">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">社群互動</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">如何加入 Threads 社群？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed whitespace-pre-line">歡迎透過 Threads 認識我們！
+
+【社群特色】
+• 晚間 8-10 點最活躍時段
+• 在 Threads 看到有趣的痛點？直接來網站投稿，得幣更直接！
+• 網站投稿享全站曝光 + 痛痛幣獎勵
+
+在 Threads 搜尋「智慧轉運站」即可找到我們，但記得：完整轉運在網站，來這裡投稿得幣加倍！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="平台介紹">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">平台介紹</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">這個網站是做什麼的？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed">智慧轉運站是一個探索問題與 AI 解法的平台。你可以分享痛點、學習解法、找到工具、甚至啟發機會。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="功能說明">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">功能說明</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">什麼是痛點中心？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed">痛點中心收集生活與工作中的各種問題，每個痛點都包含情境描述、AI解法、推薦工具和真實案例故事。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="功能說明">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">功能說明</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">什麼是 AI工具箱？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed">AI工具箱收錄各種 AI 工具與應用方式，從熱門工具如 ChatGPT、Notion AI 到低調實用工具，都能快速上手。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="功能說明">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">功能說明</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">什麼是榮譽榜？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed">榮譽榜展示最受歡迎的痛點、AI解法與創意機會，讓你快速找到靈感、學習解法、獲得啟發。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="隱私安全">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">隱私安全</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">我的分享會被公開嗎？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed">是的，所有分享都會公開在平台上，讓更多人看到並從中學習。你也可以選擇匿名分享。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="費用相關">
+        <div class="bg-white rounded-xl shadow-md border-2 border-gray-100 overflow-hidden hover:border-orange-200 transition-all mb-4">
+          <button onclick="toggleFAQ(this)" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">費用相關</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">平台有收費嗎？</h3>
+            </div>
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0 ml-4 faq-chevron">
+              <i class="ri-arrow-down-s-line text-xl"></i>
+            </div>
+          </button>
+          <div class="faq-answer px-8 pb-6">
+            <div class="bg-orange-50 rounded-lg p-6 border-l-4 border-orange-500">
+              <p class="text-gray-700 leading-relaxed">目前平台完全免費使用，我們希望讓更多人透過 AI 創造新的價值。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end faq-list -->
+
+    <!-- CTA -->
+    <div class="max-w-4xl mx-auto px-6 pb-20">
+      <div class="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-12 text-center text-white shadow-xl">
+        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+          <i class="ri-customer-service-2-line text-4xl"></i>
+        </div>
+        <h3 class="text-3xl font-bold mb-4">還有其他問題？</h3>
+        <p class="text-white/90 text-lg mb-8">我們很樂意協助你解答任何疑問</p>
+        <a href="mailto:support@wisdomstation.com" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-orange-500 rounded-xl font-bold text-lg hover:bg-orange-50 transition-all hover:scale-105 shadow-lg">
+          <i class="ri-mail-line"></i> 聯絡我們
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    function toggleFAQ(btn) {
+      const answer = btn.nextElementSibling;
+      const chevron = btn.querySelector('.faq-chevron');
+      answer.classList.toggle('open');
+      chevron.classList.toggle('open');
+    }
+
+    function filterFAQ(cat) {
+      // 更新按鈕樣式
+      document.querySelectorAll('.faq-cat-btn').forEach(b => {
+        if (b.dataset.cat === cat) {
+          b.classList.add('bg-orange-500', 'text-white', 'shadow-lg');
+          b.classList.remove('bg-white', 'text-gray-700', 'border-2', 'border-gray-200');
+        } else {
+          b.classList.remove('bg-orange-500', 'text-white', 'shadow-lg');
+          b.classList.add('bg-white', 'text-gray-700', 'border-2', 'border-gray-200');
+        }
+      });
+      // 篩選項目
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.style.display = (cat === '全部' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

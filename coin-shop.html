@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>幣兌換商店 - 智慧轉運站</title>
+  <meta name="description" content="在幣兌換商店使用痛痛幣和智慧幣兌換實用服務、專屬特權和豐富獎勵。" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+    .animate-ping { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,.6,1) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(-15%); } 50% { transform: none; } }
+    .animate-bounce { animation: bounce 1s infinite; }
+    @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .animate-scale-in { animation: scaleIn 0.2s ease-out; }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-orange-50 via-white to-amber-50 min-h-screen">
+  <div id="navbar"></div>
+
+  <!-- 成功兌換動畫 -->
+  <div id="success-overlay" class="fixed inset-0 z-50 pointer-events-none hidden">
+    <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-auto">
+      <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full border-4 border-amber-400 relative overflow-hidden animate-scale-in">
+        <div class="relative text-center space-y-6">
+          <div id="success-icon" class="w-20 h-20 rounded-2xl flex items-center justify-center text-white mx-auto shadow-xl animate-bounce"></div>
+          <div>
+            <h3 class="text-3xl font-bold text-gray-900 mb-2">🎉 兌換成功！</h3>
+            <p class="text-lg text-gray-600">你已成功兌換 <span id="success-name" class="font-bold text-orange-600"></span></p>
+          </div>
+          <div class="bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 rounded-2xl p-6 border-2 border-orange-300">
+            <div class="flex items-center justify-center gap-3 mb-2">
+              <span class="text-4xl">💰</span>
+              <span id="success-deduction" class="text-4xl font-bold text-red-600 animate-pulse"></span>
+            </div>
+            <p class="text-sm text-gray-600">請查看個人資料頁或信箱獲取詳情</p>
+          </div>
+          <div class="flex justify-center gap-3 text-3xl">
+            <span class="animate-pulse">⭐</span>
+            <span class="animate-pulse" style="animation-delay:0.2s">✨</span>
+            <span class="animate-pulse" style="animation-delay:0.4s">⭐</span>
+          </div>
+        </div>
+        <button onclick="closeSuccess()" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-all">
+          <i class="ri-close-line text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 兌換確認 Modal -->
+  <div id="redeem-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-scale-in">
+      <div class="flex items-center gap-3 mb-4">
+        <div id="modal-icon" class="w-12 h-12 rounded-xl flex items-center justify-center text-white"></div>
+        <div class="flex-1">
+          <h3 id="modal-name" class="text-xl font-bold text-gray-900"></h3>
+          <p id="modal-desc" class="text-sm text-gray-500"></p>
+        </div>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-4 mb-4">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm text-gray-600">兌換價格</span>
+          <div class="flex items-center gap-2">
+            <div id="modal-coin-icon" class="w-6 h-6 rounded-full flex items-center justify-center"></div>
+            <span id="modal-price" class="text-2xl font-bold"></span>
+            <span id="modal-coin-label" class="text-sm text-gray-600"></span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold text-gray-700 mb-2">包含內容</h4>
+        <div id="modal-benefits" class="space-y-1"></div>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="closeRedeemModal()" class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all">取消</button>
+        <button onclick="confirmRedeem()" class="flex-1 px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold hover:from-orange-600 hover:to-amber-600 transition-all">確認兌換</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 text-white py-24">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+        <i class="ri-store-3-line text-5xl"></i>
+      </div>
+      <h1 class="text-5xl font-bold mb-4">幣兌換商店</h1>
+      <p class="text-xl text-orange-50 max-w-2xl mx-auto">
+        用你賺取的<span class="font-bold text-white">痛痛幣</span>與<span class="font-bold text-white">智慧幣</span>兌換實用服務、專屬特權和豐富獎勵
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-12">
+
+    <!-- 未登入提示 -->
+    <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-2xl p-6 mb-8 shadow-lg">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
+          <i class="ri-lock-line text-white text-2xl"></i>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-lg font-bold text-amber-900 mb-1">登入後即可兌換商品</h3>
+          <p class="text-sm text-amber-700">登入查看你的幣包餘額並開始兌換專屬服務與特權</p>
+        </div>
+        <a href="coin-rules.html" class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-sm hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg flex items-center gap-2 whitespace-nowrap">
+          <i class="ri-question-line"></i>如何賺幣
+        </a>
+      </div>
+    </div>
+
+    <!-- 篩選器 -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8">
+      <div class="space-y-6">
+        <div>
+          <label class="flex items-center gap-2 text-base font-bold text-gray-900 mb-3">
+            <i class="ri-filter-3-line text-orange-600"></i>商品分類
+          </label>
+          <div class="flex flex-wrap gap-3">
+            <button id="cat-all" onclick="setCategory('all')" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg scale-105 transition-all">
+              <i class="ri-apps-line"></i>全部
+            </button>
+            <button id="cat-service" onclick="setCategory('service')" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105 transition-all">
+              <i class="ri-service-line"></i>服務
+            </button>
+            <button id="cat-privilege" onclick="setCategory('privilege')" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105 transition-all">
+              <i class="ri-vip-crown-line"></i>特權
+            </button>
+            <button id="cat-reward" onclick="setCategory('reward')" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105 transition-all">
+              <i class="ri-gift-line"></i>獎勵
+            </button>
+          </div>
+        </div>
+        <div>
+          <label class="flex items-center gap-2 text-base font-bold text-gray-900 mb-3">
+            <i class="ri-coin-line text-orange-600"></i>幣種篩選
+          </label>
+          <div class="flex flex-wrap gap-3">
+            <button id="coin-all" onclick="setCoinType('all')" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-gray-900 text-white shadow-lg scale-105 transition-all">全部幣種</button>
+            <button id="coin-pain" onclick="setCoinType('pain')" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105 transition-all">
+              <i class="ri-coin-line"></i>痛痛幣
+            </button>
+            <button id="coin-wisdom" onclick="setCoinType('wisdom')" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105 transition-all">
+              <i class="ri-lightbulb-flash-line"></i>智慧幣
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品列表 (依分類) -->
+    <div id="section-service" class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center">
+          <i class="ri-service-line text-white text-xl"></i>
+        </div>服務類商品
+      </h2>
+      <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <div id="section-privilege" class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+          <i class="ri-vip-crown-line text-white text-xl"></i>
+        </div>特權類商品
+      </h2>
+      <div id="privilege-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <div id="section-reward" class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center">
+          <i class="ri-gift-line text-white text-xl"></i>
+        </div>獎勵類商品
+      </h2>
+      <div id="reward-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <div id="empty-state" class="hidden bg-white rounded-2xl shadow-lg border border-gray-100 text-center py-20">
+      <i class="ri-inbox-line text-7xl text-gray-300 mb-4 block"></i>
+      <p class="text-xl text-gray-500 font-semibold">目前沒有符合條件的商品</p>
+      <p class="text-sm text-gray-400 mt-2">試試調整篩選條件</p>
+    </div>
+
+    <!-- 機制說明 -->
+    <div id="section-info" class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mt-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center">
+          <i class="ri-information-line text-white text-xl"></i>
+        </div>兌換機制說明
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-6 border-2 border-orange-200">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+              <i class="ri-coin-line text-white text-2xl"></i>
+            </div>
+            <div><h3 class="text-xl font-bold text-orange-900">痛痛幣</h3><p class="text-sm text-orange-700">分享痛點獲得</p></div>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-700">
+            <li class="flex items-start gap-2"><i class="ri-check-line text-orange-600 mt-0.5"></i><span>分享痛點即可獲得痛痛幣</span></li>
+            <li class="flex items-start gap-2"><i class="ri-check-line text-orange-600 mt-0.5"></i><span>可兌換 AI 圖片生成、痛點置頂等服務</span></li>
+            <li class="flex items-start gap-2"><i class="ri-check-line text-orange-600 mt-0.5"></i><span>適合想要提升痛點曝光度的使用者</span></li>
+          </ul>
+        </div>
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+              <i class="ri-lightbulb-flash-line text-white text-2xl"></i>
+            </div>
+            <div><h3 class="text-xl font-bold text-blue-900">智慧幣</h3><p class="text-sm text-blue-700">提供解法獲得</p></div>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-700">
+            <li class="flex items-start gap-2"><i class="ri-check-line text-blue-600 mt-0.5"></i><span>提供有效解法即可獲得智慧幣</span></li>
+            <li class="flex items-start gap-2"><i class="ri-check-line text-blue-600 mt-0.5"></i><span>可兌換專屬暱稱框、VIP 徽章等特權</span></li>
+            <li class="flex items-start gap-2"><i class="ri-check-line text-blue-600 mt-0.5"></i><span>適合想要獲得社群認可的貢獻者</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+        <h3 class="text-lg font-bold text-amber-900 mb-4 flex items-center gap-2"><i class="ri-alert-line"></i>兌換注意事項</h3>
+        <ul class="space-y-3 text-sm text-amber-900">
+          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-amber-600 mt-0.5"></i><span><strong>不可退換：</strong>商品一經兌換，無法退回幣值，請謹慎選擇</span></li>
+          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-amber-600 mt-0.5"></i><span><strong>有效期限：</strong>部分商品有使用期限，請在期限內使用完畢</span></li>
+          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-amber-600 mt-0.5"></i><span><strong>最低門檻：</strong>確保你的幣值餘額足夠才能完成兌換</span></li>
+          <li class="flex items-start gap-2"><i class="ri-arrow-right-s-line text-amber-600 mt-0.5"></i><span><strong>兌換記錄：</strong>所有兌換記錄可在個人資料頁查看</span></li>
+        </ul>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="coin-rules.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg hover:shadow-xl">
+          <i class="ri-book-open-line"></i>查看完整幣規則<i class="ri-arrow-right-line"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const shopItems = [
+      { id:'pain-1', name:'AI 文案生成 1 次', desc:'使用 Readdy 內建 AI 生成一次專業文案（最多 500 字）', coinType:'pain', price:50, icon:'ri-quill-pen-line', iconColor:'bg-orange-500', category:'service', isPopular:true, benefits:['即時生成','專業文案','支援多種風格','500字內容'] },
+      { id:'pain-2', name:'優先匹配 AI 解方', desc:'你的痛點將優先獲得 AI 智能匹配與推薦解方', coinType:'pain', price:200, icon:'ri-flashlight-line', iconColor:'bg-amber-500', category:'service', isPopular:true, benefits:['優先處理','AI 智能匹配','24小時內回應','精準推薦'] },
+      { id:'pain-3', name:'Notion 模板下載', desc:'獨家 Notion 生產力模板包，包含專案管理、知識庫等 10+ 模板', coinType:'pain', price:500, icon:'ri-file-download-line', iconColor:'bg-gray-800', category:'reward', benefits:['10+ 專業模板','終身使用','定期更新','中文化介面'] },
+      { id:'pain-4', name:'痛點曝光加成', desc:'你的痛點將在首頁置頂顯示 24 小時，獲得更多關注', coinType:'pain', price:300, icon:'ri-eye-line', iconColor:'bg-rose-500', category:'privilege', benefits:['首頁置頂','24小時曝光','增加互動率','快速獲得解方'] },
+      { id:'pain-5', name:'AI 圖片生成 3 次', desc:'使用 AI 生成高品質圖片 3 次，支援多種風格與尺寸', coinType:'pain', price:150, originalPrice:200, icon:'ri-image-ai-line', iconColor:'bg-purple-500', category:'service', isLimitedOffer:true, benefits:['3次生成額度','多種風格','高解析度','商用授權'] },
+      { id:'pain-6', name:'專屬暱稱框', desc:'獲得獨特的暱稱裝飾框，在社群中脫穎而出', coinType:'pain', price:400, icon:'ri-user-star-line', iconColor:'bg-pink-500', category:'privilege', benefits:['永久使用','多款樣式','個性化展示','專屬標識'] },
+      { id:'pain-7', name:'痛點置頂 3 天', desc:'你的痛點將在痛點中心置頂顯示 3 天，大幅提升曝光率', coinType:'pain', price:600, originalPrice:800, icon:'ri-pushpin-2-line', iconColor:'bg-red-500', category:'privilege', isLimitedOffer:true, isPopular:true, benefits:['3天置頂','首頁曝光','優先推薦','快速獲得解方'] },
+      { id:'wisdom-1', name:'廣告置頂 1 天', desc:'你的 AI 解方將在解方畫廊置頂顯示 1 天，大幅提升曝光', coinType:'wisdom', price:5, icon:'ri-pushpin-line', iconColor:'bg-blue-500', category:'privilege', isPopular:true, benefits:['畫廊置頂','24小時曝光','提升採納率','增加智慧幣收益'] },
+      { id:'wisdom-2', name:'AI 算力補貼', desc:'獲得 1 個月 AI 算力補貼，可用於 ChatGPT、Midjourney 等工具', coinType:'wisdom', price:10, icon:'ri-cpu-line', iconColor:'bg-indigo-500', category:'reward', isPopular:true, benefits:['1個月算力','多平台通用','無使用限制','即時到帳'] },
+      { id:'wisdom-3', name:'深度商機報告', desc:'獲得本月 AI 工具市場深度分析報告，掌握最新趨勢與商機', coinType:'wisdom', price:20, icon:'ri-line-chart-line', iconColor:'bg-cyan-500', category:'service', benefits:['專業分析','市場趨勢','商機洞察','PDF 下載'] },
+      { id:'wisdom-4', name:'發明者勳章', desc:'獲得「AI 解方發明者」專屬勳章，個人資料頁永久顯示，彰顯專業身份', coinType:'wisdom', price:30, icon:'ri-medal-line', iconColor:'bg-teal-500', category:'reward', benefits:['永久勳章','專屬標識','榮譽榜曝光','專業認證'] },
+      { id:'wisdom-5', name:'解法精選推薦', desc:'你的解法將被編輯精選推薦至首頁，獲得最大曝光', coinType:'wisdom', price:15, originalPrice:20, icon:'ri-star-smile-line', iconColor:'bg-yellow-500', category:'privilege', isLimitedOffer:true, benefits:['首頁精選','編輯推薦','7天曝光','提升信任度'] },
+      { id:'wisdom-6', name:'月度商機報告 PDF', desc:'獲得完整版月度 AI 商機分析報告，包含市場數據與投資建議', coinType:'wisdom', price:25, icon:'ri-file-chart-line', iconColor:'bg-emerald-500', category:'service', benefits:['完整版報告','數據分析','投資建議','永久下載'] },
+      { id:'wisdom-7', name:'社群 VIP 徽章', desc:'獲得社群 VIP 專屬徽章，享受優先客服與專屬活動邀請', coinType:'wisdom', price:50, icon:'ri-vip-diamond-line', iconColor:'bg-violet-500', category:'reward', isPopular:true, benefits:['永久 VIP 標識','優先客服','專屬活動','限量發行'] },
+    ];
+
+    let selectedCat = 'all';
+    let selectedCoin = 'all';
+    let pendingItem = null;
+
+    function makeCard(item) {
+      const isPain = item.coinType === 'pain';
+      const priceColor = isPain ? '#FF5C1A' : '#4A6CF7';
+      const coinIconEl = isPain ? 'ri-coin-line' : 'ri-lightbulb-flash-line';
+      const coinBg = isPain ? 'bg-orange-500' : 'bg-blue-500';
+      const coinLabel = isPain ? '痛痛幣' : '智慧幣';
+      return `
+        <div class="bg-white rounded-2xl border-2 border-gray-100 p-6 hover:shadow-2xl transition-all duration-300 relative overflow-hidden">
+          ${item.isPopular ? `<div class="absolute top-4 right-4 z-10"><span class="px-3 py-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-bold rounded-full shadow-lg"><i class="ri-fire-fill mr-1"></i>熱門</span></div>` : ''}
+          ${item.isLimitedOffer ? `<div class="absolute top-4 left-4 z-10"><span class="px-3 py-1 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold rounded-full shadow-lg animate-pulse"><i class="ri-flashlight-fill mr-1"></i>限時特惠</span></div>` : ''}
+          <div class="flex items-start gap-4 mb-5">
+            <div class="w-14 h-14 ${item.iconColor} rounded-xl flex items-center justify-center text-white flex-shrink-0 shadow-lg">
+              <i class="${item.icon} text-2xl"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-bold text-gray-900 mb-1">${item.name}</h3>
+              <p class="text-sm text-gray-600 line-clamp-2">${item.desc}</p>
+            </div>
+          </div>
+          <div class="mb-5 space-y-2">
+            ${item.benefits.slice(0,3).map(b => `<div class="flex items-center gap-2 text-sm text-gray-600"><i class="ri-checkbox-circle-fill text-green-500"></i><span>${b}</span></div>`).join('')}
+          </div>
+          <div class="flex items-center justify-between pt-5 border-t-2 border-gray-100">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 ${coinBg} rounded-lg flex items-center justify-center shadow-md">
+                <i class="${coinIconEl} text-white text-sm"></i>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2">
+                  <span class="text-2xl font-bold" style="color:${priceColor}">${item.price}</span>
+                  ${item.isLimitedOffer && item.originalPrice ? `<span class="text-sm text-gray-400 line-through">${item.originalPrice}</span>` : ''}
+                </div>
+                <span class="text-xs text-gray-500">${coinLabel}</span>
+              </div>
+            </div>
+            <button onclick="openRedeemModal('${item.id}')" class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-sm hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg hover:shadow-xl hover:scale-105">
+              立即兌換
+            </button>
+          </div>
+        </div>`;
+    }
+
+    function renderShop() {
+      const cats = ['service','privilege','reward'];
+      let totalVisible = 0;
+      cats.forEach(cat => {
+        const filtered = shopItems.filter(item => {
+          const catOk = selectedCat === 'all' || item.category === cat;
+          const coinOk = selectedCoin === 'all' || item.coinType === selectedCoin;
+          return catOk && coinOk && item.category === cat;
+        });
+        const grid = document.getElementById(`${cat}-grid`);
+        const section = document.getElementById(`section-${cat}`);
+        if (filtered.length === 0 || (selectedCat !== 'all' && selectedCat !== cat)) {
+          section.style.display = 'none';
+        } else {
+          section.style.display = '';
+          grid.innerHTML = filtered.map(makeCard).join('');
+          totalVisible += filtered.length;
+        }
+      });
+      document.getElementById('empty-state').style.display = totalVisible === 0 ? '' : 'none';
+    }
+
+    function setCategory(cat) {
+      selectedCat = cat;
+      ['all','service','privilege','reward'].forEach(k => {
+        const btn = document.getElementById(`cat-${k}`);
+        btn.className = `flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all ${k===cat ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg scale-105' : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105'}`;
+      });
+      renderShop();
+    }
+
+    function setCoinType(type) {
+      selectedCoin = type;
+      ['all','pain','wisdom'].forEach(k => {
+        const btn = document.getElementById(`coin-${k}`);
+        btn.className = `flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all ${k===type ? 'bg-gray-900 text-white shadow-lg scale-105' : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105'}`;
+      });
+      renderShop();
+    }
+
+    function openRedeemModal(id) {
+      const item = shopItems.find(i => i.id === id);
+      if (!item) return;
+      pendingItem = item;
+      const isPain = item.coinType === 'pain';
+      const priceColor = isPain ? '#FF5C1A' : '#4A6CF7';
+      const coinBg = isPain ? 'bg-orange-500' : 'bg-blue-500';
+      const coinIcon = isPain ? 'ri-coin-line' : 'ri-lightbulb-flash-line';
+
+      document.getElementById('modal-icon').className = `w-12 h-12 ${item.iconColor} rounded-xl flex items-center justify-center text-white`;
+      document.getElementById('modal-icon').innerHTML = `<i class="${item.icon} text-2xl"></i>`;
+      document.getElementById('modal-name').textContent = item.name;
+      document.getElementById('modal-desc').textContent = item.desc;
+      document.getElementById('modal-price').textContent = item.price;
+      document.getElementById('modal-price').style.color = priceColor;
+      document.getElementById('modal-coin-label').textContent = isPain ? '痛痛幣' : '智慧幣';
+      document.getElementById('modal-coin-icon').className = `w-6 h-6 ${coinBg} rounded-full flex items-center justify-center`;
+      document.getElementById('modal-coin-icon').innerHTML = `<i class="${coinIcon} text-white text-xs"></i>`;
+      document.getElementById('modal-benefits').innerHTML = item.benefits.map(b => `
+        <div class="flex items-center gap-2 text-sm text-gray-600">
+          <i class="ri-checkbox-circle-fill text-green-500 text-xs"></i><span>${b}</span>
+        </div>`).join('');
+
+      document.getElementById('redeem-modal').classList.remove('hidden');
+      document.getElementById('redeem-modal').classList.add('flex');
+    }
+
+    function closeRedeemModal() {
+      document.getElementById('redeem-modal').classList.add('hidden');
+      document.getElementById('redeem-modal').classList.remove('flex');
+      pendingItem = null;
+    }
+
+    function confirmRedeem() {
+      if (!pendingItem) return;
+      const item = pendingItem;
+      closeRedeemModal();
+
+      // Show success
+      const iconEl = document.getElementById('success-icon');
+      iconEl.className = `w-20 h-20 ${item.iconColor} rounded-2xl flex items-center justify-center text-white mx-auto shadow-xl animate-bounce`;
+      iconEl.innerHTML = `<i class="${item.icon} text-4xl"></i>`;
+      document.getElementById('success-name').textContent = item.name;
+      document.getElementById('success-deduction').textContent = `-${item.price}`;
+      document.getElementById('success-overlay').classList.remove('hidden');
+      setTimeout(() => closeSuccess(), 5000);
+    }
+
+    function closeSuccess() {
+      document.getElementById('success-overlay').classList.add('hidden');
+    }
+
+    document.getElementById('redeem-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeRedeemModal();
+    });
+
+    renderShop();
+  </script>
+</body>
+</html>

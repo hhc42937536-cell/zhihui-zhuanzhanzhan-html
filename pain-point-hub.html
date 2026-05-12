@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>痛點中心 - 智慧轉運站 | 分享痛點換痛痛幣</title>
+  <meta name="description" content="分享你的生活與創業痛點，讓全台社群一起幫你找解法。每則痛點立即獲得痛痛幣，共鳴越高獎勵越多。" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+    .animate-ping { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,.6,1) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+  </style>
+</head>
+<body class="bg-white">
+  <div id="navbar"></div>
+
+  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-white to-amber-50">
+
+    <!-- Hero -->
+    <section class="pt-28 pb-6 px-6">
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-5">
+          <span class="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></span>
+          即時更新中
+        </div>
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">痛點中心</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6">
+          說出你的困擾，讓社群幫你找解法<br />
+          <span class="text-orange-500 font-semibold">每則痛點立即獲得痛痛幣，共鳴越高獎勵越多</span>
+        </p>
+        <a href="solution-gallery.html"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-bold text-lg hover:from-indigo-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl">
+          <i class="ri-lightbulb-flash-line text-xl"></i>
+          查看 AI 解法實驗室
+          <i class="ri-arrow-right-line text-xl"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 分享表單 -->
+    <section class="px-6 pb-8">
+      <div class="max-w-3xl mx-auto" id="upload-panel">
+        <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border-2 border-orange-200 shadow-md">
+          <h3 class="font-bold text-gray-900 text-lg mb-1">分享你的痛點，立即賺幣！</h3>
+          <p class="text-sm text-gray-500 mb-4">說出你的日常困擾，社群幫你找解法，還能馬上賺痛痛幣！</p>
+          <div id="submit-success" class="hidden items-center gap-2 px-4 py-3 bg-green-50 border border-green-200 rounded-xl text-green-700 text-sm font-medium mb-3">
+            <i class="ri-checkbox-circle-line text-green-500 text-lg"></i>
+            已收到你的痛點！社群正在幫你找解法 🎉
+            <button onclick="document.getElementById('submit-success').classList.add('hidden');document.getElementById('submit-success').style.display='';document.getElementById('pain-form').classList.remove('hidden')" class="ml-auto text-green-500 hover:text-green-700 text-xs">再提交一個</button>
+          </div>
+          <form id="pain-form" onsubmit="submitPainPoint(event)">
+            <div class="flex items-center gap-2 mb-3 px-1">
+              <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span class="text-xs text-gray-500">很多人第一則就刷到 <span class="font-bold text-orange-500">25</span> 幣！</span>
+            </div>
+            <select id="pain-category" class="w-full px-3 py-2 text-sm border border-orange-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-600 mb-2">
+              <option value="">選擇分類…</option>
+              <option value="工作">💼 工作</option>
+              <option value="生活">🏠 生活</option>
+              <option value="AI創作">🎨 AI創作</option>
+              <option value="自動化">⚡ 自動化</option>
+              <option value="投資">💰 投資</option>
+              <option value="創業">🚀 創業</option>
+            </select>
+            <div class="flex gap-2">
+              <input id="pain-input" type="text" maxlength="200" placeholder="例：每週手動整理報表很耗時…" class="flex-1 px-3 py-2.5 text-sm border border-orange-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-orange-300 placeholder-gray-300" />
+              <button type="submit" class="px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-bold transition-colors">送出</button>
+            </div>
+            <p id="form-error" class="text-xs text-red-500 mt-1 hidden"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 賺幣方式 + 快捷連結 -->
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-wrap items-center gap-3 p-4 bg-white border border-orange-100 rounded-2xl shadow-sm">
+          <span class="text-xs font-bold text-gray-400 uppercase tracking-wide">賺幣方式</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 text-orange-600 rounded-lg text-xs font-semibold border border-orange-100">
+              <i class="ri-edit-line"></i> 分享痛點 +10~30 🍬
+            </span>
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-lg text-xs font-semibold border border-amber-100">
+              <i class="ri-chat-3-line"></i> 回覆解法 +50~200 💡
+            </span>
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-600 rounded-lg text-xs font-semibold border border-green-100">
+              <i class="ri-heart-line"></i> 獲得按讚 每讚 +2 🍬
+            </span>
+            <span class="flex items-center gap-1.5 px-3 py-1.5 bg-teal-50 text-teal-600 rounded-lg text-xs font-semibold border border-teal-100">
+              <i class="ri-star-line"></i> 解法被採納 額外 +100 💡
+            </span>
+          </div>
+          <div class="ml-auto flex items-center gap-3 flex-wrap">
+            <a href="solution-gallery.html" class="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-lg text-sm font-semibold hover:from-indigo-600 hover:to-blue-600 transition-all shadow-lg">
+              <i class="ri-lightbulb-flash-line"></i> 查看解法
+            </a>
+            <a href="coin-shop.html" class="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg text-sm font-semibold hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">
+              <i class="ri-shopping-bag-3-line"></i> 前往兌換商店
+            </a>
+            <a href="coin-rules.html" class="text-xs text-gray-400 hover:text-orange-500 transition-colors flex items-center gap-1">
+              完整規則 <i class="ri-arrow-right-s-line"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 痛點列表 -->
+    <section class="pb-16 px-6">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- 分類篩選 + 排序 -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-6">
+          <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+            <h3 class="text-sm font-bold text-gray-700 flex items-center gap-2">
+              <i class="ri-filter-3-line text-orange-500"></i> 分類篩選
+            </h3>
+            <div class="flex items-center gap-2">
+              <button onclick="setSort('hot')" id="sort-hot" class="sort-btn flex items-center gap-1.5 px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-orange-500 text-white shadow-lg">
+                <i class="ri-fire-line"></i> 熱門
+              </button>
+              <button onclick="setSort('latest')" id="sort-latest" class="sort-btn flex items-center gap-1.5 px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500">
+                <i class="ri-time-line"></i> 最新
+              </button>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2" id="category-btns">
+            <button onclick="setCategory('全部')" class="cat-btn px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-orange-500 text-white shadow-lg" data-cat="全部">全部</button>
+            <button onclick="setCategory('投資')" class="cat-btn px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500" data-cat="投資">投資</button>
+            <button onclick="setCategory('工作')" class="cat-btn px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500" data-cat="工作">工作</button>
+            <button onclick="setCategory('生活')" class="cat-btn px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500" data-cat="生活">生活</button>
+            <button onclick="setCategory('創業')" class="cat-btn px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500" data-cat="創業">創業</button>
+            <button onclick="setCategory('自動化')" class="cat-btn px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500" data-cat="自動化">自動化</button>
+            <button onclick="setCategory('AI創作')" class="cat-btn px-4 py-1.5 rounded-xl font-semibold text-sm transition-all bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500" data-cat="AI創作">AI創作</button>
+          </div>
+        </div>
+
+        <!-- 痛點卡片 -->
+        <div id="pain-cards" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- 完整流程引導 -->
+    <section class="py-16 px-6 bg-gradient-to-br from-orange-50 to-amber-50">
+      <div class="max-w-5xl mx-auto">
+        <div class="bg-white rounded-3xl p-10 shadow-xl border-2 border-orange-200">
+          <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-3">完整的痛點解決流程</h2>
+            <p class="text-lg text-gray-600">從發現問題到找到解法，我們陪你一起轉運</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="relative bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border-2 border-orange-300 hover:shadow-lg transition-all">
+              <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">1</div>
+              <div class="flex items-center justify-center mb-4 mt-2">
+                <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
+                  <i class="ri-error-warning-line text-white text-3xl"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">分享痛點</h3>
+              <p class="text-sm text-gray-600 text-center mb-4">在痛點中心說出你的困擾，立即獲得痛痛幣</p>
+              <div class="text-center">
+                <span class="inline-flex items-center gap-1 px-3 py-1.5 bg-orange-100 text-orange-600 rounded-full text-xs font-bold">
+                  <i class="ri-coin-line"></i> +10~30 痛痛幣
+                </span>
+              </div>
+            </div>
+            <div class="relative bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-6 border-2 border-indigo-300 hover:shadow-lg transition-all">
+              <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">2</div>
+              <div class="flex items-center justify-center mb-4 mt-2">
+                <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center">
+                  <i class="ri-lightbulb-flash-line text-white text-3xl"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">查看解法</h3>
+              <p class="text-sm text-gray-600 text-center mb-4">前往 AI解法實驗室，找到對應的解決方案</p>
+              <div class="text-center">
+                <a href="solution-gallery.html" class="inline-flex items-center gap-1 px-3 py-1.5 bg-indigo-600 text-white rounded-full text-xs font-bold hover:bg-indigo-700 transition-all">
+                  前往解法實驗室 <i class="ri-arrow-right-line"></i>
+                </a>
+              </div>
+            </div>
+            <div class="relative bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-green-300 hover:shadow-lg transition-all">
+              <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">3</div>
+              <div class="flex items-center justify-center mb-4 mt-2">
+                <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
+                  <i class="ri-checkbox-circle-line text-white text-3xl"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">解決問題</h3>
+              <p class="text-sm text-gray-600 text-center mb-4">應用解法提升效率，採納解法還能賺更多幣</p>
+              <div class="text-center">
+                <span class="inline-flex items-center gap-1 px-3 py-1.5 bg-green-100 text-green-600 rounded-full text-xs font-bold">
+                  <i class="ri-coin-line"></i> +100 智慧幣
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <button onclick="document.getElementById('upload-panel').scrollIntoView({behavior:'smooth',block:'center'})"
+              class="px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-lg hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
+              <i class="ri-edit-line text-xl"></i> 立即分享痛點
+            </button>
+            <a href="solution-gallery.html"
+              class="px-8 py-4 bg-white text-indigo-600 border-2 border-indigo-500 rounded-xl font-bold text-lg hover:bg-indigo-50 transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
+              <i class="ri-lightbulb-flash-line text-xl"></i> 瀏覽 AI 解法
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 問卷回饋 -->
+    <section class="px-6 py-8 bg-white border-t border-gray-100">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-dashed border-amber-300 rounded-2xl px-8 py-5">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🛤️</span>
+            <div>
+              <p class="font-bold text-gray-900 text-sm">轉運站剛開張，難免有顛簸</p>
+              <p class="text-gray-500 text-xs mt-0.5">如果你在尋找商機的路上卡關了，請告訴我們！</p>
+            </div>
+          </div>
+          <a href="https://forms.gle/WWvKeExEB3HwQHQU9" target="_blank" rel="noopener noreferrer"
+            class="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-orange-500 text-white rounded-xl font-bold text-sm hover:bg-orange-600 transition-all shadow-md">
+            <i class="ri-chat-heart-line text-base"></i> 點我留言 <i class="ri-external-link-line text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const painPoints = [
+      { id:1, category:'工作', title:'每週手動整理報表，光複製貼上就要2小時', desc:'公司要求每週一早上9點前交出KPI報表，但資料分散在5個系統，每次都要手動彙整，加班到很晚。', likes:234, replies:18, tags:['自動化','報表','效率'], date:'2026-05-10' },
+      { id:2, category:'生活', title:'找水電師傅超難，打電話沒人接，Line也不回', desc:'家裡馬桶壞掉，在網路上找了10個水電行，打電話5個沒人接，3個說要等2週，真的很崩潰。', likes:189, replies:23, tags:['生活服務','維修','居家'], date:'2026-05-11' },
+      { id:3, category:'創業', title:'想開一人公司但不知道怎麼開始，稅務超複雜', desc:'想把接案收入正式化，但公司設立、稅務申報、發票開立完全是另一個世界，網路資訊又互相矛盾。', likes:312, replies:41, tags:['創業','稅務','一人公司'], date:'2026-05-09' },
+      { id:4, category:'AI創作', title:'用AI生成的圖片總是很怪，手指不對、比例奇怪', desc:'最近想用Midjourney幫公司做素材，但生成的人物手指總是6根或者融在一起，每次都要重新生成。', likes:156, replies:29, tags:['AI繪圖','Midjourney','提示詞'], date:'2026-05-12' },
+      { id:5, category:'自動化', title:'每天要回覆100+封客戶信件，內容大同小異卻不敢用模板', desc:'做電商客服，每天接到的問題80%都是問出貨狀態、退換貨政策，但客戶希望感受到「有人在回」。', likes:201, replies:35, tags:['客服','自動化','AI寫信'], date:'2026-05-08' },
+      { id:6, category:'投資', title:'看了很多理財文章，但每個說法都不一樣，完全不知道怎麼開始', desc:'工作了3年存了一些錢，看了很多理財文章，有人說ETF、有人說高股息、有人說定存，根本不知道誰說的對。', likes:278, replies:52, tags:['理財','ETF','投資新手'], date:'2026-05-07' },
+    ];
+
+    let currentCat = '全部';
+    let currentSort = 'hot';
+
+    function renderCards() {
+      let list = painPoints.filter(p => currentCat === '全部' || p.category === currentCat);
+      if (currentSort === 'hot') list = [...list].sort((a,b) => b.likes - a.likes);
+      else list = [...list].sort((a,b) => new Date(b.date) - new Date(a.date));
+
+      const container = document.getElementById('pain-cards');
+      if (!list.length) {
+        container.innerHTML = `<div class="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
+          <i class="ri-search-line text-6xl text-gray-300 mb-4 block"></i>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">找不到相關痛點</h3>
+          <p class="text-gray-600">試試其他分類，或成為第一個分享的人！</p>
+        </div>`;
+        return;
+      }
+      container.innerHTML = list.map(p => `
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-orange-200 transition-all">
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
+                <span class="px-2.5 py-1 bg-orange-100 text-orange-600 rounded-lg text-xs font-bold">${p.category}</span>
+                ${p.tags.map(t => `<span class="text-xs text-gray-400">#${t}</span>`).join('')}
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-2">${p.title}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">${p.desc}</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+            <div class="flex items-center gap-4">
+              <button onclick="likePost(this, ${p.id})" class="flex items-center gap-1.5 text-sm text-gray-500 hover:text-orange-500 transition-colors">
+                <i class="ri-heart-line"></i> <span class="like-count">${p.likes}</span>
+              </button>
+              <span class="flex items-center gap-1.5 text-sm text-gray-500">
+                <i class="ri-chat-3-line"></i> ${p.replies} 則回覆
+              </span>
+            </div>
+            <button onclick="showReply(${p.id})" class="flex items-center gap-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-semibold transition-colors">
+              <i class="ri-lightbulb-line"></i> 提供解法 +50~200 💡
+            </button>
+          </div>
+          <div id="reply-form-${p.id}" class="hidden mt-4 pt-4 border-t border-gray-100">
+            <textarea placeholder="分享你的解法（詳細步驟可獲得更多幣）…" class="w-full px-3 py-2 text-sm border border-amber-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-amber-300 placeholder-gray-300 resize-none" rows="3"></textarea>
+            <div class="flex justify-end gap-2 mt-2">
+              <button onclick="hideReply(${p.id})" class="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700">取消</button>
+              <button onclick="submitReply(${p.id})" class="px-4 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-bold transition-colors">送出解法</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setCategory(cat) {
+      currentCat = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        const active = b.dataset.cat === cat;
+        b.className = `cat-btn px-4 py-1.5 rounded-xl font-semibold text-sm transition-all ${active ? 'bg-orange-500 text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500'}`;
+      });
+      renderCards();
+    }
+
+    function setSort(sort) {
+      currentSort = sort;
+      document.querySelectorAll('.sort-btn').forEach(b => {
+        const active = b.id === `sort-${sort}`;
+        b.className = `sort-btn flex items-center gap-1.5 px-4 py-1.5 rounded-xl font-semibold text-sm transition-all ${active ? 'bg-orange-500 text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500'}`;
+      });
+      renderCards();
+    }
+
+    function likePost(btn, id) {
+      const span = btn.querySelector('.like-count');
+      span.textContent = parseInt(span.textContent) + 1;
+      btn.querySelector('i').className = 'ri-heart-fill text-orange-500';
+      btn.disabled = true;
+    }
+
+    function showReply(id) { document.getElementById(`reply-form-${id}`).classList.remove('hidden'); }
+    function hideReply(id) { document.getElementById(`reply-form-${id}`).classList.add('hidden'); }
+    function submitReply(id) {
+      alert('✅ 解法已提交！即將為你發放智慧幣獎勵。');
+      hideReply(id);
+    }
+
+    async function submitPainPoint(e) {
+      e.preventDefault();
+      const val = document.getElementById('pain-input').value.trim();
+      const cat = document.getElementById('pain-category').value;
+      const err = document.getElementById('form-error');
+      if (!val) { err.textContent = '請輸入你的痛點描述'; err.classList.remove('hidden'); return; }
+      if (!cat) { err.textContent = '請選擇分類'; err.classList.remove('hidden'); return; }
+      err.classList.add('hidden');
+      const body = new URLSearchParams();
+      body.append('pain_point', val);
+      body.append('category', cat);
+      try {
+        await fetch('https://readdy.ai/api/form/d6q063dsbgrc47filtvg', {
+          method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString()
+        });
+      } catch {}
+      document.getElementById('pain-form').classList.add('hidden');
+      const s = document.getElementById('submit-success');
+      s.classList.remove('hidden');
+      s.style.display = 'flex';
+    }
+
+    renderCards();
+  </script>
+</body>
+</html>

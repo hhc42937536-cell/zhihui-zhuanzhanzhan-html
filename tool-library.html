@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI工具箱 - 智慧轉運站</title>
+  <meta name="description" content="創作者自行研發的 AI 應用軟體上架平台。從文字生成、AI繪圖、語音轉文字到自動化工具，都是創作者親手打造的解決方案。" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+    .animate-ping { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,.6,1) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+  </style>
+</head>
+<body class="bg-[#fafaf8]">
+  <div id="navbar"></div>
+
+  <!-- Hero Section -->
+  <section class="pt-24 pb-14 bg-gradient-to-br from-orange-50 via-white to-amber-50 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-16 left-8 w-72 h-72 bg-orange-100/40 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-8 right-8 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-6 text-center">
+
+      <!-- 上架按鈕 -->
+      <div class="flex justify-end mb-4">
+        <button onclick="openUploadModal()" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full font-bold text-sm hover:from-orange-600 hover:to-amber-600 transition-all hover:scale-105 shadow-lg">
+          <i class="ri-upload-cloud-line text-lg"></i>上架我的應用
+        </button>
+      </div>
+
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-5">
+        <i class="ri-code-box-line"></i>創作者自研應用平台
+      </div>
+      <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-5 leading-tight">
+        你開發的 AI 應用，<br />在這裡找到使用者
+      </h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+        這裡不是第三方工具展示櫃，而是<strong class="text-orange-600">創作者自行研發的 AI 應用軟體</strong>上架平台。<br />
+        開發者定價、使用者兌換、創作者獲得收益。
+      </p>
+
+      <!-- Stats -->
+      <div class="flex flex-wrap justify-center gap-10 mb-12">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center rounded-full bg-orange-100 text-orange-500">
+            <i class="ri-code-box-line text-lg"></i>
+          </div>
+          <div class="text-left">
+            <div class="text-xl font-bold text-gray-900">16+</div>
+            <div class="text-xs text-gray-500">自研應用</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center rounded-full bg-orange-100 text-orange-500">
+            <i class="ri-coin-line text-lg"></i>
+          </div>
+          <div class="text-left">
+            <div class="text-xl font-bold text-gray-900">10起</div>
+            <div class="text-xs text-gray-500">痛痛幣即可兌換</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-600">
+            <i class="ri-lightbulb-flash-line text-lg"></i>
+          </div>
+          <div class="text-left">
+            <div class="text-xl font-bold text-gray-900">5</div>
+            <div class="text-xs text-gray-500">智慧幣專業應用</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+            <i class="ri-user-star-line text-lg"></i>
+          </div>
+          <div class="text-left">
+            <div class="text-xl font-bold text-gray-900">300+</div>
+            <div class="text-xs text-gray-500">開發者貢獻</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 上架流程 -->
+      <div class="bg-white rounded-3xl p-8 mb-10 shadow-sm border border-orange-100">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          <i class="ri-rocket-line text-orange-500 mr-2"></i>如何上架你的 AI 應用？
+        </h2>
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="flex flex-col items-center text-center">
+            <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl mb-3 text-xl font-bold">1</div>
+            <div class="w-12 h-12 flex items-center justify-center bg-orange-100 rounded-xl mb-3">
+              <i class="ri-code-s-slash-line text-2xl text-orange-600"></i>
+            </div>
+            <h3 class="text-base font-bold text-gray-900 mb-1">開發應用</h3>
+            <p class="text-sm text-gray-600">用你擅長的技術打造 AI 應用</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl mb-3 text-xl font-bold">2</div>
+            <div class="w-12 h-12 flex items-center justify-center bg-orange-100 rounded-xl mb-3">
+              <i class="ri-file-upload-line text-2xl text-orange-600"></i>
+            </div>
+            <h3 class="text-base font-bold text-gray-900 mb-1">提交審核</h3>
+            <p class="text-sm text-gray-600">填寫應用資訊並提交審核</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl mb-3 text-xl font-bold">3</div>
+            <div class="w-12 h-12 flex items-center justify-center bg-orange-100 rounded-xl mb-3">
+              <i class="ri-price-tag-3-line text-2xl text-orange-600"></i>
+            </div>
+            <h3 class="text-base font-bold text-gray-900 mb-1">定價上架</h3>
+            <p class="text-sm text-gray-600">自行設定痛痛幣或智慧幣價格</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl mb-3 text-xl font-bold">4</div>
+            <div class="w-12 h-12 flex items-center justify-center bg-orange-100 rounded-xl mb-3">
+              <i class="ri-money-dollar-circle-line text-2xl text-orange-600"></i>
+            </div>
+            <h3 class="text-base font-bold text-gray-900 mb-1">獲得收益</h3>
+            <p class="text-sm text-gray-600">使用者兌換後，你獲得分潤</p>
+          </div>
+        </div>
+        <div class="mt-8">
+          <button onclick="openUploadModal()" class="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-base hover:from-orange-600 hover:to-amber-600 transition-all hover:scale-105 shadow-lg">
+            <i class="ri-add-circle-line text-xl"></i>立即上架我的應用
+          </button>
+        </div>
+      </div>
+
+      <!-- 分類引導 -->
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
+        <div onclick="filterByPricing('coin')" class="bg-white rounded-2xl p-6 border-2 border-orange-200 hover:border-orange-400 transition-all hover:shadow-lg cursor-pointer group">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-orange-400 to-orange-500 rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform">
+              <i class="ri-coin-line text-white text-2xl"></i>
+            </div>
+            <div class="flex-1 text-left">
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">10 幣區</h3>
+                <span class="px-2 py-0.5 bg-orange-100 text-orange-600 text-xs font-bold rounded-full">快速體驗</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">用 10 痛痛幣立即體驗創作者開發的基礎 AI 應用。</p>
+              <div class="flex items-center gap-2 text-xs text-orange-600 font-semibold">
+                <span>11 個應用可選</span><i class="ri-arrow-right-line"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div onclick="filterByPricing('wisdom')" class="bg-white rounded-2xl p-6 border-2 border-blue-200 hover:border-blue-400 transition-all hover:shadow-lg cursor-pointer group">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex-shrink-0 group-hover:scale-110 transition-transform">
+              <i class="ri-vip-crown-line text-white text-2xl"></i>
+            </div>
+            <div class="flex-1 text-left">
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">專業區</h3>
+                <span class="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs font-bold rounded-full">高階算力</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">消耗智慧幣，獲取高階 AI 算力支援與專業級應用權限。</p>
+              <div class="flex items-center gap-2 text-xs text-blue-600 font-semibold">
+                <span>5 個專業應用</span><i class="ri-arrow-right-line"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分類快速連結 -->
+      <div class="flex flex-wrap justify-center gap-3" id="category-links">
+        <button onclick="setCategory('writing')" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-orange-100 text-orange-600 hover:scale-105 transition-all hover:shadow-md">
+          <i class="ri-quill-pen-line text-sm"></i>文字生成
+        </button>
+        <button onclick="setCategory('image')" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-rose-100 text-rose-600 hover:scale-105 transition-all hover:shadow-md">
+          <i class="ri-image-ai-line text-sm"></i>AI繪圖
+        </button>
+        <button onclick="setCategory('audio')" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-teal-100 text-teal-600 hover:scale-105 transition-all hover:shadow-md">
+          <i class="ri-mic-ai-line text-sm"></i>語音轉文字
+        </button>
+        <button onclick="setCategory('automation')" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-emerald-100 text-emerald-600 hover:scale-105 transition-all hover:shadow-md">
+          <i class="ri-robot-line text-sm"></i>自動化
+        </button>
+        <button onclick="setCategory('search')" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-amber-100 text-amber-600 hover:scale-105 transition-all hover:shadow-md">
+          <i class="ri-search-eye-line text-sm"></i>搜尋整理
+        </button>
+        <button onclick="setCategory('productivity')" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-indigo-100 text-indigo-600 hover:scale-105 transition-all hover:shadow-md">
+          <i class="ri-dashboard-line text-sm"></i>生產力
+        </button>
+        <button onclick="setCategory('code')" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-violet-100 text-violet-600 hover:scale-105 transition-all hover:shadow-md">
+          <i class="ri-code-s-slash-line text-sm"></i>程式開發
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <div class="sticky top-0 z-20 bg-white border-b border-gray-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-3">
+      <!-- 搜尋 -->
+      <div class="relative flex-1 min-w-[200px] max-w-xs">
+        <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        <input id="search-input" type="text" placeholder="搜尋應用名稱、標籤..." oninput="renderTools()"
+          class="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
+      </div>
+      <!-- 分類 -->
+      <select id="cat-select" onchange="renderTools()" class="px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 bg-white">
+        <option value="all">全部分類</option>
+        <option value="文字生成">文字生成</option>
+        <option value="AI繪圖">AI繪圖</option>
+        <option value="語音轉文字">語音轉文字</option>
+        <option value="自動化">自動化</option>
+        <option value="搜尋整理">搜尋整理</option>
+        <option value="生產力">生產力</option>
+        <option value="程式開發">程式開發</option>
+      </select>
+      <!-- 幣種 -->
+      <select id="pricing-select" onchange="renderTools()" class="px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 bg-white">
+        <option value="all">全部幣種</option>
+        <option value="coin">痛痛幣</option>
+        <option value="wisdom">智慧幣</option>
+      </select>
+      <!-- 排序 -->
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-gray-500">排序：</span>
+        <button id="sort-rating" onclick="setSort('rating')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-orange-500 text-white">評分最高</button>
+        <button id="sort-new" onclick="setSort('new')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500">最新上架</button>
+      </div>
+      <!-- 清除 -->
+      <button onclick="clearFilters()" class="text-xs text-orange-500 font-semibold px-2 py-1 bg-orange-50 rounded-lg hover:bg-orange-100">清除篩選</button>
+    </div>
+  </div>
+
+  <!-- Tool Grid -->
+  <section class="py-12" id="tool-grid">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center justify-between mb-6">
+        <span id="result-count" class="text-gray-700 font-semibold"></span>
+      </div>
+      <div id="tool-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+      <div id="empty-state" class="hidden text-center py-20">
+        <i class="ri-emotion-sad-line text-6xl text-gray-300 mb-4 block"></i>
+        <p class="text-gray-500 text-lg mb-2">找不到符合的應用</p>
+        <p class="text-gray-400 text-sm mb-6">試試其他關鍵字或分類？</p>
+        <button onclick="clearFilters()" class="px-6 py-2.5 bg-orange-500 text-white rounded-xl font-semibold text-sm hover:bg-orange-600 transition-all">清除篩選</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-14 bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="bg-gradient-to-r from-orange-500 to-amber-500 rounded-3xl p-10 text-center text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        <div class="relative">
+          <div class="w-14 h-14 flex items-center justify-center bg-white/20 rounded-2xl mx-auto mb-5">
+            <i class="ri-code-box-line text-white text-3xl"></i>
+          </div>
+          <h2 class="text-3xl font-bold mb-3">上架你自己開發的 AI 應用</h2>
+          <p class="text-orange-100 text-lg mb-8 max-w-xl mx-auto">你開發了什麼實用的 AI 應用？上架到平台，讓更多人使用並獲得收益！</p>
+          <button onclick="openUploadModal()" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-orange-500 rounded-xl font-bold text-base hover:bg-orange-50 transition-all hover:scale-105 shadow-lg">
+            <i class="ri-upload-cloud-line text-xl"></i>立即上架應用
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upload Modal -->
+  <div id="upload-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h2 class="text-xl font-bold text-gray-900"><i class="ri-upload-cloud-line text-orange-500 mr-2"></i>上架我的 AI 應用</h2>
+        <button onclick="closeUploadModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500">
+          <i class="ri-close-line text-xl"></i>
+        </button>
+      </div>
+      <form class="p-6 space-y-4" onsubmit="submitUpload(event)">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">應用名稱 *</label>
+          <input type="text" required placeholder="例：智能摘要器" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">應用分類 *</label>
+          <select required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 bg-white">
+            <option value="">選擇分類</option>
+            <option>文字生成</option>
+            <option>AI繪圖</option>
+            <option>語音轉文字</option>
+            <option>自動化</option>
+            <option>搜尋整理</option>
+            <option>生產力</option>
+            <option>程式開發</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">應用描述 *</label>
+          <textarea required rows="3" placeholder="描述你的應用功能與解決的問題..." class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 resize-none"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">定價方式 *</label>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="flex items-center gap-3 p-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:border-orange-300">
+              <input type="radio" name="pricing" value="coin" class="text-orange-500" />
+              <div>
+                <div class="font-semibold text-sm text-gray-900">痛痛幣 🍬</div>
+                <div class="text-xs text-gray-500">入門體驗，10幣起</div>
+              </div>
+            </label>
+            <label class="flex items-center gap-3 p-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:border-blue-300">
+              <input type="radio" name="pricing" value="wisdom" class="text-blue-500" />
+              <div>
+                <div class="font-semibold text-sm text-gray-900">智慧幣 💡</div>
+                <div class="text-xs text-gray-500">專業功能，1幣起</div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">應用連結 *</label>
+          <input type="url" required placeholder="https://your-app.com" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">開發者名稱 *</label>
+          <input type="text" required placeholder="你的名字或暱稱" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">聯絡 Email *</label>
+          <input type="email" required placeholder="your@email.com" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
+        </div>
+        <div class="flex gap-3 pt-2">
+          <button type="button" onclick="closeUploadModal()" class="flex-1 py-3 rounded-xl border-2 border-gray-200 text-gray-700 font-semibold hover:bg-gray-50">取消</button>
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold hover:from-orange-600 hover:to-amber-600 transition-all">提交審核</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const tools = [
+      { id:1, name:'智能會議摘要器', category:'生產力', desc:'自動將會議錄音轉為結構化摘要，提取關鍵決策與待辦事項，支援多人發言辨識與時間軸標記。', tags:['會議記錄','語音辨識','摘要生成','待辦提取'], rating:4.8, users:'12萬+', icon:'ri-file-list-3-line', iconColor:'bg-indigo-600', coinPrice:10, creator:'張小明', isHot:true, isNew:false, isPermanent:true },
+      { id:2, name:'文案魔法師', category:'文字生成', desc:'專為行銷人員設計的 AI 文案工具，一鍵生成社群貼文、廣告標題、產品描述，支援多種語氣風格切換。', tags:['行銷文案','社群貼文','廣告標題','風格切換'], rating:4.7, users:'8萬+', icon:'ri-quill-pen-line', iconColor:'bg-orange-600', coinPrice:20, creator:'李佳琪', isHot:true, isNew:false, isPermanent:true },
+      { id:3, name:'語音筆記本', category:'語音轉文字', desc:'隨時隨地用語音記錄想法，自動轉為文字並智能分類標籤，支援多語言混合辨識與雲端同步。', tags:['語音記錄','自動分類','多語言','雲端同步'], rating:4.9, users:'15萬+', icon:'ri-mic-line', iconColor:'bg-teal-600', coinPrice:10, creator:'王大偉', isHot:true, isNew:false, isPermanent:true },
+      { id:4, name:'品牌視覺生成器', category:'AI繪圖', desc:'輸入品牌關鍵字，自動生成 Logo、配色方案、視覺風格指南，適合新創團隊快速建立品牌識別。', tags:['品牌設計','Logo生成','配色方案','視覺指南'], rating:4.6, users:'5萬+', icon:'ri-palette-line', iconColor:'bg-rose-600', wisdomCoinPrice:2, creator:'陳美玲', isHot:false, isNew:true, isPermanent:false },
+      { id:5, name:'競品分析助手', category:'搜尋整理', desc:'自動追蹤競爭對手的產品動態、價格變化、行銷策略，生成每週競品分析報告，附帶數據圖表。', tags:['競品追蹤','市場分析','價格監控','報告生成'], rating:4.8, users:'6萬+', icon:'ri-line-chart-line', iconColor:'bg-amber-500', coinPrice:30, creator:'林志豪', isHot:true, isNew:false, isPermanent:true },
+      { id:6, name:'客服自動化機器人', category:'自動化', desc:'整合 LINE、FB Messenger、官網聊天室，自動回覆常見問題，智能分流複雜問題給真人客服。', tags:['客服機器人','多平台整合','自動回覆','智能分流'], rating:4.7, users:'10萬+', icon:'ri-customer-service-2-line', iconColor:'bg-emerald-600', coinPrice:40, creator:'黃建國', isHot:false, isNew:false, isPermanent:true },
+      { id:7, name:'程式碼審查員', category:'程式開發', desc:'自動檢查程式碼品質、安全漏洞、效能問題，提供改善建議與最佳實踐範例，支援 10+ 程式語言。', tags:['程式碼審查','安全檢測','效能優化','最佳實踐'], rating:4.9, users:'3萬+', icon:'ri-code-s-slash-line', iconColor:'bg-violet-600', wisdomCoinPrice:3, creator:'吳俊傑', isHot:false, isNew:true, isPermanent:false },
+      { id:8, name:'產品圖背景魔術師', category:'AI繪圖', desc:'一鍵去除產品照片背景，自動生成多種場景背景，適合電商賣家快速製作商品圖。', tags:['背景去除','場景生成','電商圖片','批次處理'], rating:4.8, users:'20萬+', icon:'ri-image-edit-line', iconColor:'bg-rose-500', coinPrice:10, creator:'劉雅婷', isHot:true, isNew:false, isPermanent:true },
+      { id:9, name:'合約智能分析器', category:'文字生成', desc:'上傳合約文件，自動標記風險條款、權利義務、重要日期，生成白話文摘要與法律建議。', tags:['合約分析','風險標記','法律建議','白話摘要'], rating:4.7, users:'4萬+', icon:'ri-file-shield-2-line', iconColor:'bg-orange-500', coinPrice:20, creator:'鄭雅文', isHot:false, isNew:true, isPermanent:true },
+      { id:10, name:'社群排程大師', category:'自動化', desc:'一次排程多平台貼文，自動調整圖片尺寸與文案格式，附帶最佳發文時間建議。', tags:['社群排程','多平台發布','圖片調整','時間優化'], rating:4.6, users:'9萬+', icon:'ri-calendar-schedule-line', iconColor:'bg-orange-600', coinPrice:30, creator:'蔡宗翰', isHot:false, isNew:false, isPermanent:true },
+      { id:11, name:'有聲書製作器', category:'語音轉文字', desc:'將文字內容轉為自然流暢的語音，支援多種聲音角色與情緒調整，適合製作 Podcast、有聲書、教學影片旁白。', tags:['文字轉語音','聲音角色','情緒調整','有聲內容'], rating:4.8, users:'7萬+', icon:'ri-volume-up-line', iconColor:'bg-teal-500', wisdomCoinPrice:1, creator:'許志明', isHot:false, isNew:true, isPermanent:false },
+      { id:12, name:'專案進度追蹤器', category:'生產力', desc:'自動整合 Trello、Notion、Slack 等工具的專案資料，生成視覺化進度報告與風險預警。', tags:['專案管理','進度追蹤','風險預警','團隊協作'], rating:4.7, users:'11萬+', icon:'ri-task-line', iconColor:'bg-indigo-600', coinPrice:50, creator:'周佩君', isHot:false, isNew:false, isPermanent:true },
+      { id:13, name:'API 文件生成器', category:'程式開發', desc:'掃描程式碼自動生成 API 文件，包含參數說明、範例程式碼、錯誤處理，支援 Swagger、Postman 格式匯出。', tags:['API文件','自動生成','範例程式碼','格式匯出'], rating:4.9, users:'5萬+', icon:'ri-file-code-line', iconColor:'bg-violet-500', wisdomCoinPrice:2, creator:'謝宗憲', isHot:true, isNew:true, isPermanent:false },
+      { id:14, name:'簡報設計助手', category:'文字生成', desc:'輸入簡報主題與大綱，自動生成精美投影片設計，包含版面配置、配色方案、圖表視覺化，支援匯出 PPT。', tags:['簡報設計','自動排版','視覺化','PPT匯出'], rating:4.6, users:'13萬+', icon:'ri-slideshow-3-line', iconColor:'bg-amber-600', coinPrice:20, creator:'楊雅筑', isHot:false, isNew:true, isPermanent:true },
+      { id:15, name:'訪談逐字稿整理器', category:'語音轉文字', desc:'專為訪談設計的轉錄工具，自動辨識多位受訪者，標記時間軸與重點段落，生成結構化訪談記錄。', tags:['訪談轉錄','多人辨識','時間軸','重點標記'], rating:4.8, users:'6萬+', icon:'ri-chat-voice-line', iconColor:'bg-teal-700', coinPrice:10, creator:'賴俊宏', isHot:false, isNew:false, isPermanent:true },
+      { id:16, name:'短影音腳本生成器', category:'AI繪圖', desc:'根據產品或主題自動生成短影音腳本，包含分鏡、文案、音樂建議，適合 TikTok、Reels、Shorts 創作者。', tags:['短影音','腳本生成','分鏡設計','創作輔助'], rating:4.7, users:'14萬+', icon:'ri-movie-2-line', iconColor:'bg-rose-700', wisdomCoinPrice:3, creator:'馬志強', isHot:true, isNew:true, isPermanent:false },
+    ];
+
+    const catMap = { writing:'文字生成', image:'AI繪圖', audio:'語音轉文字', automation:'自動化', search:'搜尋整理', productivity:'生產力', code:'程式開發' };
+    let currentSort = 'rating';
+
+    function setCategory(id) {
+      document.getElementById('cat-select').value = catMap[id] || 'all';
+      renderTools();
+      document.getElementById('tool-grid').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterByPricing(type) {
+      document.getElementById('pricing-select').value = type;
+      renderTools();
+      document.getElementById('tool-grid').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function setSort(s) {
+      currentSort = s;
+      document.getElementById('sort-rating').className = `px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${s==='rating' ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500'}`;
+      document.getElementById('sort-new').className = `px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${s==='new' ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-500'}`;
+      renderTools();
+    }
+
+    function clearFilters() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('cat-select').value = 'all';
+      document.getElementById('pricing-select').value = 'all';
+      renderTools();
+    }
+
+    function renderTools() {
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      const cat = document.getElementById('cat-select').value;
+      const pricing = document.getElementById('pricing-select').value;
+
+      let result = tools.filter(t => {
+        if (cat !== 'all' && t.category !== cat) return false;
+        if (pricing === 'coin' && !t.coinPrice) return false;
+        if (pricing === 'wisdom' && !t.wisdomCoinPrice) return false;
+        if (q && !t.name.toLowerCase().includes(q) && !t.desc.toLowerCase().includes(q) && !t.tags.some(tg => tg.toLowerCase().includes(q))) return false;
+        return true;
+      });
+
+      if (currentSort === 'rating') result.sort((a,b) => b.rating - a.rating);
+      else if (currentSort === 'new') result.sort((a,b) => (b.isNew?1:0) - (a.isNew?1:0));
+
+      document.getElementById('result-count').innerHTML = `共 <strong class="text-orange-500">${result.length}</strong> 個應用`;
+
+      const container = document.getElementById('tool-cards');
+      const empty = document.getElementById('empty-state');
+
+      if (result.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+
+      container.innerHTML = result.map(t => {
+        const priceTag = t.wisdomCoinPrice
+          ? `<span class="flex items-center gap-1 px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold"><i class="ri-lightbulb-flash-line"></i>${t.wisdomCoinPrice} 智慧幣</span>`
+          : `<span class="flex items-center gap-1 px-2.5 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-bold"><i class="ri-coin-line"></i>${t.coinPrice} 痛痛幣</span>`;
+        const badges = [
+          t.isHot ? `<span class="px-1.5 py-0.5 bg-red-100 text-red-600 text-xs font-bold rounded-full">🔥 熱門</span>` : '',
+          t.isNew ? `<span class="px-1.5 py-0.5 bg-green-100 text-green-600 text-xs font-bold rounded-full">✨ 新上架</span>` : '',
+          t.isPermanent ? `<span class="px-1.5 py-0.5 bg-gray-100 text-gray-500 text-xs font-bold rounded-full">永久使用</span>` : `<span class="px-1.5 py-0.5 bg-purple-100 text-purple-600 text-xs font-bold rounded-full">訂閱制</span>`,
+        ].filter(Boolean).join('');
+        return `
+          <div class="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-lg transition-all flex flex-col gap-3">
+            <div class="flex items-start justify-between">
+              <div class="w-12 h-12 flex items-center justify-center ${t.iconColor} text-white rounded-xl flex-shrink-0">
+                <i class="${t.icon} text-xl"></i>
+              </div>
+              <div class="flex flex-wrap gap-1 justify-end">${badges}</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-gray-900 text-base mb-1">${t.name}</h3>
+              <p class="text-sm text-gray-500 leading-relaxed line-clamp-2">${t.desc}</p>
+            </div>
+            <div class="flex flex-wrap gap-1">
+              ${t.tags.slice(0,3).map(tg => `<span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">${tg}</span>`).join('')}
+            </div>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+              <span><i class="ri-star-fill text-amber-400 mr-0.5"></i>${t.rating}</span>
+              <span><i class="ri-user-line mr-0.5"></i>${t.users}</span>
+              <span><i class="ri-user-heart-line mr-0.5"></i>${t.creator}</span>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+              ${priceTag}
+              <button onclick="redeemTool(${t.id})" class="px-3 py-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg text-xs font-bold hover:from-orange-600 hover:to-amber-600 transition-all">立即兌換</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function redeemTool(id) {
+      const t = tools.find(t => t.id === id);
+      if (!t) return;
+      const price = t.wisdomCoinPrice ? `${t.wisdomCoinPrice} 智慧幣` : `${t.coinPrice} 痛痛幣`;
+      alert(`即將兌換「${t.name}」，需要 ${price}。\n請先登入帳號以確認幣餘額。`);
+    }
+
+    function openUploadModal() {
+      document.getElementById('upload-modal').classList.remove('hidden');
+      document.getElementById('upload-modal').classList.add('flex');
+    }
+
+    function closeUploadModal() {
+      document.getElementById('upload-modal').classList.add('hidden');
+      document.getElementById('upload-modal').classList.remove('flex');
+    }
+
+    function submitUpload(e) {
+      e.preventDefault();
+      closeUploadModal();
+      alert('感謝你的提交！我們將在 3-5 個工作天內完成審核，結果將寄送至你的 Email。');
+    }
+
+    document.getElementById('upload-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeUploadModal();
+    });
+
+    renderTools();
+  </script>
+</body>
+</html>

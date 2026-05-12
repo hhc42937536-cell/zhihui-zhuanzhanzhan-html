@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>榮譽榜 - 智慧轉運站</title>
+  <meta name="description" content="查看本週、本月與總榜貢獻者排名。累積 TPS 分數登上榮譽榜，解鎖解憂店主勳章與幣值加成！" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+    .animate-ping { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,.6,1) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(-15%); animation-timing-function: cubic-bezier(0.8,0,1,1); } 50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); } }
+    .animate-bounce { animation: bounce 1s infinite; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-orange-50 via-white to-amber-50 min-h-screen">
+  <div id="navbar"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">🏆 榮譽榜</h1>
+      <p class="text-xl text-gray-600">感謝每位解憂店主的貢獻，讓痛點找到出路</p>
+    </div>
+
+    <!-- 本週轉運王打卡區 -->
+    <div class="mb-16" id="section-week-star">
+      <div class="bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-30">
+          <div class="absolute top-0 left-1/4 w-64 h-64 bg-yellow-300 rounded-full blur-3xl animate-pulse"></div>
+          <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-300 rounded-full blur-3xl animate-pulse" style="animation-delay:1s"></div>
+        </div>
+        <div class="relative z-10">
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-lg mb-4 animate-bounce">
+              <span class="text-5xl">👑</span>
+            </div>
+            <h2 class="text-3xl font-bold text-green-700 mb-2">本週轉運王</h2>
+            <p class="text-green-600 text-lg">連續打卡 7 天，解鎖特別幣獎勵</p>
+          </div>
+          <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">連續打卡進度</h3>
+                <p class="text-sm text-gray-600">目前已連續 5 天</p>
+              </div>
+              <div class="text-right">
+                <div class="text-3xl font-bold text-orange-500">5/7</div>
+                <p class="text-xs text-gray-500">天</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-7 gap-3 mb-6">
+              <div class="text-center"><div class="w-full aspect-square rounded-xl flex items-center justify-center text-2xl bg-gradient-to-br from-orange-400 to-amber-500 shadow-lg scale-105">✓</div><p class="text-xs mt-2 font-medium text-orange-600">第 1 天</p></div>
+              <div class="text-center"><div class="w-full aspect-square rounded-xl flex items-center justify-center text-2xl bg-gradient-to-br from-orange-400 to-amber-500 shadow-lg scale-105">✓</div><p class="text-xs mt-2 font-medium text-orange-600">第 2 天</p></div>
+              <div class="text-center"><div class="w-full aspect-square rounded-xl flex items-center justify-center text-2xl bg-gradient-to-br from-orange-400 to-amber-500 shadow-lg scale-105">✓</div><p class="text-xs mt-2 font-medium text-orange-600">第 3 天</p></div>
+              <div class="text-center"><div class="w-full aspect-square rounded-xl flex items-center justify-center text-2xl bg-gradient-to-br from-orange-400 to-amber-500 shadow-lg scale-105">✓</div><p class="text-xs mt-2 font-medium text-orange-600">第 4 天</p></div>
+              <div class="text-center"><div class="w-full aspect-square rounded-xl flex items-center justify-center text-2xl ring-4 ring-orange-300 animate-pulse bg-gradient-to-br from-orange-400 to-amber-500 shadow-lg scale-105">✓</div><p class="text-xs mt-2 font-medium text-orange-600">第 5 天</p></div>
+              <div class="text-center"><div class="w-full aspect-square rounded-xl flex items-center justify-center bg-gray-100 border-2 border-dashed border-gray-300"></div><p class="text-xs mt-2 font-medium text-gray-400">第 6 天</p></div>
+              <div class="text-center"><div class="w-full aspect-square rounded-xl flex items-center justify-center text-2xl bg-gray-100 border-2 border-dashed border-gray-300">👑</div><p class="text-xs mt-2 font-medium text-gray-400">第 7 天</p></div>
+            </div>
+            <div class="mb-6">
+              <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-orange-400 to-amber-500 rounded-full" style="width:71.4%"></div>
+              </div>
+            </div>
+            <div class="bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-orange-200 rounded-xl p-4 text-center">
+              <div class="text-2xl mb-2">🎯</div>
+              <h4 class="text-lg font-bold text-orange-700 mb-1">再堅持 2 天！</h4>
+              <p class="text-orange-600 text-sm mb-3">完成 7 天連續打卡即可獲得</p>
+              <div class="flex items-center justify-center gap-4">
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                  <span class="text-xl">🪙</span><span class="font-bold text-gray-700">+50 痛痛幣</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                  <span class="text-xl">💡</span><span class="font-bold text-gray-700">+5 智慧幣</span>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-gray-200">
+              <div class="text-center"><p class="text-2xl font-bold text-gray-900">23</p><p class="text-sm text-gray-600">累計打卡天數</p></div>
+              <div class="text-center"><p class="text-2xl font-bold text-gray-900">12</p><p class="text-sm text-gray-600">最長連續紀錄</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本週之星 Top 3 -->
+    <div class="mb-16">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-2 rounded-full font-bold text-sm mb-4 shadow-lg">
+          <i class="ri-star-line text-base"></i>本週之星
+        </div>
+        <h2 class="text-4xl font-bold text-gray-900 mb-3">本週最耀眼的三顆星</h2>
+        <p class="text-lg text-gray-600">他們用貢獻點亮社群，你也可以成為下一個！</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- 🥇 -->
+        <div class="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border-4 border-amber-400 relative overflow-hidden group hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-br from-amber-400 via-yellow-400 to-orange-400 opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <div class="flex justify-center mb-4">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 via-yellow-400 to-orange-400 flex items-center justify-center shadow-lg ring-4 ring-white">
+                <span class="text-4xl">🥇</span>
+              </div>
+            </div>
+            <div class="text-center mb-4">
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">台南阿志</h3>
+              <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full text-yellow-600 bg-yellow-100 mb-1">金牌店主</span><br>
+              <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full text-orange-600 bg-orange-100">熱門推薦</span>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-3 mb-4">
+              <p class="text-xs text-gray-500 mb-1">代表工具</p>
+              <p class="text-sm font-semibold text-gray-900">ChatGPT 自動報價神器</p>
+            </div>
+            <div class="text-center mb-4">
+              <div class="text-xs text-gray-400 mb-1">TPS 分數</div>
+              <div class="text-4xl font-bold text-orange-500">1023</div>
+            </div>
+            <div class="grid grid-cols-3 gap-2 pt-4 border-t border-gray-100">
+              <div class="text-center"><i class="ri-thumb-up-line text-orange-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">512</div><div class="text-xs text-gray-500">讚</div></div>
+              <div class="text-center"><i class="ri-download-line text-amber-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">1834</div><div class="text-xs text-gray-500">下載</div></div>
+              <div class="text-center"><i class="ri-bookmark-line text-green-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">267</div><div class="text-xs text-gray-500">收藏</div></div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+              <div class="flex items-center gap-2 text-xs text-gray-600">
+                <i class="ri-discount-percent-line text-orange-500"></i><span>享</span><span class="font-bold text-orange-600">7折</span><span>兌換優惠</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 🥈 -->
+        <div class="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border-4 border-gray-400 relative overflow-hidden group hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-br from-gray-300 via-gray-200 to-gray-400 opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <div class="flex justify-center mb-4">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-300 via-gray-200 to-gray-400 flex items-center justify-center shadow-lg ring-4 ring-white">
+                <span class="text-4xl">🥈</span>
+              </div>
+            </div>
+            <div class="text-center mb-4">
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">高雄設計師小美</h3>
+              <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full text-yellow-600 bg-yellow-100 mb-1">金牌店主</span><br>
+              <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full text-orange-600 bg-orange-100">熱門推薦</span>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-3 mb-4">
+              <p class="text-xs text-gray-500 mb-1">代表工具</p>
+              <p class="text-sm font-semibold text-gray-900">Midjourney 品牌視覺一鍵生成</p>
+            </div>
+            <div class="text-center mb-4">
+              <div class="text-xs text-gray-400 mb-1">TPS 分數</div>
+              <div class="text-4xl font-bold text-orange-500">916</div>
+            </div>
+            <div class="grid grid-cols-3 gap-2 pt-4 border-t border-gray-100">
+              <div class="text-center"><i class="ri-thumb-up-line text-orange-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">487</div><div class="text-xs text-gray-500">讚</div></div>
+              <div class="text-center"><i class="ri-download-line text-amber-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">1621</div><div class="text-xs text-gray-500">下載</div></div>
+              <div class="text-center"><i class="ri-bookmark-line text-green-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">243</div><div class="text-xs text-gray-500">收藏</div></div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+              <div class="flex items-center gap-2 text-xs text-gray-600">
+                <i class="ri-discount-percent-line text-orange-500"></i><span>享</span><span class="font-bold text-orange-600">7折</span><span>兌換優惠</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 🥉 -->
+        <div class="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border-4 border-orange-400 relative overflow-hidden group hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-br from-orange-300 via-amber-300 to-orange-400 opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <div class="flex justify-center mb-4">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-300 via-amber-300 to-orange-400 flex items-center justify-center shadow-lg ring-4 ring-white">
+                <span class="text-4xl">🥉</span>
+              </div>
+            </div>
+            <div class="text-center mb-4">
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">台中電商王</h3>
+              <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full text-gray-500 bg-gray-100 mb-1">銀牌店主</span><br>
+              <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full text-orange-600 bg-orange-100">熱門推薦</span>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-3 mb-4">
+              <p class="text-xs text-gray-500 mb-1">代表工具</p>
+              <p class="text-sm font-semibold text-gray-900">Notion AI 庫存管理模板</p>
+            </div>
+            <div class="text-center mb-4">
+              <div class="text-xs text-gray-400 mb-1">TPS 分數</div>
+              <div class="text-4xl font-bold text-orange-500">818</div>
+            </div>
+            <div class="grid grid-cols-3 gap-2 pt-4 border-t border-gray-100">
+              <div class="text-center"><i class="ri-thumb-up-line text-orange-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">431</div><div class="text-xs text-gray-500">讚</div></div>
+              <div class="text-center"><i class="ri-download-line text-amber-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">1456</div><div class="text-xs text-gray-500">下載</div></div>
+              <div class="text-center"><i class="ri-bookmark-line text-green-500 block mb-1"></i><div class="text-lg font-bold text-gray-900">198</div><div class="text-xs text-gray-500">收藏</div></div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+              <div class="flex items-center gap-2 text-xs text-gray-600">
+                <i class="ri-discount-percent-line text-orange-500"></i><span>享</span><span class="font-bold text-orange-600">8折</span><span>兌換優惠</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 你也可以上榜 -->
+      <div class="bg-gradient-to-r from-orange-100 via-amber-100 to-orange-100 rounded-2xl p-8 text-center relative overflow-hidden">
+        <div class="relative z-10">
+          <div class="text-4xl mb-4">✨</div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">你也可以上榜！</h3>
+          <p class="text-gray-700 mb-6 max-w-2xl mx-auto">分享你的痛點、提供解方、幫助他人，累積 TPS 分數就能登上榮譽榜。<br>上榜不只是榮耀，更能獲得幣值加成與專屬勳章折扣！</p>
+          <a href="pain-point-hub.html" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-2xl font-bold text-lg hover:from-orange-600 hover:to-amber-600 transition-all hover:scale-105 shadow-xl shadow-orange-200">
+            <i class="ri-rocket-line text-xl"></i>立即開始貢獻<i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本週最佳回覆 -->
+    <div class="mb-16" id="section-best-reply">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-5 py-2 rounded-full font-bold text-sm mb-4 shadow-lg">
+          <i class="ri-chat-smile-3-line text-base"></i>本週最佳回覆票選
+        </div>
+        <h2 class="text-4xl font-bold text-gray-900 mb-3">社群票選最有幫助的回覆</h2>
+        <p class="text-lg text-gray-600">每週日結算，前三名分別獲得 +30 / +20 / +10 智慧幣</p>
+      </div>
+      <div class="grid gap-5" id="best-replies-list">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Period Selector & Rankings -->
+    <div class="flex justify-center gap-4 mb-12" id="section-month">
+      <button id="period-week" onclick="setPeriod('week')" class="px-8 py-3 rounded-full font-semibold transition-all bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg scale-105">本週榜單</button>
+      <button id="period-month" onclick="setPeriod('month')" class="px-8 py-3 rounded-full font-semibold transition-all bg-white text-gray-700 hover:bg-gray-50 shadow-md">本月榜單</button>
+      <button id="period-all" onclick="setPeriod('all')" class="px-8 py-3 rounded-full font-semibold transition-all bg-white text-gray-700 hover:bg-gray-50 shadow-md">總榜單</button>
+    </div>
+
+    <div id="rankings-list" class="grid gap-6 mb-16"></div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-8 text-center bg-gradient-to-r from-orange-100 to-amber-100 rounded-2xl p-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">想登上榜單嗎？</h2>
+      <p class="text-xl text-gray-700 mb-8">分享你的痛點、提供解方，累積幣值成為解憂店主！</p>
+      <a href="pain-point-hub.html" class="inline-block px-10 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-lg font-semibold rounded-full hover:shadow-xl transition-all duration-300 hover:scale-105">
+        立即開始貢獻
+      </a>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const weeklyRankings = [
+      { id:1, name:'台南阿志', tool:'ChatGPT 自動報價神器', likes:512, downloads:1834, bookmarks:267, tps:1023, badge:'熱門推薦', merchantBadge:'gold' },
+      { id:2, name:'高雄設計師小美', tool:'Midjourney 品牌視覺一鍵生成', likes:487, downloads:1621, bookmarks:243, tps:916, badge:'熱門推薦', merchantBadge:'gold' },
+      { id:3, name:'台中電商王', tool:'Notion AI 庫存管理模板', likes:431, downloads:1456, bookmarks:198, tps:818, badge:'熱門推薦', merchantBadge:'silver' },
+      { id:4, name:'新北接案達人', tool:'Claude 合約草稿自動化', likes:389, downloads:1289, bookmarks:176, tps:728, badge:'熱門推薦', merchantBadge:'silver' },
+      { id:5, name:'桃園餐飲老闆', tool:'Make.com 訂單自動通知流程', likes:356, downloads:1134, bookmarks:152, tps:647, badge:'', merchantBadge:'bronze' },
+      { id:6, name:'台北行銷小陳', tool:'Canva AI 社群貼文批量製作', likes:312, downloads:987, bookmarks:134, tps:564, badge:'', merchantBadge:'bronze' },
+      { id:7, name:'嘉義農業創業者', tool:'Google Gemini 農產品文案生成', likes:278, downloads:856, bookmarks:118, tps:493, badge:'', merchantBadge:'bronze' },
+      { id:8, name:'花蓮民宿主人', tool:'Airbnb 自動回覆 AI 腳本', likes:245, downloads:734, bookmarks:98, tps:426, badge:'', merchantBadge:'' },
+      { id:9, name:'台南學生小林', tool:'Gamma AI 簡報一鍵生成', likes:198, downloads:612, bookmarks:76, tps:352, badge:'', merchantBadge:'' },
+      { id:10, name:'高雄工廠老闆', tool:'Excel + GPT 成本試算自動化', likes:167, downloads:523, bookmarks:64, tps:298, badge:'', merchantBadge:'' },
+    ];
+    const monthlyRankings = [
+      { id:'s1', name:'台中自由工作者阿豪', achievement:'本月新星', growth:'950 讚' },
+      { id:'s2', name:'新竹工程師小蔡', achievement:'本月新星', growth:'800 讚' },
+      { id:'s3', name:'台南美容師阿芬', achievement:'本月新星', growth:'650 讚' },
+      { id:'s4', name:'高雄補習班老師', achievement:'本月新星', growth:'650 讚' },
+      { id:'s5', name:'台北攝影師小王', achievement:'本月新星', growth:'500 讚' },
+    ];
+    const allRankings = [
+      { id:'c1', name:'台南阿志', contribution:'分享 52 個高品質痛點', coins:8420 },
+      { id:'c2', name:'高雄設計師小美', contribution:'分享 47 個 AI 工具解法', coins:7650 },
+      { id:'c3', name:'台中電商王', contribution:'分享 38 個電商痛點', coins:6230 },
+      { id:'c4', name:'新北接案達人', contribution:'分享 31 個接案工具', coins:5180 },
+      { id:'c5', name:'桃園餐飲老闆', contribution:'分享 25 個餐飲解法', coins:4320 },
+    ];
+    const bestReplies = [
+      { rank:1, author:'台南阿志', painPoint:'庫存管理太耗時，每天手動盤點快崩潰', content:'我用 Google Sheets + ChatGPT API 做了自動盤點系統，每天早上 8 點自動抓取昨日銷售數據並更新庫存，還會自動標記低於安全庫存的商品。附上完整 Notion 教學與 Google Apps Script 模板，照著做 30 分鐘就能上線！', votes:287, levelLabel:'高階/完整流程', levelColor:'bg-orange-100 text-orange-700', expectedCoins:100, attachment:'Notion 教學 + 模板' },
+      { rank:2, author:'高雄設計師小美', painPoint:'客戶一直改需求，專案時程大亂', content:'我的做法是用 Notion 建立「需求變更紀錄表」，每次客戶提出修改就記錄下來，包含：修改內容、影響範圍、預估增加時數、是否需額外收費。然後每週五寄給客戶確認，附上我的 Notion 模板連結與使用說明影片。', votes:213, levelLabel:'高階/完整流程', levelColor:'bg-orange-100 text-orange-700', expectedCoins:100, attachment:'Notion 模板 + 影片' },
+      { rank:3, author:'台中電商王', painPoint:'外送平台抽成太高，利潤幾乎歸零', content:'建議在店內放 QR Code 引導客人加入 LINE 官方帳號，提供「官網訂餐 9 折優惠」，用 LINE Bot + Google 表單做簡易訂餐系統。我實測 3 個月後，直接訂單從 0 成長到佔 30%！', votes:178, levelLabel:'中階解法', levelColor:'bg-blue-100 text-blue-700', expectedCoins:50, attachment:'' },
+      { rank:4, author:'新北接案達人', painPoint:'報價單製作耗時，客戶等太久就跑了', content:'用 ChatGPT 做報價單模板超快！我把常用的服務項目、計價方式都整理成 prompt，每次只要輸入客戶需求，10 秒就生成專業報價單。再用 Canva 套用設計模板，5 分鐘內就能寄出。', votes:156, levelLabel:'中階解法', levelColor:'bg-blue-100 text-blue-700', expectedCoins:50, attachment:'' },
+      { rank:5, author:'桃園餐飲老闆', painPoint:'員工排班困難，每週都要花半天處理', content:'推薦用「排班小幫手」這個免費 APP，員工可以自己在手機上填希望班表，系統會自動排出最佳組合，我只要最後確認就好。省下超多時間！', votes:134, levelLabel:'基礎解法', levelColor:'bg-green-100 text-green-700', expectedCoins:20, attachment:'' },
+    ];
+
+    const medalMap = ['🥇','🥈','🥉'];
+    const merchantMap = { gold:{label:'金牌店主',color:'text-yellow-600 bg-yellow-100',disc:'7折'}, silver:{label:'銀牌店主',color:'text-gray-500 bg-gray-100',disc:'8折'}, bronze:{label:'銅牌店主',color:'text-orange-600 bg-orange-100',disc:'9折'} };
+
+    function setPeriod(p) {
+      ['week','month','all'].forEach(k => {
+        const btn = document.getElementById(`period-${k}`);
+        btn.className = `px-8 py-3 rounded-full font-semibold transition-all ${k===p ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg scale-105' : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'}`;
+      });
+      const list = document.getElementById('rankings-list');
+      if (p === 'week') {
+        list.innerHTML = weeklyRankings.map((u,i) => {
+          const isTop3 = i < 3;
+          const m = merchantMap[u.merchantBadge] || null;
+          return `
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all ${isTop3 ? 'border-2 border-orange-300' : ''}">
+            <div class="flex items-center gap-6">
+              <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center">
+                ${isTop3 ? `<span class="text-5xl">${medalMap[i]}</span>` : `<span class="text-3xl font-bold text-gray-400">#${i+1}</span>`}
+              </div>
+              <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                ${u.name.charAt(0)}
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-3 mb-2 flex-wrap">
+                  <h3 class="text-2xl font-bold text-gray-900">${u.name}</h3>
+                  ${m ? `<span class="text-xs font-semibold px-2 py-1 rounded-full ${m.color}">${m.label}</span>` : ''}
+                  ${u.badge ? `<span class="text-xs font-semibold px-2 py-1 rounded-full text-orange-600 bg-orange-100">${u.badge}</span>` : ''}
+                </div>
+                <p class="text-gray-500 text-sm mb-2 truncate">${u.tool}</p>
+                <div class="flex flex-wrap gap-4">
+                  <div class="flex items-center gap-1"><i class="ri-thumb-up-line text-orange-500"></i><span class="text-gray-600 text-sm">${u.likes} 讚</span></div>
+                  <div class="flex items-center gap-1"><i class="ri-download-line text-amber-500"></i><span class="text-gray-600 text-sm">${u.downloads} 下載</span></div>
+                  <div class="flex items-center gap-1"><i class="ri-bookmark-line text-green-500"></i><span class="text-gray-600 text-sm">${u.bookmarks} 收藏</span></div>
+                </div>
+              </div>
+              <div class="flex-shrink-0 text-right">
+                <div class="text-xs text-gray-400 mb-1">TPS 分數</div>
+                <div class="text-3xl font-bold text-orange-500">${u.tps}</div>
+              </div>
+            </div>
+            ${m ? `<div class="mt-4 pt-4 border-t border-gray-100 flex items-center gap-2 text-sm text-gray-600"><i class="ri-discount-percent-line text-orange-500"></i><span>持有 <span class="font-semibold">${m.label}</span> 可享</span><span class="font-bold text-orange-600">${m.disc}</span><span>兌換工具優惠</span></div>` : ''}
+          </div>`;
+        }).join('');
+      } else if (p === 'month') {
+        list.innerHTML = monthlyRankings.map((s,i) => `
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+            <div class="flex items-center gap-6">
+              <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center"><span class="text-3xl font-bold text-gray-400">#${i+1}</span></div>
+              <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg">${s.name.charAt(0)}</div>
+              <div class="flex-1"><h3 class="text-xl font-bold text-gray-900 mb-1">${s.name}</h3><span class="text-xs font-semibold px-2 py-1 rounded-full text-purple-600 bg-purple-100">${s.achievement}</span></div>
+              <div class="flex-shrink-0 text-right"><div class="text-sm text-gray-500">${s.growth}</div></div>
+            </div>
+          </div>`).join('');
+      } else {
+        list.innerHTML = allRankings.map((c,i) => `
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+            <div class="flex items-center gap-6">
+              <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center"><span class="text-3xl font-bold text-gray-400">#${i+1}</span></div>
+              <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg">${c.name.charAt(0)}</div>
+              <div class="flex-1"><h3 class="text-xl font-bold text-gray-900 mb-1">${c.name}</h3><p class="text-gray-500 text-sm">${c.contribution}</p></div>
+              <div class="flex-shrink-0 text-right">
+                <div class="flex items-center gap-2 justify-end mb-1"><span class="text-xl">🪙</span><span class="text-2xl font-bold text-orange-600">${c.coins.toLocaleString()}</span></div>
+                <div class="text-xs text-gray-400">累積痛痛幣</div>
+              </div>
+            </div>
+          </div>`).join('');
+      }
+    }
+
+    // Best Replies
+    const levelRankColors = ['border-amber-400','border-gray-400','border-orange-400','border-gray-200','border-gray-200'];
+    document.getElementById('best-replies-list').innerHTML = bestReplies.map((r,i) => `
+      <div class="bg-white rounded-2xl p-6 shadow-lg border-l-4 ${levelRankColors[i]} hover:shadow-xl transition-all">
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">${i<3 ? medalMap[i] : `#${i+1}`}</span>
+            <div>
+              <div class="font-bold text-gray-900">${r.author}</div>
+              <div class="text-xs text-gray-500">回覆了：「${r.painPoint}」</div>
+            </div>
+          </div>
+          <div class="flex flex-col items-end gap-1 flex-shrink-0">
+            <span class="text-xs px-2 py-1 rounded-full font-semibold ${r.levelColor}">${r.levelLabel}</span>
+            <div class="flex items-center gap-1 text-sm font-bold text-orange-600"><i class="ri-thumb-up-fill"></i>${r.votes} 票</div>
+          </div>
+        </div>
+        <p class="text-gray-700 text-sm leading-relaxed mb-3 line-clamp-3">${r.content}</p>
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <div class="flex items-center gap-3">
+            ${r.attachment ? `<span class="flex items-center gap-1 text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full"><i class="ri-attachment-line"></i>${r.attachment}</span>` : ''}
+            <span class="flex items-center gap-1 text-xs bg-amber-50 text-amber-700 px-2 py-1 rounded-full"><i class="ri-coin-line"></i>預期 +${r.expectedCoins} 智慧幣</span>
+          </div>
+        </div>
+      </div>`).join('');
+
+    setPeriod('week');
+  </script>
+</body>
+</html>

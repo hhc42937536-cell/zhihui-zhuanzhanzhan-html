@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI解法實驗室 - 智慧轉運站 | 真實AI Workflow分享</title>
+  <meta name="description" content="學習真實AI workflow，從痛點到成果一步步轉運！分享你的解法，累積熱度獲得智慧幣（高品質解法可達200幣）。" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+    .animate-ping { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,.6,1) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+  </style>
+</head>
+<body class="bg-white">
+  <div id="navbar"></div>
+
+  <div class="min-h-screen bg-white">
+
+    <!-- Hero -->
+    <section class="bg-white pt-28 pb-16 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-orange-100 to-amber-100 text-orange-600 rounded-full text-sm font-semibold mb-6">
+            <i class="ri-flask-line"></i> 解決痛點的 AI 方法
+          </div>
+          <h1 class="text-5xl font-bold text-gray-900 mb-6">這裡的解法，都來自痛點中心的真實問題</h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-4">
+            每個解法都對應一個真實痛點，從問題出發，找到最適合的 AI 工具與流程
+          </p>
+          <p class="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed mb-8">
+            分享你的解法，幫助更多人解決問題，獲得<strong class="text-indigo-600"> 智慧幣</strong>獎勵
+          </p>
+
+          <!-- 流程引導 -->
+          <div class="max-w-5xl mx-auto mb-8">
+            <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8 border-2 border-orange-200">
+              <div class="flex items-center justify-center gap-3 mb-6">
+                <i class="ri-route-line text-orange-600 text-3xl"></i>
+                <h3 class="text-2xl font-bold text-gray-900">從痛點到解法的完整流程</h3>
+              </div>
+              <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-white rounded-xl p-6 border-2 border-orange-200 hover:shadow-lg transition-all relative">
+                  <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">步驟 1</div>
+                  <div class="flex items-center justify-center mb-3 mt-2"><i class="ri-error-warning-line text-orange-500 text-3xl"></i></div>
+                  <div class="text-lg font-bold text-gray-900 mb-2">痛點中心</div>
+                  <div class="text-sm text-gray-600">發現或分享真實的工作痛點</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border-2 border-orange-300 hover:shadow-lg transition-all relative">
+                  <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full">步驟 2</div>
+                  <div class="flex items-center justify-center mb-3 mt-2"><i class="ri-flask-line text-orange-600 text-3xl"></i></div>
+                  <div class="text-lg font-bold text-gray-900 mb-2">AI解法實驗室</div>
+                  <div class="text-sm text-gray-600">找到對應的 AI 解決方案</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border-2 border-orange-200 hover:shadow-lg transition-all relative">
+                  <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">步驟 3</div>
+                  <div class="flex items-center justify-center mb-3 mt-2"><i class="ri-checkbox-circle-line text-orange-500 text-3xl"></i></div>
+                  <div class="text-lg font-bold text-gray-900 mb-2">解決問題</div>
+                  <div class="text-sm text-gray-600">實際應用解法，提升效率</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 按鈕組 -->
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <a href="pain-point-hub.html"
+              class="px-8 py-4 bg-white text-orange-600 border-2 border-orange-500 rounded-xl font-bold text-lg hover:bg-orange-50 hover:shadow-xl transition-all flex items-center gap-2">
+              <i class="ri-arrow-left-line text-xl"></i> 前往痛點中心
+            </a>
+            <button onclick="document.getElementById('submit-modal').classList.remove('hidden')"
+              class="px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all flex items-center gap-2">
+              <i class="ri-upload-cloud-line text-xl"></i> 分享我的解法
+            </button>
+          </div>
+
+          <!-- 搜尋 -->
+          <div class="max-w-2xl mx-auto mb-8">
+            <div class="relative">
+              <input type="text" id="search-input" placeholder="搜尋解法、工具或痛點關鍵字..." oninput="filterSolutions()"
+                class="w-full px-6 py-4 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 placeholder-gray-400" />
+              <i class="ri-search-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></i>
+            </div>
+          </div>
+
+          <!-- 智慧幣獎勵等級 -->
+          <div class="max-w-4xl mx-auto mb-8">
+            <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-6 border border-indigo-200">
+              <div class="flex items-center justify-center gap-2 mb-4">
+                <i class="ri-coin-line text-indigo-600 text-2xl"></i>
+                <h3 class="text-xl font-bold text-gray-900">提交解法，獲得智慧幣</h3>
+              </div>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-white rounded-xl p-4 border border-indigo-100 hover:shadow-lg transition-all">
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <i class="ri-lightbulb-line text-indigo-600 text-xl"></i>
+                    <span class="text-2xl font-bold text-indigo-600">+20</span>
+                  </div>
+                  <div class="text-sm font-semibold text-gray-900 mb-1">基礎解法</div>
+                  <div class="text-xs text-gray-500">簡單工具推薦或一句方法</div>
+                </div>
+                <div class="bg-white rounded-xl p-4 border-2 border-indigo-300 hover:shadow-lg transition-all relative">
+                  <div class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">推薦</div>
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <i class="ri-star-line text-indigo-600 text-xl"></i>
+                    <span class="text-2xl font-bold text-indigo-600">+50</span>
+                  </div>
+                  <div class="text-sm font-semibold text-gray-900 mb-1">中階解法</div>
+                  <div class="text-xs text-gray-500">詳細步驟 + 簡單案例</div>
+                </div>
+                <div class="bg-white rounded-xl p-4 border border-indigo-100 hover:shadow-lg transition-all">
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <i class="ri-trophy-line text-indigo-600 text-xl"></i>
+                    <span class="text-2xl font-bold text-indigo-600">+100</span>
+                  </div>
+                  <div class="text-sm font-semibold text-gray-900 mb-1">高階/完整流程</div>
+                  <div class="text-xs text-gray-500">含模板、影片或 Notion 連結</div>
+                </div>
+              </div>
+              <div class="mt-4 text-center">
+                <a href="coin-rules.html" class="text-sm text-indigo-600 hover:text-indigo-700 font-semibold inline-flex items-center gap-1">
+                  查看完整幣規則 <i class="ri-arrow-right-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- TPS Info -->
+          <div class="max-w-2xl mx-auto bg-indigo-50 border border-indigo-200 rounded-xl p-6">
+            <div class="flex items-start gap-3">
+              <i class="ri-trophy-line text-indigo-600 text-2xl flex-shrink-0 mt-1"></i>
+              <div class="text-left">
+                <p class="text-gray-700 mb-2"><strong class="text-indigo-600">TPS高不只榮譽，還直接轉換智慧幣！</strong></p>
+                <p class="text-gray-700">TPS 公式：0.5 × 按讚 + 0.4 × 下載量 + 0.1 × 收藏數</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 分類篩選 -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-12" id="cat-buttons">
+          <button onclick="setCat('all')" class="cat-btn px-6 py-3 rounded-xl font-bold transition-all bg-indigo-600 text-white shadow-lg" data-cat="all">
+            <i class="ri-apps-line mr-2"></i>全部解法
+          </button>
+          <button onclick="setCat('automation')" class="cat-btn px-6 py-3 rounded-xl font-bold transition-all bg-white text-gray-700 border border-gray-200 hover:border-indigo-300 hover:shadow-md" data-cat="automation">
+            <i class="ri-robot-line mr-2"></i>自動化流程
+          </button>
+          <button onclick="setCat('content')" class="cat-btn px-6 py-3 rounded-xl font-bold transition-all bg-white text-gray-700 border border-gray-200 hover:border-indigo-300 hover:shadow-md" data-cat="content">
+            <i class="ri-file-text-line mr-2"></i>內容生成
+          </button>
+          <button onclick="setCat('analysis')" class="cat-btn px-6 py-3 rounded-xl font-bold transition-all bg-white text-gray-700 border border-gray-200 hover:border-indigo-300 hover:shadow-md" data-cat="analysis">
+            <i class="ri-bar-chart-line mr-2"></i>數據分析
+          </button>
+          <button onclick="setCat('design')" class="cat-btn px-6 py-3 rounded-xl font-bold transition-all bg-white text-gray-700 border border-gray-200 hover:border-indigo-300 hover:shadow-md" data-cat="design">
+            <i class="ri-palette-line mr-2"></i>設計創作
+          </button>
+          <button onclick="setCat('education')" class="cat-btn px-6 py-3 rounded-xl font-bold transition-all bg-white text-gray-700 border border-gray-200 hover:border-indigo-300 hover:shadow-md" data-cat="education">
+            <i class="ri-graduation-cap-line mr-2"></i>教育學習
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 解法卡片 -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div id="solutions-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div id="no-results" class="hidden text-center py-16">
+          <div class="w-20 h-20 flex items-center justify-center bg-gray-100 rounded-full mx-auto mb-4">
+            <i class="ri-search-line text-gray-400 text-4xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">找不到符合條件的解法</h3>
+          <p class="text-gray-600 mb-6">試試調整篩選條件，或者成為第一個提交解法的人！</p>
+          <button onclick="document.getElementById('submit-modal').classList.remove('hidden')"
+            class="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold hover:shadow-lg transition-all">
+            <i class="ri-upload-cloud-line mr-2"></i>提交解法
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TPS 說明 -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-50">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-indigo-200">
+          <div class="flex items-center justify-center gap-3 mb-6">
+            <i class="ri-fire-line text-indigo-600 text-3xl"></i>
+            <h2 class="text-2xl font-bold text-gray-900">TPS 越高，智慧幣越多</h2>
+          </div>
+          <div class="space-y-4 mb-6">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 flex items-center justify-center bg-indigo-100 rounded-full flex-shrink-0"><i class="ri-heart-line text-indigo-600"></i></div>
+              <div>
+                <div class="font-semibold text-gray-900 mb-1">按讚數越多 → 基礎智慧幣 +30%</div>
+                <div class="text-sm text-gray-600">你的解法獲得 50+ 讚，自動加成智慧幣獎勵</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 flex items-center justify-center bg-indigo-100 rounded-full flex-shrink-0"><i class="ri-download-line text-indigo-600"></i></div>
+              <div>
+                <div class="font-semibold text-gray-900 mb-1">下載量破百 → 額外獎勵 +50 智慧幣</div>
+                <div class="text-sm text-gray-600">超過 100 人下載使用，證明你的解法超實用</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 flex items-center justify-center bg-indigo-100 rounded-full flex-shrink-0"><i class="ri-bookmark-line text-indigo-600"></i></div>
+              <div>
+                <div class="font-semibold text-gray-900 mb-1">收藏數高 → 長期價值認證</div>
+                <div class="text-sm text-gray-600">被收藏代表長期有用，每月額外發放智慧幣</div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <a href="coin-rules.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg transition-all">
+              查看完整幣規則與兌換方式 <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 提交 CTA -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8 border-2 border-orange-200 text-center">
+          <div class="w-16 h-16 flex items-center justify-center bg-orange-500 text-white rounded-full mx-auto mb-4">
+            <i class="ri-upload-cloud-line text-3xl"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-3">提交你的 AI 解法</h2>
+          <p class="text-gray-600 mb-6">分享你的解決方案，幫助更多人解決問題，獲得智慧幣獎勵</p>
+          <button onclick="document.getElementById('submit-modal').classList.remove('hidden')"
+            class="px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all">
+            立即提交解法
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 提交解法 Modal -->
+  <div id="submit-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold text-gray-900">提交你的 AI 解法</h3>
+        <button onclick="document.getElementById('submit-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+          <i class="ri-close-line text-2xl"></i>
+        </button>
+      </div>
+      <div class="space-y-3">
+        <input type="text" placeholder="解法標題" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300" />
+        <select class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-600">
+          <option value="">選擇分類</option>
+          <option>自動化流程</option><option>內容生成</option><option>數據分析</option><option>設計創作</option><option>教育學習</option>
+        </select>
+        <textarea placeholder="詳細說明你的解法步驟、使用工具與成效…（越詳細智慧幣越多！）" rows="4" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 resize-none"></textarea>
+      </div>
+      <div class="flex gap-3 mt-4">
+        <button onclick="document.getElementById('submit-modal').classList.add('hidden')" class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all">取消</button>
+        <button onclick="alert('✅ 解法已提交！感謝你的貢獻，智慧幣將在審核後發放。');document.getElementById('submit-modal').classList.add('hidden')"
+          class="flex-1 px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold hover:from-orange-600 hover:to-amber-600 transition-all">
+          提交解法
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const solutions = [
+      { id:1, cat:'automation', title:'用 Make.com 自動彙整週報，省下 2 小時手工', desc:'串接 Google Sheets + Notion + Slack，每週一早上 8 點自動生成 KPI 報表並推送。', tags:['Make.com','自動化','週報'], likes:312, downloads:189, bookmarks:67, tps:310, level:'高階', levelColor:'bg-purple-100 text-purple-600' },
+      { id:2, cat:'content', title:'ChatGPT Prompt 模板：客服話術一鍵生成', desc:'提供 20 個場景的完整 Prompt，讓 AI 生成有溫度、符合品牌語氣的客服回覆。', tags:['ChatGPT','客服','Prompt'], likes:267, downloads:145, bookmarks:89, tps:251, level:'中階', levelColor:'bg-blue-100 text-blue-600' },
+      { id:3, cat:'design', title:'Midjourney 修手指技巧：inpaint 精準修復', desc:'用 Midjourney 的 Vary Region 功能，只重繪手部區域，3 步驟解決 AI 生圖手指問題。', tags:['Midjourney','AI繪圖','修圖'], likes:198, downloads:234, bookmarks:45, tps:243, level:'基礎', levelColor:'bg-green-100 text-green-600' },
+      { id:4, cat:'analysis', title:'Python + pandas 自動分析電商銷售數據', desc:'20 行程式碼完成商品排行、客戶 RFM 分析、趨勢圖表，直接輸出 Excel 報告。', tags:['Python','數據分析','電商'], likes:178, downloads:123, bookmarks:56, tps:189, level:'高階', levelColor:'bg-purple-100 text-purple-600' },
+      { id:5, cat:'education', title:'NotebookLM 生成讀書心得：30 分鐘搞定', desc:'上傳 PDF 教材到 NotebookLM，讓 AI 生成重點摘要、問答、讀書心得草稿。', tags:['NotebookLM','學習','報告'], likes:234, downloads:167, bookmarks:78, tps:228, level:'基礎', levelColor:'bg-green-100 text-green-600' },
+      { id:6, cat:'automation', title:'n8n + Line Bot 打造個人 AI 秘書', desc:'透過 n8n 串接 Line Messaging API，實現智慧排程提醒、問題自動回答、資料查詢。', tags:['n8n','Line Bot','AI秘書'], likes:289, downloads:201, bookmarks:93, tps:289, level:'高階', levelColor:'bg-purple-100 text-purple-600' },
+    ];
+
+    let currentCat = 'all';
+    let searchQuery = '';
+
+    function setCat(cat) {
+      currentCat = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        const active = b.dataset.cat === cat;
+        b.className = `cat-btn px-6 py-3 rounded-xl font-bold transition-all ${active ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100' : 'bg-white text-gray-700 border border-gray-200 hover:border-indigo-300 hover:shadow-md'}`;
+      });
+      renderSolutions();
+    }
+
+    function filterSolutions() {
+      searchQuery = document.getElementById('search-input').value.toLowerCase();
+      renderSolutions();
+    }
+
+    function renderSolutions() {
+      let list = solutions.filter(s => {
+        const catMatch = currentCat === 'all' || s.cat === currentCat;
+        const searchMatch = !searchQuery || s.title.toLowerCase().includes(searchQuery) || s.desc.toLowerCase().includes(searchQuery) || s.tags.some(t => t.toLowerCase().includes(searchQuery));
+        return catMatch && searchMatch;
+      });
+      const grid = document.getElementById('solutions-grid');
+      const noRes = document.getElementById('no-results');
+      if (!list.length) { grid.innerHTML = ''; noRes.classList.remove('hidden'); return; }
+      noRes.classList.add('hidden');
+      grid.innerHTML = list.map(s => `
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg hover:border-indigo-200 transition-all">
+          <div class="flex items-center gap-2 mb-3 flex-wrap">
+            <span class="px-2.5 py-1 ${s.levelColor} rounded-lg text-xs font-bold">${s.level}解法</span>
+            ${s.tags.map(t => `<span class="text-xs text-gray-400">#${t}</span>`).join('')}
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">${s.title}</h3>
+          <p class="text-sm text-gray-600 leading-relaxed mb-4">${s.desc}</p>
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+            <div class="flex items-center gap-4 text-xs text-gray-500">
+              <span class="flex items-center gap-1"><i class="ri-thumb-up-line text-orange-500"></i> ${s.likes}</span>
+              <span class="flex items-center gap-1"><i class="ri-download-line text-amber-500"></i> ${s.downloads}</span>
+              <span class="flex items-center gap-1"><i class="ri-bookmark-line text-green-500"></i> ${s.bookmarks}</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs font-bold text-indigo-600">
+              <i class="ri-trophy-line"></i> TPS ${s.tps}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    renderSolutions();
+  </script>
+</body>
+</html>

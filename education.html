@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>學生/老師學習轉運區 - 智慧轉運站</title>
+  <meta name="description" content="AI 如何幫助學習與教學？學生報告生成、摘要筆記、考試準備；老師備課自動化、教材生成、測驗題製作。分享校園痛點，得幣加倍！" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+    .animate-ping { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,.6,1) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+  </style>
+</head>
+<body class="bg-white">
+  <div id="navbar"></div>
+
+  <!-- Hero -->
+  <section class="bg-white pt-24 pb-16 px-6">
+    <div class="max-w-7xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
+        <i class="ri-vip-crown-line text-lg"></i>
+        <span>得幣加倍專區</span>
+      </div>
+      <h1 class="text-5xl font-bold text-gray-900 mb-6">學生/老師學習轉運區</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+        AI 如何幫助學習與教學？從報告生成到備課自動化，讓科技成為你的轉運助力！
+      </p>
+      <p class="text-lg text-orange-600 font-medium mb-8">
+        分享校園痛點，學生/18歲以下自動加成 30% 幣值 + 優先上榮譽榜！
+      </p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href="pain-point-hub.html" class="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-4 rounded-lg font-medium hover:shadow-lg transition-all">
+          分享校園痛點，得幣加倍
+        </a>
+        <a href="coin-rules.html" class="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-medium hover:border-orange-500 hover:text-orange-600 transition-all">
+          查看幣規則
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 標籤雲 -->
+  <section class="bg-white py-12 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">校園熱門痛點</h2>
+        <p class="text-gray-600">點擊標籤快速篩選相關案例</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3" id="tag-bar">
+        <button onclick="setTag(null)" id="tag-all" class="px-4 py-2 rounded-full text-sm font-medium bg-orange-500 text-white transition-all">全部顯示</button>
+        <button onclick="setTag('學生報告')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-file-text-line text-base"></i>#學生報告 <span class="text-xs opacity-75">(328)</span></button>
+        <button onclick="setTag('老師備課')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-book-2-line text-base"></i>#老師備課 <span class="text-xs opacity-75">(256)</span></button>
+        <button onclick="setTag('摘要筆記')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-book-open-line text-base"></i>#摘要筆記 <span class="text-xs opacity-75">(412)</span></button>
+        <button onclick="setTag('翻轉教室')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-gamepad-line text-base"></i>#翻轉教室 <span class="text-xs opacity-75">(189)</span></button>
+        <button onclick="setTag('考試準備')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-questionnaire-line text-base"></i>#考試準備 <span class="text-xs opacity-75">(367)</span></button>
+        <button onclick="setTag('簡報製作')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-slideshow-line text-base"></i>#簡報製作 <span class="text-xs opacity-75">(294)</span></button>
+        <button onclick="setTag('英文寫作')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-translate-2 text-base"></i>#英文寫作 <span class="text-xs opacity-75">(223)</span></button>
+        <button onclick="setTag('測驗題')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-file-list-3-line text-base"></i>#測驗題 <span class="text-xs opacity-75">(178)</span></button>
+        <button onclick="setTag('作業批改')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-edit-box-line text-base"></i>#作業批改 <span class="text-xs opacity-75">(145)</span></button>
+        <button onclick="setTag('論文寫作')" class="tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all flex items-center gap-2"><i class="ri-article-line text-base"></i>#論文寫作 <span class="text-xs opacity-75">(167)</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 案例卡片區 -->
+  <section class="bg-gray-50 py-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Tab 切換 -->
+      <div class="flex items-center justify-center gap-4 mb-8">
+        <button id="tab-student" onclick="setTab('student')"
+          class="px-8 py-3 rounded-full font-medium transition-all bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md">
+          <i class="ri-user-smile-line mr-2"></i>學生專區
+        </button>
+        <button id="tab-teacher" onclick="setTab('teacher')"
+          class="px-8 py-3 rounded-full font-medium transition-all bg-white text-gray-600 border border-gray-300 hover:border-orange-500">
+          <i class="ri-user-star-line mr-2"></i>老師專區
+        </button>
+      </div>
+      <div class="text-center mb-12">
+        <h2 id="case-title" class="text-3xl font-bold text-gray-900 mb-4">學生專區：AI 學習案例</h2>
+        <p id="case-desc" class="text-gray-600">報告寫不完？AI 幫你生成大綱、摘要筆記，省時 50% 以上！</p>
+      </div>
+      <div id="case-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="case-empty" class="hidden text-center py-12">
+        <i class="ri-search-line text-6xl text-gray-300 mb-4 block"></i>
+        <p class="text-gray-500">目前沒有符合此標籤的案例，試試其他標籤吧！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 精選教育工具 -->
+  <section class="bg-white py-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">精選教育 AI 工具</h2>
+        <p class="text-gray-600">適合學生與老師的 AI 工具推薦，讓學習與教學更輕鬆！</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="tool-library.html" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-orange-500 transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-orange-100"><i class="ri-chat-3-line text-2xl text-orange-600"></i></div>
+            <div class="flex-1"><h3 class="text-lg font-bold text-gray-900 mb-1">ChatGPT</h3><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">通用 AI</span></div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">最強大的 AI 助手，適合生成教材、解答問題、批改作業</p>
+          <div class="flex items-center gap-2"><span class="text-xs text-gray-500">適用：</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">學生</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">老師</span></div>
+        </a>
+        <a href="tool-library.html" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-orange-500 transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-teal-100"><i class="ri-file-text-line text-2xl text-teal-600"></i></div>
+            <div class="flex-1"><h3 class="text-lg font-bold text-gray-900 mb-1">Notion AI</h3><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">筆記工具</span></div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">筆記與知識管理神器，適合整理課堂筆記、製作學習資料庫</p>
+          <div class="flex items-center gap-2"><span class="text-xs text-gray-500">適用：</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">學生</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">老師</span></div>
+        </a>
+        <a href="tool-library.html" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-orange-500 transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-purple-100"><i class="ri-slideshow-line text-2xl text-purple-600"></i></div>
+            <div class="flex-1"><h3 class="text-lg font-bold text-gray-900 mb-1">Gamma</h3><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">簡報工具</span></div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">快速生成精美簡報，適合學生報告與老師課程簡報</p>
+          <div class="flex items-center gap-2"><span class="text-xs text-gray-500">適用：</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">學生</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">老師</span></div>
+        </a>
+        <a href="tool-library.html" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-orange-500 transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-green-100"><i class="ri-translate-2 text-2xl text-green-600"></i></div>
+            <div class="flex-1"><h3 class="text-lg font-bold text-gray-900 mb-1">Grammarly</h3><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">寫作工具</span></div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">英文寫作批改工具，適合學生英文作文與老師教材校對</p>
+          <div class="flex items-center gap-2"><span class="text-xs text-gray-500">適用：</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">學生</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">老師</span></div>
+        </a>
+        <a href="tool-library.html" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-orange-500 transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-amber-100"><i class="ri-questionnaire-line text-2xl text-amber-600"></i></div>
+            <div class="flex-1"><h3 class="text-lg font-bold text-gray-900 mb-1">Quizizz</h3><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">測驗工具</span></div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">互動測驗平台，適合老師製作測驗題與學生自我練習</p>
+          <div class="flex items-center gap-2"><span class="text-xs text-gray-500">適用：</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">學生</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">老師</span></div>
+        </a>
+        <a href="tool-library.html" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-orange-500 transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-indigo-100"><i class="ri-gamepad-line text-2xl text-indigo-600"></i></div>
+            <div class="flex-1"><h3 class="text-lg font-bold text-gray-900 mb-1">Curipod</h3><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">教學工具</span></div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">互動教學設計工具，適合老師翻轉教室與遊戲化學習</p>
+          <div class="flex items-center gap-2"><span class="text-xs text-gray-500">適用：</span><span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full">老師</span></div>
+        </a>
+      </div>
+      <div class="text-center mt-8">
+        <a href="tool-library.html" class="inline-flex items-center gap-2 text-orange-600 font-medium hover:text-orange-700 transition-all">
+          <span>查看更多工具</span><i class="ri-arrow-right-line"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 得幣加成橫幅 -->
+  <section class="bg-gradient-to-r from-orange-500 to-amber-500 py-12 px-6">
+    <div class="max-w-5xl mx-auto text-center text-white">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <i class="ri-vip-crown-line text-4xl"></i>
+        <h2 class="text-3xl font-bold">學生專屬得幣加成</h2>
+      </div>
+      <p class="text-xl mb-6 opacity-95">學生/18歲以下分享校園痛點，自動加成 <strong class="text-2xl">30%</strong> 幣值！</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+          <div class="text-4xl font-bold mb-2">+10</div>
+          <div class="text-sm opacity-90">分享痛點基礎幣值</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+          <div class="text-4xl font-bold mb-2">×1.3</div>
+          <div class="text-sm opacity-90">學生身份自動加成</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+          <div class="text-4xl font-bold mb-2">=13</div>
+          <div class="text-sm opacity-90">實際獲得痛痛幣</div>
+        </div>
+      </div>
+      <p class="text-sm opacity-90 mb-6">再加上 Threads 分享 ×2 + 黃金時段 ×1.5，最高可達 <strong>39 痛痛幣</strong>！</p>
+      <a href="coin-rules.html" class="inline-block bg-white text-orange-600 px-8 py-3 rounded-lg font-medium hover:shadow-lg transition-all">查看完整幣規則</a>
+    </div>
+  </section>
+
+  <!-- 底部 CTA -->
+  <section class="bg-white py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-gray-900 mb-6">準備好開始你的學習轉運了嗎？</h2>
+      <p class="text-xl text-gray-600 mb-8">分享你的校園痛點，讓 AI 幫你找到解法，還能賺取痛痛幣與智慧幣！</p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href="pain-point-hub.html" class="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-10 py-4 rounded-lg text-lg font-medium hover:shadow-lg transition-all">
+          <i class="ri-add-circle-line mr-2"></i>分享你的校園痛點，得幣加倍！
+        </a>
+        <a href="solution-gallery.html" class="border-2 border-gray-300 text-gray-700 px-10 py-4 rounded-lg text-lg font-medium hover:border-orange-500 hover:text-orange-600 transition-all">
+          探索 AI 解法
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 問卷回饋 -->
+  <section class="bg-amber-50 py-12 px-6 border-t border-amber-100">
+    <div class="max-w-3xl mx-auto">
+      <div class="bg-white rounded-2xl p-8 shadow-md border border-amber-200 flex flex-col sm:flex-row items-center gap-6">
+        <div class="w-14 h-14 flex-shrink-0 bg-amber-100 rounded-2xl flex items-center justify-center">
+          <i class="ri-questionnaire-line text-amber-600 text-2xl"></i>
+        </div>
+        <div class="flex-1 text-center sm:text-left">
+          <h3 class="text-lg font-bold text-gray-900 mb-1">這份教學對你有幫助嗎？</h3>
+          <p class="text-gray-500 text-sm">告訴我們你的看法，幫助我們做得更好！</p>
+        </div>
+        <a href="https://forms.gle/WWvKeExEB3HwQHQU9" target="_blank" rel="noopener noreferrer"
+          class="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-sm hover:shadow-lg transition-all">
+          <i class="ri-survey-line"></i>快速回饋<i class="ri-external-link-line text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const studentCases = [
+      { id:1, title:'報告寫不完？AI 幫你生成大綱', desc:'期末報告壓力山大？用 AI 快速生成報告架構、章節大綱，省時 50% 以上！', timeSaved:'50%', difficulty:'簡單', steps:['輸入報告主題與要求','AI 生成完整大綱架構','根據大綱補充內容','調整格式與引用文獻'], tools:['ChatGPT','Claude','Notion AI'], tags:['學生報告','大綱生成','省時神器'], icon:'ri-file-text-line', color:'orange' },
+      { id:2, title:'課堂筆記自動摘要', desc:'上課來不及抄筆記？用 AI 將錄音或講義快速轉成重點摘要，複習超輕鬆！', timeSaved:'60%', difficulty:'簡單', steps:['上傳課堂錄音或講義 PDF','AI 自動提取重點內容','生成結構化摘要筆記','匯出至筆記軟體'], tools:['Otter.ai','ChatGPT','Notion'], tags:['摘要筆記','課堂錄音','複習神器'], icon:'ri-book-open-line', color:'teal' },
+      { id:3, title:'考試準備：AI 生成練習題', desc:'準備考試沒題目練習？讓 AI 根據課程內容自動生成練習題與解答！', timeSaved:'40%', difficulty:'中等', steps:['輸入課程章節與重點','AI 生成多種題型練習題','檢查答案與解析','重複練習弱點題型'], tools:['ChatGPT','Quizlet','Anki'], tags:['考試準備','練習題','自我測驗'], icon:'ri-questionnaire-line', color:'amber' },
+      { id:4, title:'英文作文批改與建議', desc:'英文作文不知道哪裡錯？AI 幫你找出文法錯誤、提供改進建議！', timeSaved:'45%', difficulty:'簡單', steps:['輸入英文作文內容','AI 標記文法與拼寫錯誤','獲得改進建議與範例','修改後再次檢查'], tools:['Grammarly','ChatGPT','DeepL Write'], tags:['英文寫作','英文作文','文法檢查'], icon:'ri-translate-2', color:'green' },
+      { id:5, title:'簡報製作快速生成', desc:'小組報告要做簡報？AI 幫你快速生成簡報架構與視覺設計！', timeSaved:'55%', difficulty:'中等', steps:['輸入簡報主題與大綱','AI 生成簡報架構','選擇視覺風格模板','調整內容與排版'], tools:['Gamma','Beautiful.ai','Canva AI'], tags:['簡報製作','視覺設計','小組報告'], icon:'ri-slideshow-line', color:'purple' },
+      { id:6, title:'論文文獻快速整理', desc:'寫論文要看一堆文獻？AI 幫你快速摘要重點、整理引用格式！', timeSaved:'50%', difficulty:'中等', steps:['上傳論文 PDF 檔案','AI 提取核心論點與方法','自動生成引用格式','整理至文獻管理工具'], tools:['ChatPDF','Elicit','Zotero'], tags:['論文寫作','文獻整理','引用格式'], icon:'ri-article-line', color:'indigo' },
+    ];
+    const teacherCases = [
+      { id:1, title:'備課自動化：AI 生成教材', desc:'備課太累？讓 AI 根據課程大綱自動生成教材內容、教學活動設計！', timeSaved:'60%', difficulty:'簡單', steps:['輸入課程主題與教學目標','AI 生成教材內容架構','調整教學活動與範例','匯出成教材文件'], tools:['ChatGPT','Magic School AI','Curipod'], tags:['老師備課','備課自動化','教材生成'], icon:'ri-book-2-line', color:'orange' },
+      { id:2, title:'測驗題自動產生', desc:'出考題很花時間？AI 幫你根據教材內容自動生成選擇題、問答題！', timeSaved:'70%', difficulty:'簡單', steps:['上傳教材或輸入章節重點','AI 生成多種題型測驗題','調整難度與題目數量','匯出成測驗卷'], tools:['ChatGPT','Quizizz AI','Kahoot'], tags:['測驗題','考卷生成','評量工具'], icon:'ri-file-list-3-line', color:'teal' },
+      { id:3, title:'翻轉教室：互動教學設計', desc:'想讓課堂更有趣？AI 幫你設計互動教學活動、討論題目與遊戲化學習！', timeSaved:'50%', difficulty:'中等', steps:['輸入課程主題與學生程度','AI 生成互動教學活動','設計討論題目與分組任務','準備教學輔助工具'], tools:['Curipod','Nearpod','Classcraft'], tags:['翻轉教室','互動教學','遊戲化學習'], icon:'ri-gamepad-line', color:'amber' },
+      { id:4, title:'學生作業批改輔助', desc:'批改作業太累？AI 幫你快速找出常見錯誤、提供個別化回饋建議！', timeSaved:'55%', difficulty:'中等', steps:['上傳學生作業檔案','AI 分析常見錯誤類型','生成個別化回饋建議','調整後發送給學生'], tools:['ChatGPT','Gradescope','Turnitin'], tags:['作業批改','回饋建議','個別化教學'], icon:'ri-edit-box-line', color:'green' },
+      { id:5, title:'課程簡報快速製作', desc:'每週都要做新簡報？AI 幫你快速生成課程簡報架構與視覺設計！', timeSaved:'65%', difficulty:'簡單', steps:['輸入課程主題與教學重點','AI 生成簡報架構','選擇教學風格模板','調整內容與動畫效果'], tools:['Gamma','Canva','Beautiful.ai'], tags:['老師備課','課程簡報','視覺設計'], icon:'ri-presentation-line', color:'purple' },
+      { id:6, title:'差異化教學資源生成', desc:'學生程度不同怎麼教？AI 幫你生成不同難度的教材與練習題！', timeSaved:'60%', difficulty:'中等', steps:['輸入課程內容與學生程度','AI 生成不同難度教材','調整教學策略與輔助資源','分配給不同程度學生'], tools:['ChatGPT','Diffit','Magic School AI'], tags:['差異化教學','分級教材','個別化學習'], icon:'ri-group-line', color:'indigo' },
+    ];
+
+    const colorMap = {
+      orange: { bg: 'bg-orange-100', text: 'text-orange-600' },
+      teal:   { bg: 'bg-teal-100',   text: 'text-teal-600' },
+      amber:  { bg: 'bg-amber-100',  text: 'text-amber-600' },
+      green:  { bg: 'bg-green-100',  text: 'text-green-600' },
+      purple: { bg: 'bg-purple-100', text: 'text-purple-600' },
+      indigo: { bg: 'bg-indigo-100', text: 'text-indigo-600' },
+    };
+
+    let activeTab = 'student';
+    let activeTag = null;
+
+    function setTab(tab) {
+      activeTab = tab;
+      activeTag = null;
+      document.getElementById('tag-all').className = 'px-4 py-2 rounded-full text-sm font-medium bg-orange-500 text-white transition-all';
+      document.querySelectorAll('.tag-btn').forEach(b => b.className = b.className.replace('bg-orange-500 text-white','bg-gray-100 text-gray-700'));
+
+      const isStudent = tab === 'student';
+      document.getElementById('tab-student').className = `px-8 py-3 rounded-full font-medium transition-all ${isStudent ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md' : 'bg-white text-gray-600 border border-gray-300 hover:border-orange-500'}`;
+      document.getElementById('tab-teacher').className = `px-8 py-3 rounded-full font-medium transition-all ${!isStudent ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md' : 'bg-white text-gray-600 border border-gray-300 hover:border-orange-500'}`;
+      document.getElementById('case-title').textContent = isStudent ? '學生專區：AI 學習案例' : '老師專區：AI 教學案例';
+      document.getElementById('case-desc').textContent = isStudent ? '報告寫不完？AI 幫你生成大綱、摘要筆記，省時 50% 以上！' : '備課太累？AI 自動產教材、測驗題，輕鬆翻轉教室！';
+      renderCases();
+    }
+
+    function setTag(tag) {
+      activeTag = tag;
+      document.getElementById('tag-all').className = `px-4 py-2 rounded-full text-sm font-medium transition-all ${tag === null ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`;
+      document.querySelectorAll('.tag-btn').forEach(b => {
+        const btnTag = b.getAttribute('onclick').match(/'([^']+)'/)?.[1];
+        const active = btnTag === tag;
+        b.className = `tag-btn px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${active ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`;
+      });
+      renderCases();
+    }
+
+    function renderCases() {
+      const cases = activeTab === 'student' ? studentCases : teacherCases;
+      const filtered = activeTag ? cases.filter(c => c.tags.includes(activeTag)) : cases;
+      const grid = document.getElementById('case-grid');
+      const empty = document.getElementById('case-empty');
+      if (filtered.length === 0) { grid.innerHTML = ''; empty.classList.remove('hidden'); return; }
+      empty.classList.add('hidden');
+      grid.innerHTML = filtered.map(c => {
+        const cl = colorMap[c.color] || colorMap.orange;
+        return `
+        <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg ${cl.bg}">
+              <i class="${c.icon} text-2xl ${cl.text}"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-gray-900 mb-1">${c.title}</h3>
+              <div class="flex items-center gap-2">
+                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">省時 ${c.timeSaved}</span>
+                <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">${c.difficulty}</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">${c.desc}</p>
+          <div class="mb-4">
+            <h4 class="text-sm font-bold text-gray-900 mb-2">AI Workflow 步驟：</h4>
+            <ol class="space-y-1">
+              ${c.steps.map((s,i) => `<li class="text-sm text-gray-600 flex items-start gap-2"><span class="text-orange-500 font-bold">${i+1}.</span><span>${s}</span></li>`).join('')}
+            </ol>
+          </div>
+          <div class="mb-4">
+            <h4 class="text-sm font-bold text-gray-900 mb-2">推薦工具：</h4>
+            <div class="flex flex-wrap gap-2">
+              ${c.tools.map(t => `<span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            ${c.tags.map(t => `<span class="text-xs text-orange-600">#${t}</span>`).join('')}
+          </div>
+          <a href="solution-gallery.html" class="block w-full text-center bg-orange-50 text-orange-600 py-2 rounded-lg text-sm font-medium hover:bg-orange-100 transition-all">查看完整解法</a>
+        </div>`;
+      }).join('');
+    }
+
+    renderCases();
+  </script>
+</body>
+</html>
