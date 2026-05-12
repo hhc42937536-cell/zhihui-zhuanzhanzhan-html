@@ -61,7 +61,7 @@
             <i class="ri-tools-line text-orange-500 text-base"></i>
           </div>
           <div>
-            <span class="font-bold text-gray-900 text-base" data-target="300">0+</span>
+            <span class="font-bold text-gray-900 text-base" data-target="293">0+</span>
             <span class="text-gray-400 text-sm ml-1">神器被玩翻</span>
           </div>
         </div>
@@ -70,7 +70,7 @@
             <i class="ri-user-heart-line text-orange-500 text-base"></i>
           </div>
           <div>
-            <span class="font-bold text-gray-900 text-base" data-target="8500">0+</span>
+            <span class="font-bold text-gray-900 text-base" data-target="8300">0+</span>
             <span class="text-gray-400 text-sm ml-1">朋友一起刷幣</span>
           </div>
         </div>
@@ -79,7 +79,7 @@
             <i class="ri-lightbulb-flash-line text-orange-500 text-base"></i>
           </div>
           <div>
-            <span class="font-bold text-gray-900 text-base" data-target="450">0+</span>
+            <span class="font-bold text-gray-900 text-base" data-target="440">0+</span>
             <span class="text-gray-400 text-sm ml-1">解法案例</span>
           </div>
         </div>
@@ -134,35 +134,52 @@
         </div>
       </div>
 
-      <!-- 快速提交表單 -->
-      <div class="max-w-2xl mx-auto bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-200 mb-10">
-        <h3 class="font-bold text-gray-900 mb-1">大家最近在聊什麼痛點？</h3>
-        <p class="text-sm text-gray-500 mb-4">分享你的日常煩惱，馬上獲得痛痛幣！</p>
-        <div id="submit-success" class="hidden items-center gap-2 px-4 py-3 bg-green-50 border border-green-200 rounded-xl text-green-700 text-sm font-medium mb-3">
-          <i class="ri-checkbox-circle-line text-green-500 text-lg"></i>
-          已收到你的痛點！社群正在幫你找解法 🎉
-          <button onclick="document.getElementById('submit-success').classList.add('hidden');document.getElementById('pain-form').classList.remove('hidden')" class="ml-auto text-green-500 hover:text-green-700">再提交一個</button>
+      <!-- 熱門痛點排行 -->
+      <div class="max-w-3xl mx-auto mb-10">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-bold text-gray-900">大家最近在聊什麼痛點？</h3>
+          <a href="pain-point-hub.html" class="text-sm text-orange-500 hover:text-orange-600 font-medium flex items-center gap-1">查看更多痛點 <i class="ri-arrow-right-line"></i></a>
         </div>
-        <form id="pain-form" onsubmit="submitPainPoint(event)">
-          <div class="flex items-center gap-2 mb-3 px-1">
-            <div class="relative">
-              <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            </div>
-            <span class="text-xs text-gray-500">很多人第一則就刷到 <span class="font-bold text-orange-500">25</span> 幣！</span>
-          </div>
-          <select id="pain-category" class="w-full px-3 py-2 text-sm border border-orange-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-600 mb-2">
-            <option value="">選擇分類…</option>
-            <option value="工作">💼 工作</option>
-            <option value="生活">🏠 生活</option>
-            <option value="AI創作">🎨 AI創作</option>
-            <option value="自動化">⚡ 自動化</option>
-          </select>
-          <div class="flex gap-2">
-            <input id="pain-input" type="text" maxlength="200" placeholder="例：每週手動整理報表很耗時…" class="flex-1 px-3 py-2.5 text-sm border border-orange-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-orange-300 placeholder-gray-300" />
-            <button type="submit" class="px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-bold transition-colors">送出</button>
-          </div>
-          <p id="form-error" class="text-xs text-red-500 mt-1 hidden"></p>
-        </form>
+        <p class="text-sm text-gray-500 mb-3">這些都已經被按讚好多，來看看有沒有共鳴～<br><span class="text-orange-500 font-medium">（點進去就能回覆解法，馬上賺智慧幣喔！）</span></p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <button class="px-3 py-1.5 bg-orange-500 text-white rounded-full text-xs font-medium">全部</button>
+          <button class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-full text-xs font-medium hover:border-orange-300 transition-colors">💼 工作</button>
+          <button class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-full text-xs font-medium hover:border-orange-300 transition-colors">🏠 生活</button>
+          <button class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-full text-xs font-medium hover:border-orange-300 transition-colors">🎨 AI創作</button>
+          <button class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-full text-xs font-medium hover:border-orange-300 transition-colors">⚡ 自動化</button>
+        </div>
+        <div class="space-y-2">
+          <a href="pain-point-hub.html" class="flex items-center gap-4 bg-white rounded-xl px-5 py-4 border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all">
+            <span class="text-2xl font-black text-orange-300 w-7 shrink-0">1</span>
+            <div class="flex-1 min-w-0"><p class="font-medium text-gray-900 text-sm">整理會議紀錄太耗時</p><p class="text-xs text-gray-400 mt-0.5">語音轉文字 + AI 摘要</p></div>
+            <span class="text-xs text-gray-400 shrink-0 hidden sm:block">工作</span>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-sm font-bold text-gray-500">856</span><span class="px-2 py-1 bg-orange-500 text-white rounded-lg text-xs font-medium">回覆賺幣</span></div>
+          </a>
+          <a href="pain-point-hub.html" class="flex items-center gap-4 bg-white rounded-xl px-5 py-4 border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all">
+            <span class="text-2xl font-black text-orange-300 w-7 shrink-0">2</span>
+            <div class="flex-1 min-w-0"><p class="font-medium text-gray-900 text-sm">寫工作報告太慢</p><p class="text-xs text-gray-400 mt-0.5">資料整理 → AI 自動生成報告</p></div>
+            <span class="text-xs text-gray-400 shrink-0 hidden sm:block">工作</span>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-sm font-bold text-gray-500">742</span><span class="px-2 py-1 bg-orange-500 text-white rounded-lg text-xs font-medium">回覆賺幣</span></div>
+          </a>
+          <a href="pain-point-hub.html" class="flex items-center gap-4 bg-white rounded-xl px-5 py-4 border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all">
+            <span class="text-2xl font-black text-orange-300 w-7 shrink-0">3</span>
+            <div class="flex-1 min-w-0"><p class="font-medium text-gray-900 text-sm">資料零散難整合</p><p class="text-xs text-gray-400 mt-0.5">自動抓取資料 → 分類整理 → 智慧筆記</p></div>
+            <span class="text-xs text-gray-400 shrink-0 hidden sm:block">生活</span>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-sm font-bold text-gray-500">689</span><span class="px-2 py-1 bg-orange-500 text-white rounded-lg text-xs font-medium">回覆賺幣</span></div>
+          </a>
+          <a href="pain-point-hub.html" class="flex items-center gap-4 bg-white rounded-xl px-5 py-4 border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all">
+            <span class="text-2xl font-black text-orange-300 w-7 shrink-0">4</span>
+            <div class="flex-1 min-w-0"><p class="font-medium text-gray-900 text-sm">學習筆記難整理</p><p class="text-xs text-gray-400 mt-0.5">語音錄製課程 → AI 生成摘要筆記</p></div>
+            <span class="text-xs text-gray-400 shrink-0 hidden sm:block">生活</span>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-sm font-bold text-gray-500">623</span><span class="px-2 py-1 bg-orange-500 text-white rounded-lg text-xs font-medium">回覆賺幣</span></div>
+          </a>
+          <a href="pain-point-hub.html" class="flex items-center gap-4 bg-white rounded-xl px-5 py-4 border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all">
+            <span class="text-2xl font-black text-orange-300 w-7 shrink-0">5</span>
+            <div class="flex-1 min-w-0"><p class="font-medium text-gray-900 text-sm">重複工作太多</p><p class="text-xs text-gray-400 mt-0.5">自動化工作流程 → 模板套用 → 批次操作</p></div>
+            <span class="text-xs text-gray-400 shrink-0 hidden sm:block">自動化</span>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-sm font-bold text-gray-500">598</span><span class="px-2 py-1 bg-orange-500 text-white rounded-lg text-xs font-medium">回覆賺幣</span></div>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -217,13 +234,33 @@
   <!-- 熱門工具 -->
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-10">
+      <div class="text-center mb-6">
         <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-4">
           <i class="ri-tools-line"></i> AI 工具箱
         </span>
-        <h2 class="text-3xl font-bold text-gray-900">AI 工具遊樂園 · 300+ 神器等你玩！</h2>
+        <h2 class="text-3xl font-bold text-gray-900">AI 工具遊樂園 · 300+ 神器等你玩、推薦、創作！</h2>
         <p class="text-gray-500 mt-2">300+ 個實用小東西，等你來試、來推薦、來創作</p>
       </div>
+
+      <!-- 創作者專屬福利 -->
+      <div class="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-6 mb-8 text-white">
+        <div class="flex flex-col md:flex-row md:items-center gap-4">
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-1">創作者專屬福利　想讓更多人用你的創作？</h3>
+            <p class="text-orange-100 text-sm">上傳後：被人下載/收藏 → 智慧幣 + TPS衝榜 + 真實感謝<br>已經有朋友靠分享模板月賺上千幣～ 你也來試試？</p>
+            <div class="flex flex-wrap gap-4 mt-3 text-sm text-orange-100">
+              <span>12,500+ 次下載</span><span>|</span><span>450+ 創作者</span><span>|</span><span>平均月賺 300+ 幣</span>
+            </div>
+          </div>
+          <a href="tool-library.html" class="shrink-0 px-5 py-3 bg-white text-orange-600 font-bold rounded-xl hover:bg-orange-50 transition-colors text-sm whitespace-nowrap">上傳我的工具 / prompt / 模板</a>
+        </div>
+        <div class="flex flex-wrap gap-6 mt-4 pt-4 border-t border-white/20 text-sm">
+          <div><span class="text-white font-medium">推薦工具賺幣</span><span class="text-orange-100 ml-2">看到痛點缺工具？推薦一個 → 拿 🍬痛痛幣</span></div>
+          <div><span class="text-white font-medium">上傳作品賺更多</span><span class="text-orange-100 ml-2">自己做個 prompt 或模板 → 被人用 → 賺 💡智慧幣</span></div>
+        </div>
+      </div>
+
+      <p class="font-bold text-gray-700 mb-4">一起玩出新花樣　這裡不只用工具，還能一起玩出新花樣</p>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <a href="tool-library.html" class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
           <div class="flex items-center gap-2 mb-3">
@@ -233,8 +270,7 @@
           <h3 class="font-bold text-gray-900 mb-1">週報自動生成器</h3>
           <p class="text-sm text-gray-500 mb-3">輸入關鍵字，AI 自動生成專業週報</p>
           <div class="flex items-center justify-between text-xs text-gray-400">
-            <span>⭐ 4.8 · 1,834 次下載</span>
-            <span class="text-orange-500 font-medium">15 🍬</span>
+            <span>⭐ 4.8 · 1,834 次下載</span><span class="text-orange-500 font-medium">15 🍬</span>
           </div>
         </a>
         <a href="tool-library.html" class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
@@ -245,27 +281,205 @@
           <h3 class="font-bold text-gray-900 mb-1">客服話術模板庫</h3>
           <p class="text-sm text-gray-500 mb-3">200+ 場景話術，一鍵複製使用</p>
           <div class="flex items-center justify-between text-xs text-gray-400">
-            <span>⭐ 4.9 · 1,456 次下載</span>
-            <span class="text-orange-500 font-medium">20 🍬</span>
+            <span>⭐ 4.9 · 1,456 次下載</span><span class="text-orange-500 font-medium">20 🍬</span>
           </div>
         </a>
         <a href="tool-library.html" class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
           <div class="flex items-center gap-2 mb-3">
-            <span class="px-2 py-0.5 bg-green-100 text-green-600 rounded text-xs font-medium">AI創作</span>
-            <span class="px-2 py-0.5 bg-blue-100 text-blue-500 rounded text-xs font-medium">NEW</span>
+            <span class="px-2 py-0.5 bg-orange-100 text-orange-600 rounded text-xs font-medium">工作效率</span>
           </div>
-          <h3 class="font-bold text-gray-900 mb-1">品牌視覺生成器</h3>
-          <p class="text-sm text-gray-500 mb-3">輸入品牌關鍵字，自動生成 Logo 與配色方案</p>
+          <h3 class="font-bold text-gray-900 mb-1">會議紀錄整理術</h3>
+          <p class="text-sm text-gray-500 mb-3">語音轉文字 + 自動摘要重點</p>
           <div class="flex items-center justify-between text-xs text-gray-400">
-            <span>⭐ 4.6 · 987 次下載</span>
-            <span class="text-orange-500 font-medium">22 🍬</span>
+            <span>⭐ 4.7 · 1,289 次下載</span><span class="text-orange-500 font-medium">25 🍬</span>
+          </div>
+        </a>
+        <a href="tool-library.html" class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2 py-0.5 bg-purple-100 text-purple-600 rounded text-xs font-medium">AI創作</span>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-1">社群文案批量產生器</h3>
+          <p class="text-sm text-gray-500 mb-3">一次生成 10 則不同風格貼文</p>
+          <div class="flex items-center justify-between text-xs text-gray-400">
+            <span>⭐ 4.6 · 1,123 次下載</span><span class="text-orange-500 font-medium">18 🍬</span>
+          </div>
+        </a>
+        <a href="tool-library.html" class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2 py-0.5 bg-teal-100 text-teal-600 rounded text-xs font-medium">職涯發展</span>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-1">履歷痛點分析工具</h3>
+          <p class="text-sm text-gray-500 mb-3">AI 分析履歷弱點，給優化建議</p>
+          <div class="flex items-center justify-between text-xs text-gray-400">
+            <span>⭐ 4.8 · 987 次下載</span><span class="text-orange-500 font-medium">22 🍬</span>
+          </div>
+        </a>
+        <a href="tool-library.html" class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2 py-0.5 bg-red-100 text-red-600 rounded text-xs font-medium">數據分析</span>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-1">訂單異常偵測小幫手</h3>
+          <p class="text-sm text-gray-500 mb-3">自動標記可疑訂單，降低風險</p>
+          <div class="flex items-center justify-between text-xs text-gray-400">
+            <span>⭐ 4.5 · 856 次下載</span><span class="text-orange-500 font-medium">30 🍬</span>
           </div>
         </a>
       </div>
-      <div class="text-center mt-8">
-        <a href="tool-library.html" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white rounded-xl font-medium transition-all">
+      <p class="text-center text-gray-500 text-sm mt-6">邊玩邊賺，真的蠻有趣的～　誰推薦的最多、誰的作品最夯 → 誰就是本週轉運王！</p>
+      <div class="text-center mt-4">
+        <a href="tool-library.html" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white rounded-xl font-medium transition-all mr-3">
           探索全部神器 <i class="ri-arrow-right-line"></i>
         </a>
+        <a href="tool-library.html" class="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-medium transition-all">
+          我也要分享工具
+        </a>
+      </div>
+
+      <!-- 社群創作者推薦神器 -->
+      <div class="mt-12 pt-10 border-t border-gray-100">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full">創作者專區</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-1">🌟 社群創作者推薦的神器 → 這些都是真實好用的！</h3>
+        <p class="text-sm text-gray-500 mb-2">不是大品牌廣告，是社群成員親自測試、推薦的實戰工具</p>
+        <p class="text-sm text-orange-500 font-medium mb-6">你也可以分享你的工具 → 被下載越多，幣賺越多，還能上榜當大神！</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-2 py-0.5 bg-green-100 text-green-600 rounded text-xs font-medium">生產力</span>
+              <span class="px-2 py-0.5 bg-red-100 text-red-500 rounded text-xs font-medium">🔥 熱門</span>
+              <span class="ml-auto text-xs text-gray-400">免費試用</span>
+            </div>
+            <h4 class="font-bold text-gray-900 mb-1">智能會議摘要器</h4>
+            <p class="text-xs text-gray-500 mb-3">自動將會議錄音轉為結構化摘要，提取關鍵決策與待辦事項，支援多人發言辨識與時間軸標記。</p>
+            <div class="flex flex-wrap gap-1 mb-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">團隊會議記錄</span><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">客戶訪談整理</span></div>
+            <div class="flex items-center justify-between text-xs"><span class="text-gray-400">⭐ 4.8 · 張小明 推薦</span><span class="text-orange-500 font-medium">10 🍬</span></div>
+          </div>
+          <div class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-2 py-0.5 bg-pink-100 text-pink-600 rounded text-xs font-medium">文字生成</span>
+              <span class="px-2 py-0.5 bg-red-100 text-red-500 rounded text-xs font-medium">🔥 熱門</span>
+              <span class="ml-auto text-xs text-gray-400">免費試用</span>
+            </div>
+            <h4 class="font-bold text-gray-900 mb-1">文案魔法師</h4>
+            <p class="text-xs text-gray-500 mb-3">專為行銷人員設計的 AI 文案工具，一鍵生成社群貼文、廣告標題、產品描述，支援多種語氣風格切換。</p>
+            <div class="flex flex-wrap gap-1 mb-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">社群行銷</span><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">電商產品描述</span></div>
+            <div class="flex items-center justify-between text-xs"><span class="text-gray-400">⭐ 4.7 · 李佳琪 推薦</span><span class="text-orange-500 font-medium">20 🍬</span></div>
+          </div>
+          <div class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-600 rounded text-xs font-medium">語音轉文字</span>
+              <span class="px-2 py-0.5 bg-red-100 text-red-500 rounded text-xs font-medium">🔥 熱門</span>
+              <span class="ml-auto text-xs text-gray-400">免費</span>
+            </div>
+            <h4 class="font-bold text-gray-900 mb-1">語音筆記本</h4>
+            <p class="text-xs text-gray-500 mb-3">隨時隨地用語音記錄想法，自動轉為文字並智能分類標籤，支援多語言混合辨識與雲端同步。</p>
+            <div class="flex flex-wrap gap-1 mb-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">靈感記錄</span><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">日記撰寫</span></div>
+            <div class="flex items-center justify-between text-xs"><span class="text-gray-400">⭐ 4.9 · 王大偉 推薦</span><span class="text-orange-500 font-medium">10 🍬</span></div>
+          </div>
+          <div class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-2 py-0.5 bg-purple-100 text-purple-600 rounded text-xs font-medium">AI繪圖</span>
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-500 rounded text-xs font-medium">NEW</span>
+              <span class="ml-auto text-xs text-gray-400">付費</span>
+            </div>
+            <h4 class="font-bold text-gray-900 mb-1">品牌視覺生成器</h4>
+            <p class="text-xs text-gray-500 mb-3">輸入品牌關鍵字，自動生成 Logo、配色方案、視覺風格指南，適合新創團隊快速建立品牌識別。</p>
+            <div class="flex flex-wrap gap-1 mb-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">新創品牌設計</span><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">產品視覺規劃</span></div>
+            <div class="flex items-center justify-between text-xs"><span class="text-gray-400">⭐ 4.6 · 陳美玲 推薦</span><span class="text-teal-500 font-medium">2 💡</span></div>
+          </div>
+          <div class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded text-xs font-medium">搜尋整理</span>
+              <span class="px-2 py-0.5 bg-red-100 text-red-500 rounded text-xs font-medium">🔥 熱門</span>
+              <span class="ml-auto text-xs text-gray-400">免費試用</span>
+            </div>
+            <h4 class="font-bold text-gray-900 mb-1">競品分析助手</h4>
+            <p class="text-xs text-gray-500 mb-3">自動追蹤競爭對手的產品動態、價格變化、行銷策略，生成每週競品分析報告，附帶數據圖表。</p>
+            <div class="flex flex-wrap gap-1 mb-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">市場調查</span><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">產品定價</span></div>
+            <div class="flex items-center justify-between text-xs"><span class="text-gray-400">⭐ 4.8 · 林志豪 推薦</span><span class="text-orange-500 font-medium">30 🍬</span></div>
+          </div>
+          <div class="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all hover:border-orange-200">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-2 py-0.5 bg-teal-100 text-teal-600 rounded text-xs font-medium">自動化</span>
+              <span class="ml-auto text-xs text-gray-400">免費試用</span>
+            </div>
+            <h4 class="font-bold text-gray-900 mb-1">客服自動化機器人</h4>
+            <p class="text-xs text-gray-500 mb-3">整合 LINE、FB Messenger、官網聊天室，自動回覆常見問題，智能分流複雜問題給真人客服。</p>
+            <div class="flex flex-wrap gap-1 mb-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">電商客服</span><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">預約諮詢</span></div>
+            <div class="flex items-center justify-between text-xs"><span class="text-gray-400">⭐ 4.7 · 黃建國 推薦</span><span class="text-orange-500 font-medium">40 🍬</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 榮譽榜 Podium -->
+  <section class="py-16 bg-gradient-to-br from-orange-50 to-amber-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-4">
+          <i class="ri-trophy-line"></i> 榮譽榜 · 本週排行
+        </span>
+        <h2 class="text-3xl font-bold text-gray-900">誰是本週的轉運王？</h2>
+        <p class="text-gray-500 mt-2">每週更新的榮譽榜，記錄最有貢獻的社群成員。<br>上榜不只是榮耀，更能獲得幣值加成與專屬勳章！</p>
+      </div>
+      <!-- Podium -->
+      <div class="flex items-end justify-center gap-4 mb-10 max-w-2xl mx-auto">
+        <!-- #2 -->
+        <div class="flex-1 text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-2">李</div>
+          <p class="font-bold text-gray-900 text-sm">財務助理小李</p>
+          <p class="text-xs text-gray-500 mb-1">智慧貢獻者</p>
+          <div class="bg-gray-200 rounded-t-xl pt-6 pb-4 px-2">
+            <span class="text-2xl">🥈</span>
+            <p class="font-black text-gray-700 mt-1">TPS 2,640</p>
+          </div>
+        </div>
+        <!-- #1 -->
+        <div class="flex-1 text-center -mt-4">
+          <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-2 ring-4 ring-orange-300">林</div>
+          <p class="font-bold text-gray-900">PM 小林</p>
+          <p class="text-xs text-orange-500 font-medium mb-1">本週轉運王</p>
+          <div class="bg-gradient-to-b from-orange-500 to-orange-600 rounded-t-xl pt-8 pb-4 px-2">
+            <span class="text-3xl">🏆</span>
+            <p class="font-black text-white mt-1">TPS 2,850</p>
+          </div>
+        </div>
+        <!-- #3 -->
+        <div class="flex-1 text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-2">L</div>
+          <p class="font-bold text-gray-900 text-sm">行銷人 Lisa</p>
+          <p class="text-xs text-gray-500 mb-1">痛點達人</p>
+          <div class="bg-amber-200 rounded-t-xl pt-4 pb-4 px-2">
+            <span class="text-2xl">🥉</span>
+            <p class="font-black text-amber-700 mt-1">TPS 2,420</p>
+          </div>
+        </div>
+      </div>
+      <!-- 本週冠軍統計 -->
+      <div class="bg-white rounded-2xl p-6 max-w-2xl mx-auto shadow-sm grid grid-cols-3 gap-4 text-center mb-6">
+        <div>
+          <p class="text-xs text-gray-400 mb-1">本週冠軍</p>
+          <p class="font-bold text-gray-900">PM 小林</p>
+          <p class="text-orange-500 font-bold">TPS 2,850</p>
+        </div>
+        <div class="border-x border-gray-100">
+          <p class="text-xs text-gray-400 mb-1">最熱痛點</p>
+          <p class="font-bold text-gray-900 text-sm">整理會議紀錄</p>
+          <p class="text-xs text-gray-500">1,240 次共鳴</p>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 mb-1">最熱解法</p>
+          <p class="font-bold text-gray-900 text-sm">AI 自動摘要</p>
+          <p class="text-xs text-gray-500">890 次下載</p>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="honor-board.html" class="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-medium transition-colors">
+          前往完整榮譽榜 <i class="ri-arrow-right-line"></i>
+        </a>
+        <p class="text-xs text-gray-400 mt-3">每週一更新 · 上榜即獲幣值加成</p>
       </div>
     </div>
   </section>
@@ -302,7 +516,32 @@
           <p class="text-sm text-gray-600 leading-relaxed">「分享了幾個 Figma 模板，沒想到這麼多人喜歡，智慧幣一直進來，動力滿滿～」</p>
           <p class="text-xs text-orange-500 font-medium mt-3">已賺 890 幣</p>
         </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center font-bold text-yellow-600">傑</div>
+            <div><p class="font-bold text-gray-900 text-sm">阿傑</p><p class="text-xs text-gray-400">行銷企劃 · 靈感收集家</p></div>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">「每天看別人的痛點都有新靈感，還能順便賺幣，比刷社群媒體有意義多了！」</p>
+          <p class="text-xs text-orange-500 font-medium mt-3">已賺 445 幣</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center font-bold text-green-600">S</div>
+            <div><p class="font-bold text-gray-900 text-sm">Sophia</p><p class="text-xs text-gray-400">大學生 · 學生之星</p></div>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">「學生加成超讚！寫作業遇到問題就來發痛點，不只解決問題還能賺零用錢～」</p>
+          <p class="text-xs text-orange-500 font-medium mt-3">已賺 267 幣</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center font-bold text-indigo-600">K</div>
+            <div><p class="font-bold text-gray-900 text-sm">Kevin</p><p class="text-xs text-gray-400">創業者 · 商業洞察家</p></div>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">「這裡的痛點都是真實需求，我的 SaaS 產品就是從這裡找到 PMF 的！」</p>
+          <p class="text-xs text-orange-500 font-medium mt-3">已賺 1,567 幣</p>
+        </div>
       </div>
+      <p class="text-center text-gray-500 text-sm mt-8">你的痛點或創作，也許就是下一個讓大家開心的故事喔！</p>
     </div>
   </section>
 
