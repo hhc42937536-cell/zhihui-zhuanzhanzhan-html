@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>登入 / 註冊 - 智慧轉運站</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-orange-50 via-white to-amber-50 min-h-screen flex flex-col">
+  <div id="navbar"></div>
+
+  <div class="flex-1 flex items-center justify-center px-4 py-16">
+    <div class="w-full max-w-md">
+      <!-- Logo -->
+      <div class="text-center mb-8">
+        <a href="index.html" class="inline-flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="ri-lightbulb-flash-line text-white text-2xl"></i>
+          </div>
+          <span class="text-2xl font-bold text-gray-900">智慧轉運站</span>
+        </a>
+        <p class="text-gray-500 text-sm">加入我們，讓痛點成為轉機</p>
+      </div>
+
+      <!-- Card -->
+      <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+        <!-- Tabs -->
+        <div class="flex border-b border-gray-100">
+          <button id="tab-login" onclick="switchTab('login')"
+            class="flex-1 py-4 text-sm font-bold text-orange-600 border-b-2 border-orange-500 transition-all">
+            登入
+          </button>
+          <button id="tab-register" onclick="switchTab('register')"
+            class="flex-1 py-4 text-sm font-bold text-gray-400 border-b-2 border-transparent hover:text-gray-600 transition-all">
+            註冊帳號
+          </button>
+        </div>
+
+        <!-- 登入表單 -->
+        <div id="form-login" class="p-8">
+          <form onsubmit="handleLogin(event)" class="space-y-5">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+              <input id="login-email" type="email" placeholder="your@email.com" required
+                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">密碼</label>
+              <div class="relative">
+                <input id="login-password" type="password" placeholder="••••••••" required
+                  class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all pr-12" />
+                <button type="button" onclick="togglePwd('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                  <i class="ri-eye-off-line"></i>
+                </button>
+              </div>
+            </div>
+            <div id="login-error" class="hidden text-red-500 text-sm bg-red-50 px-4 py-3 rounded-xl"></div>
+            <button type="submit" id="login-btn"
+              class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
+              <span>登入</span>
+            </button>
+          </form>
+          <div class="mt-4 text-center">
+            <button onclick="switchTab('register')" class="text-sm text-orange-500 hover:text-orange-600">
+              還沒有帳號？立即註冊
+            </button>
+          </div>
+        </div>
+
+        <!-- 註冊表單 -->
+        <div id="form-register" class="p-8 hidden">
+          <form onsubmit="handleRegister(event)" class="space-y-5">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">暱稱</label>
+              <input id="reg-name" type="text" placeholder="你想讓大家怎麼稱呼你？" required
+                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+              <input id="reg-email" type="email" placeholder="your@email.com" required
+                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">密碼（至少 6 位）</label>
+              <div class="relative">
+                <input id="reg-password" type="password" placeholder="••••••••" minlength="6" required
+                  class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all pr-12" />
+                <button type="button" onclick="togglePwd('reg-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                  <i class="ri-eye-off-line"></i>
+                </button>
+              </div>
+            </div>
+            <div id="reg-error" class="hidden text-red-500 text-sm bg-red-50 px-4 py-3 rounded-xl"></div>
+            <div id="reg-success" class="hidden text-green-700 text-sm bg-green-50 px-4 py-3 rounded-xl"></div>
+            <button type="submit" id="reg-btn"
+              class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:shadow-lg transition-all">
+              建立帳號
+            </button>
+          </form>
+          <div class="mt-4 text-center">
+            <button onclick="switchTab('login')" class="text-sm text-orange-500 hover:text-orange-600">
+              已有帳號？直接登入
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 條款 -->
+      <p class="text-center text-xs text-gray-400 mt-6">
+        登入即表示你同意
+        <a href="terms-of-service.html" class="underline hover:text-gray-600">服務條款</a>
+        與
+        <a href="privacy-policy.html" class="underline hover:text-gray-600">隱私政策</a>
+      </p>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    // 已登入則跳轉
+    window._supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) window.location.href = 'profile.html';
+    });
+
+    function switchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('form-login').classList.toggle('hidden', !isLogin);
+      document.getElementById('form-register').classList.toggle('hidden', isLogin);
+      document.getElementById('tab-login').className = `flex-1 py-4 text-sm font-bold transition-all border-b-2 ${isLogin ? 'text-orange-600 border-orange-500' : 'text-gray-400 border-transparent hover:text-gray-600'}`;
+      document.getElementById('tab-register').className = `flex-1 py-4 text-sm font-bold transition-all border-b-2 ${!isLogin ? 'text-orange-600 border-orange-500' : 'text-gray-400 border-transparent hover:text-gray-600'}`;
+    }
+
+    function togglePwd(id, btn) {
+      const input = document.getElementById(id);
+      const isText = input.type === 'text';
+      input.type = isText ? 'password' : 'text';
+      btn.innerHTML = isText ? '<i class="ri-eye-off-line"></i>' : '<i class="ri-eye-line"></i>';
+    }
+
+    function setLoading(btnId, loading) {
+      const btn = document.getElementById(btnId);
+      btn.disabled = loading;
+      btn.innerHTML = loading
+        ? '<i class="ri-loader-4-line animate-spin"></i><span>處理中...</span>'
+        : (btnId === 'login-btn' ? '<span>登入</span>' : '<span>建立帳號</span>');
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const errEl = document.getElementById('login-error');
+      errEl.classList.add('hidden');
+      setLoading('login-btn', true);
+
+      const { error } = await window._supabase.auth.signInWithPassword({
+        email: document.getElementById('login-email').value.trim(),
+        password: document.getElementById('login-password').value,
+      });
+
+      setLoading('login-btn', false);
+      if (error) {
+        errEl.textContent = error.message === 'Invalid login credentials' ? 'Email 或密碼錯誤' : error.message;
+        errEl.classList.remove('hidden');
+      } else {
+        const redirect = new URLSearchParams(location.search).get('redirect') || 'index.html';
+        window.location.href = redirect;
+      }
+    }
+
+    async function handleRegister(e) {
+      e.preventDefault();
+      const errEl = document.getElementById('reg-error');
+      const successEl = document.getElementById('reg-success');
+      errEl.classList.add('hidden');
+      successEl.classList.add('hidden');
+      setLoading('reg-btn', true);
+
+      const { error } = await window._supabase.auth.signUp({
+        email: document.getElementById('reg-email').value.trim(),
+        password: document.getElementById('reg-password').value,
+        options: { data: { full_name: document.getElementById('reg-name').value.trim() } }
+      });
+
+      setLoading('reg-btn', false);
+      if (error) {
+        errEl.textContent = error.message;
+        errEl.classList.remove('hidden');
+      } else {
+        successEl.textContent = '註冊成功！請檢查你的信箱並點擊驗證連結，驗證後即可登入。';
+        successEl.classList.remove('hidden');
+        document.querySelector('#form-register form').reset();
+      }
+    }
+  </script>
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+  </style>
+</body>
+</html>
